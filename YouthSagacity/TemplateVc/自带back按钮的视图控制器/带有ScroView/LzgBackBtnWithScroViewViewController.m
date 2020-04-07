@@ -1,0 +1,85 @@
+//
+//  LzgBackBtnWithScroViewViewController.m
+//  Youth Sagacity
+//
+//  Created by LiZhengGuo on 2020/4/1.
+//  Copyright © 2020 LiZhengGuo. All rights reserved.
+//
+
+#import "LzgBackBtnWithScroViewViewController.h"
+#import "UIViewController+LzgBackButtonImage.h"
+static UIImage *backbtnimage;
+@interface LzgBackBtnWithScroViewViewController ()
+{
+    @protected
+    UIImage *_intanceBackBtnImage;
+    UIButton *_backAction;
+}
+@property(nonatomic,strong)UIImage *intanceBackBtnImage;
+@property(nonatomic,strong)UIButton *backAction;
+@end
+
+@implementation LzgBackBtnWithScroViewViewController
+-(void)setInstanceImage:(UIImage *)image
+{
+    _intanceBackBtnImage=image;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController.navigationBar setHidden:YES];
+}
+-(instancetype)init
+{
+    if (self=[super init])
+    {
+        _backAction=[[UIButton alloc]init];
+        [_backAction addTarget:self action:@selector(kbackAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    UIImage *aimg=[LzgBackBtnWithScroViewViewController theBackButtonImage];
+    if (aimg)
+    {
+        [_backAction setImage:aimg forState:UIControlStateNormal];
+    }
+    else
+    {
+        if (_intanceBackBtnImage)
+        {
+            [_backAction setImage:_intanceBackBtnImage forState:UIControlStateNormal];
+        }
+    }
+    return self;
+}
++(void)configureTheBackBtnImage:(UIImage *)image
+{
+   
+    [self setTheBackButtonImage:image];
+}
+-(void)kbackAction:(UIButton *)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self addTheViewInBottomView:_backAction andSDAutoLayoutModel:^(UIView * _Nonnull theview, UIView * _Nonnull theBaseView)
+    {
+        theview.sd_layout.leftSpaceToView(theBaseView, 15*LZGWIDTH)
+        .topSpaceToView(theBaseView, 15*LZGHEIGHT)
+        .widthIs(25*LZGWIDTH)
+        .heightIs(15*LZGHEIGHT);
+        [theBaseView bringSubviewToFront:theview];
+    }];
+    // Do any additional setup after loading the view.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
