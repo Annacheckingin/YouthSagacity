@@ -14,6 +14,7 @@
 #import "LzgLogStatus.h"
 #import "LzgLogModel+hard.h"
 #import "LzgRegistModel+hard.h"
+#import "LzgAcount_PasswordValidate.h"
 static LzgLogViewController *me;
 @interface LzgLogViewController ()<UITextFieldDelegate>
 @property(nonatomic,strong)UITextField *userAcount;
@@ -121,16 +122,19 @@ static LzgLogViewController *me;
         [self.view addSubview:indicateView];
         [indicateView startAnimating];
         LzgLogModel *logModel=[LzgLogModel shareInstance];
-//       BOOL  isvalidateLogging =[logModel loggingWithAcount:_userAcount.text andPassWord:_userPassword.text];
-//       __block  BOOL  isvalidateLogging ;
-        [logModel loggingWithAcount:_userAcount.text andPassWord:_userPassword.text handler:^(BOOL isucced, NSString *userid,NSString *username)
+        BOOL isvalidateInput=[[LzgAcount_PasswordValidate shareInstance] isValidateWithAcount:_userAcount.text passWord:_userPassword.text];
+        if (!isvalidateInput)
         {
-            
-            [self kAlertViewMangement:isucced andUserid:userid  andUserName:username indicateView:indicateView anctionString:@"log"];
+           [ self kAlertViewMangement:isvalidateInput andUserid:nil  andUserName:nil andPassword:nil indicateView:indicateView anctionString:@"log"];
+        }
+        [logModel hardloggingWithAcount:_userAcount.text andPassWord:_userPassword.text handler:^(BOOL isucced, NSString *userid,NSString *username,NSString *password)
+        {
+    
+            [self kAlertViewMangement:isucced andUserid:userid  andUserName:username andPassword:password  indicateView:indicateView anctionString:@"log"];
         }];
     }
 }
--(void)kAlertViewMangement:(BOOL)para andUserid:(NSString *)userid andUserName:(NSString *)username indicateView:(UIView *)view anctionString:(NSString *)logOrRegister;
+-(void)kAlertViewMangement:(BOOL)para andUserid:(NSString *)userid andUserName:(NSString *)username andPassword:(NSString *)password indicateView:(UIView *)view anctionString:(NSString *)logOrRegister;
 {
     
     
@@ -139,7 +143,7 @@ static LzgLogViewController *me;
     switch (para)
      {
             case YES:
-             [self kSuccesswithIdentifer:logOrRegister andUserId:userid anduserName:username];
+             [self kSuccesswithIdentifer:logOrRegister andUserId:userid anduserName:username andPassWord:password];
             [self dismissViewControllerAnimated:YES completion:nil];
             break;
             default:
@@ -149,8 +153,9 @@ static LzgLogViewController *me;
     [indicateView stopAnimating];
     [indicateView removeFromSuperview];
 }
--(void)kSuccesswithIdentifer:(NSString *)identifer andUserId:(NSString *)userid anduserName:(NSString *)usrName
+-(void)kSuccesswithIdentifer:(NSString *)identifer andUserId:(NSString *)userid anduserName:(NSString *)usrName andPassWord:(NSString *)passWord
 {
+    
     if ([identifer isEqualToString:@"register"])
     {
         UIAlertController *alertView=[UIAlertController alertControllerWithTitle:@"Register information" message:@"Register Done!" preferredStyle:UIAlertControllerStyleAlert];
@@ -166,7 +171,7 @@ static LzgLogViewController *me;
         [self dismissViewControllerAnimated:YES completion:^{
             
         }];
-        [[LzgLogStatus shareInstance] setLoggingStatus:YES WithId:userid anduserName:usrName];
+        [[LzgLogStatus shareInstance] setLoggingStatus:YES WithId:userid anduserName:usrName andPassword:passWord];
     }
     
 }
@@ -196,16 +201,21 @@ static LzgLogViewController *me;
 }
 -(void)kregisterAction:(UIButton *)sender
 {
-    
     UIActivityIndicatorView *indicateView;
     indicateView.frame=CGRectMake((SCREENWIDTH-50*LZGWIDTH)/2, (SCREENHEIGHT-50*LZGHEIGHT)/2, 50*LZGWIDTH, 50*LZGHEIGHT);
     [self.view addSubview:indicateView];
     indicateView.color=UIColor.blackColor;
     [indicateView startAnimating];
+    BOOL validateinput=[[LzgAcount_PasswordValidate shareInstance] isValidateWithAcount:_userAcount.text passWord:_userPassword.text ];
+    if (!validateinput)
+    {
+        [self kAlertViewMangement:validateinput andUserid:nil  andUserName:self->_userAcount.text andPassword:self->_userPassword.text indicateView:indicateView anctionString:@"register"];
+        return;
+    }
     LzgRegistModel *registerModel=[LzgRegistModel shareInstance];
     [registerModel hardregistWithAcount:_userAcount.text andPassword:_userPassword.text handler:^(BOOL issucced)
     {
-        [self kAlertViewMangement:issucced andUserid:nil  andUserName:nil indicateView:indicateView anctionString:@"register"];
+        [self kAlertViewMangement:issucced andUserid:nil  andUserName:self->_userAcount.text andPassword:self->_userPassword.text indicateView:indicateView anctionString:@"register"];
     }];
 }
 +(instancetype)shareInstance

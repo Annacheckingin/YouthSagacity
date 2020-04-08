@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UserInfor : NSManagedObject
-+(UserInfor *)userWithUserid:(NSString *)userid andUserName:(NSString *)userName andDateOflastQuit:(NSDate *)dateOfLastQuit andLogStatus:(BOOL) status;
++(UserInfor *)userWithUserid:(NSString *)userid andUserName:(NSString *)userName andPassWord:(NSString *)password andDateOflastQuit:(NSDate *)dateOfLastQuit andLogStatus:(BOOL) status withBlock:(void (^)(UserInfor *userinfor,NSManagedObjectContext *context)) block;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -17,10 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSFetchRequest<UserInfor *> *)fetchRequest;
 
 @property (nullable, nonatomic, copy) NSString *userid;
+@property (nullable, nonatomic, copy) NSString *password;
 @property (nonatomic) BOOL isLogSatus;
 @property (nullable, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSDate *timeOfLastQuit;
-
+-(BOOL)userIsEqual:(id)object;
 @end
 
 NS_ASSUME_NONNULL_END

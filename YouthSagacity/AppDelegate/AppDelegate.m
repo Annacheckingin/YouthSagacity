@@ -31,8 +31,7 @@
     NSArray *viewController=@[homevc,newvc,minevc];
     LzgRootTabBarController *rootBarVc=[LzgRootTabBarController allocAndSetTheViewControllers:viewController whitNavigationController:YES];
     [rootBarVc viewControllersSetTheTabBarItemImagesWithSequenceUnselectedBegin:@[
-        
-        [UIImage imageNamed:@"5_88"],[UIImage imageNamed:@"5_79"],[UIImage imageNamed:@"5_82"],[UIImage imageNamed:@"5_89"],[UIImage imageNamed:@"5_76"],[UIImage imageNamed:@"5_87"]
+    [UIImage imageNamed:@"5_88"],[UIImage imageNamed:@"5_79"],[UIImage imageNamed:@"5_82"],[UIImage imageNamed:@"5_89"],[UIImage imageNamed:@"5_76"],[UIImage imageNamed:@"5_87"]
 
     ]];
     self.window.rootViewController=rootBarVc;
@@ -43,7 +42,8 @@
 }
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if (!_logstatus.islogging)
+    _logstatus=[LzgLogStatus shareInstance];
+    if (![_logstatus hasLogged])
     {
         LzgLogViewController *logViewController=[LzgLogViewController shareInstance];
         [self.window.rootViewController presentViewController:logViewController animated:YES completion:nil];

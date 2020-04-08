@@ -12,32 +12,46 @@
 
 
 @implementation LzgLogModel (hard)
--(void)hardloggingWithAcount:(NSString *)acount andPassWord:(NSString *)password handler:(void (^)(BOOL, NSString * _Nonnull, NSString * _Nonnull))handler
+-(void)hardloggingWithAcount:(NSString *)acount andPassWord:(NSString *)password handler:(void(^)(BOOL isucced,NSString *userid,NSString *username,NSString *password))handler
 {
+    
     dispatch_queue_t mainQueue_t=dispatch_get_main_queue();
     dispatch_queue_t backgroundQueue_t=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     //////////
+   
     dispatch_async(backgroundQueue_t, ^
     {
         LzgSimpleNSFamilyDataStore *storeCenter=[LzgSimpleNSFamilyDataStore shareInstance];
         
        UserInfor *userInfor=[storeCenter userWithName:acount];
+        
         if (userInfor==nil)
         {
             dispatch_async(mainQueue_t, ^
             {
-                handler(NO,@"",@"");
+                handler(NO,@"",@"",nil);
             });
         }
         else
         {
-            dispatch_async(mainQueue_t, ^
+            if ([userInfor.password isEqualToString:password])
             {
-                handler(YES,userInfor.userid,userInfor.name);
-            });
+                dispatch_async(mainQueue_t, ^
+                            {
+handler(YES,userInfor.userid,userInfor.name,password);
+                            });
+            }
+            else
+            {
+                dispatch_async(mainQueue_t, ^
+                            {
+                                handler(NO,@"",@"",nil);
+                            });
+            }
            
         }
         
     });
+   
 }
 @end

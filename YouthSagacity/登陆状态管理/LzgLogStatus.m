@@ -31,9 +31,13 @@ static LzgLogStatus *me;
     }
     return _storeCenter;
 }
--(void)setLoggingStatus:(BOOL)status WithId:(NSString *)userid anduserName:(NSString *)userName;
+-(BOOL)hasLogged
+{
+   return  [self.storeCenter hasLogUser];
+}
+-(void)setLoggingStatus:(BOOL)status WithId:(NSString *)userid anduserName:(NSString *)userName andPassword:(nonnull NSString *)password;
 {
     self.islogging=status;
-    [self.storeCenter saveTheDataOfUser:userid andTheName:userName andTheQuitTime:[NSDate date] logStatus:status];
+    [self.storeCenter saveTheDataOfUser:userid andTheName:userName andPassword:password  andTheQuitTime:[NSDate date] logStatus:status];
 }
 @end

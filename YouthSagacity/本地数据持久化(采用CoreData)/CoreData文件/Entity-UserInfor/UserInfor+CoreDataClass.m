@@ -9,20 +9,18 @@
 
 #import "UserInfor+CoreDataClass.h"
 #import "LzgSimpleNSFamilyDataStore.h"
+#import "UserInfor+CoreDataClass.h"
 @implementation UserInfor
-+(UserInfor *)userWithUserid:(NSString *)userid andUserName:(NSString *)userName andDateOflastQuit:(NSDate *)dateOfLastQuit andLogStatus:(BOOL)status
++(UserInfor *)userWithUserid:(NSString *)userid andUserName:(NSString *)userName andPassWord:(NSString *)password andDateOflastQuit:(NSDate *)dateOfLastQuit andLogStatus:(BOOL) status withBlock:(void (^)(UserInfor *userinfor,NSManagedObjectContext *context)) block;
 {
-    UserInfor *me=(UserInfor *)[NSEntityDescription entityForName:NSStringFromClass([UserInfor class]) inManagedObjectContext:[[LzgSimpleNSFamilyDataStore shareInstance] contextWithIdentifier:NSStringFromClass([UserInfor class])]];
-    NSLog(@"%@",NSStringFromClass([UserInfor class]));
-//    me.userid=userid;
-//    me.name=userName;
-//    me.isLogSatus=status;
-//    me.timeOfLastQuit=dateOfLastQuit;
+
+    UserInfor *me=(UserInfor *)[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([UserInfor class]) inManagedObjectContext:[[LzgSimpleNSFamilyDataStore shareInstance] contextWithIdentifier:NSStringFromClass([UserInfor class])]];
     NSNumber *statusNum=[NSNumber numberWithBool:status];
-    [me setValue:userid forKey:@"userid"];
-    [me setValue:userName forKey:@"name"];
-    [me setValue:statusNum forKey:@"isLogSatus"];
-   [me setValue:dateOfLastQuit forKey:@"timeOfLastQuit"];
+      me.userid=userid;
+      me.name=userName;
+      me.isLogSatus=statusNum;
+      me.timeOfLastQuit=dateOfLastQuit;
+     me.password=password;
     return me;
 }
 -(instancetype)init

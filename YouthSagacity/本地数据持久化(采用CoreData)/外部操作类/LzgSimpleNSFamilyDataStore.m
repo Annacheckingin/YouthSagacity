@@ -26,6 +26,13 @@
     if (_coordinatorForPics==nil)
     {
         _coordinatorForPics=[[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:self.modelForPictures];
+        NSURL *urlOfUserDatabase=[[self kgetTheDocumentDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",NSStringFromClass([Pictures class])]];
+               NSError *error;
+               [_coordinatorForPics addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:urlOfUserDatabase options:nil error:&error];
+               if (error)
+               {
+                   return nil;
+               }
     }
     return _coordinatorForPics;
 }
@@ -33,7 +40,17 @@
 {
     if (_coordinatorForUser==nil)
     {
+        NSManagedObjectModel *mode=self.modelForUserInfor;
+       
         _coordinatorForUser=[[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:self.modelForUserInfor];
+       NSURL *urlOfUserDatabase=[[self kgetTheDocumentDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",NSStringFromClass([UserInfor class])]];
+        NSError *error;
+        [_coordinatorForUser addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:urlOfUserDatabase options:nil error:&error];
+        if (error)
+        {
+            abort();
+            return nil;
+        }
     }
     return _coordinatorForUser;
 }
@@ -41,7 +58,7 @@
 {
     if (_contextForPics==nil)
     {
-        _contextForPics=[[NSManagedObjectContext alloc]init];
+        _contextForPics=[[NSManagedObjectContext alloc]initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         [_contextForPics setPersistentStoreCoordinator:self.coordinatorForPics];
     }
     return _contextForPics;
@@ -50,18 +67,19 @@
 {
     if (_contextForUser==nil)
     {
-        _contextForUser=[[NSManagedObjectContext alloc]init];
+        _contextForUser=[[NSManagedObjectContext alloc]initWithConcurrencyType:NSPrivateQueueConcurrencyType];
         [_contextForUser setPersistentStoreCoordinator:self.coordinatorForUser];
     }
     return _contextForUser;
 }
 -(void)ksaveCOntext:(NSError **)error withIdentifier:(NSString *)identifer
 {
+
     if ([identifer isEqualToString:NSStringFromClass([UserInfor class])])
     {
         if ([self.contextForUser hasChanges]&&![self.contextForUser save:error])
            {
-               NSLog(@"%@",*error);
+               NSLog(@"Error Happened:%@",*error);
            }
     }
     if ([identifer isEqualToString:NSStringFromClass([Pictures class])])
@@ -113,8 +131,12 @@
 {
     if ([identifier isEqualToString:NSStringFromClass([UserInfor class])])
     {
-         NSURL *urlOfCoreDataFile=[[NSBundle mainBundle] URLForResource:NSStringFromClass([UserInfor class]) withExtension:@"momd"];
-               _modelForUserInfor=[[NSManagedObjectModel alloc]initWithContentsOfURL:urlOfCoreDataFile];
+        if (_modelForUserInfor==nil)
+        {
+            NSURL *urlOfCoreDataFile=[[NSBundle mainBundle] URLForResource:NSStringFromClass([UserInfor class]) withExtension:@"momd"];
+            _modelForUserInfor=[[NSManagedObjectModel alloc]initWithContentsOfURL:urlOfCoreDataFile];
+        }
+         
         return _modelForUserInfor;
     }
 //    if (_model==nil)
@@ -124,8 +146,11 @@
 //    }
     if ([identifier isEqualToString:NSStringFromClass([Pictures class])])
     {
-        NSURL *urlOfCoreDataFile=[[NSBundle mainBundle] URLForResource:NSStringFromClass([Pictures class]) withExtension:@"momd"];
-        _modelForPictures=[[NSManagedObjectModel alloc]initWithContentsOfURL:urlOfCoreDataFile];
+        if (_modelForPictures==nil)
+        {
+    NSURL *urlOfCoreDataFile=[[NSBundle mainBundle] URLForResource:NSStringFromClass([Pictures class]) withExtension:@"momd"];
+    _modelForPictures=[[NSManagedObjectModel alloc]initWithContentsOfURL:urlOfCoreDataFile];
+        }
         return _modelForPictures;
     }
     return nil;
@@ -140,7 +165,6 @@
             _coordinatorForUser=[[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:[self modelWithIdentifier:identifier]];
         }
         NSURL *urlOfUserDatabase=[[self kgetTheDocumentDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",identifier]];
-           NSLog(@"%@",urlOfUserDatabase.path);
            NSError *error;
            if (![_coordinatorForUser addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:urlOfUserDatabase options:nil error:&error])
            {
@@ -157,7 +181,6 @@
         }
         
         NSURL *urlOfUserDatabase=[[self kgetTheDocumentDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.sqlite",identifier]];
-           NSLog(@"%@",urlOfUserDatabase.path);
            NSError *error;
            if (![_coordinatorForPics addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:urlOfUserDatabase options:nil error:&error])
            {
@@ -170,7 +193,8 @@
 }
 -(NSURL *)kgetTheDocumentDirectory
 {
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask]lastObject];
+    NSURL *theurl=[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask]lastObject];
+    return theurl;
 }
 -(NSPersistentContainer *)container
 {
@@ -222,7 +246,7 @@
     return YES;
 }
 
--(BOOL)saveTheDataOfUser:(NSString *)userid andTheName:(NSString *)name andTheQuitTime:(NSDate *)dateOfQuitTime logStatus:(BOOL) islog
+-(BOOL)saveTheDataOfUser:(NSString *)userid andTheName:(NSString *)name andPassword:(NSString *)password andTheQuitTime:(NSDate *)dateOfQuitTime logStatus:(BOOL) islog
 {
     
     NSFetchRequest *fetchRequest=[UserInfor fetchRequest];
@@ -235,14 +259,20 @@
         NSLog(@"%@",fetchError);
         abort();
     }
-    UserInfor *currentinfor=[UserInfor userWithUserid:userid andUserName:name andDateOflastQuit:dateOfQuitTime andLogStatus:islog];
+    UserInfor *currentinfor=[UserInfor userWithUserid:userid andUserName:name andPassWord:password  andDateOflastQuit:dateOfQuitTime andLogStatus:islog withBlock:^(UserInfor * _Nonnull userinfor, NSManagedObjectContext * _Nonnull context)
+    {
+        
+    }];
     for (UserInfor *obj in arrayOfentity)
     {
-        if ([obj isEqual:currentinfor])
+        
+        if ([obj userIsEqual:currentinfor])
         {
             [obj setIsLogSatus:YES];
             [obj setTimeOfLastQuit:dateOfQuitTime];
+            [[[LzgSimpleNSFamilyDataStore shareInstance] contextWithIdentifier:NSStringFromClass([UserInfor class])] deleteObject:currentinfor];
             NSError *errorOfSave;
+            
             [self ksaveCOntext:&errorOfSave withIdentifier:NSStringFromClass([UserInfor class])];
             if (errorOfSave)
             {
@@ -250,13 +280,22 @@
             }
             return YES;
         }
+
     }
+#pragma mark 处理生成entity后造成的context的变化，及抵消这个变化
+    [[[LzgSimpleNSFamilyDataStore shareInstance] contextWithIdentifier:NSStringFromClass([UserInfor class])] deleteObject:currentinfor];
+               NSError *errorOfSave;
+    [self ksaveCOntext:&errorOfSave withIdentifier:NSStringFromClass([UserInfor class])];
+    //
+#pragma mark 生成新的数据
+
     NSManagedObject *userInfor=[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass([UserInfor class]) inManagedObjectContext:[self contextWithIdentifier:NSStringFromClass([UserInfor class])]];
     NSNumber *islog_num=[NSNumber numberWithBool:islog];
     [userInfor setValue:userid forKey:@"userid"];
     [userInfor setValue:name forKey:@"name"];
     [userInfor setValue:dateOfQuitTime forKey:@"timeOfLastQuit"];
     [userInfor setValue:islog_num forKey:@"isLogSatus"];
+    [userInfor setValue:password forKeyPath:@"password"];
     NSError *erro;
     [self ksaveCOntext:&erro withIdentifier:NSStringFromClass([UserInfor class])];
     if (erro)
@@ -269,35 +308,81 @@
 {
     NSFetchRequest *fetchRequst=[Pictures fetchRequest];
     NSEntityDescription *desctiprtionOfPic=[NSEntityDescription entityForName:NSStringFromClass([Pictures class]) inManagedObjectContext:[self contextWithIdentifier:NSStringFromClass([Pictures class])]];
-    Pictures *preObj=(Pictures*)desctiprtionOfPic;
-    preObj.urlSource=urlString;
+//    Pictures *preObj=(Pictures*)desctiprtionOfPic;
+//    preObj.urlSource=urlString;
     NSError *error;
     [fetchRequst setEntity:desctiprtionOfPic];
   NSArray *result=(NSArray *)[[self contextWithIdentifier:NSStringFromClass([Pictures class])] executeRequest:fetchRequst error:&error];
-    Pictures *obj=[result lastObject];
-    return  obj;
+    for (Pictures *pic in result)
+    {
+        if ([pic.urlSource isEqualToString:urlString])
+        {
+            return pic;
+        }
+    }
+    return  nil;
 }
 -(UserInfor *)userWithId:(NSString *)idString
 {
     NSFetchRequest *request=[UserInfor fetchRequest];
     UserInfor *decUserInfor=(UserInfor *)[NSEntityDescription entityForName:NSStringFromClass([UserInfor class]) inManagedObjectContext:[self contextWithIdentifier:NSStringFromClass([UserInfor class])]];
-    decUserInfor.userid=idString;
+    [request setEntity:(NSEntityDescription*)decUserInfor];
     NSError *error;
-    NSArray *result=(NSArray *)[[self contextWithIdentifier:NSStringFromClass([UserInfor class])] executeRequest:request error:&error];
-    return result.lastObject;
+    NSManagedObjectContext *context=[self contextWithIdentifier:NSStringFromClass([UserInfor class])];
+    NSArray *result=[context executeFetchRequest:request error:&error];
+    for (UserInfor *userinfor in result)
+    {
+        if ([userinfor.userid isEqualToString:idString])
+        {
+            return userinfor;
+        }
+    }
+    return nil;
 }
 -(UserInfor *)userWithName:(NSString *)name
 {
     
     NSFetchRequest *request=[UserInfor fetchRequest];
     UserInfor *decUserInfor=(UserInfor *)[NSEntityDescription entityForName:NSStringFromClass([UserInfor class]) inManagedObjectContext:[self contextWithIdentifier:NSStringFromClass([UserInfor class])]];
-    decUserInfor.name=name;
+    [request setEntity:(NSEntityDescription *)decUserInfor];
     NSError *error;
-  NSArray *result=(NSArray *)[[self contextWithIdentifier:NSStringFromClass([UserInfor class])] executeRequest:request error:&error];
+  NSArray *result=[[self contextWithIdentifier:NSStringFromClass([UserInfor class])] executeFetchRequest:request error:&error];
     if (error)
     {
         return nil;
     }
-    return result.lastObject;
+    for (UserInfor *userobj in result)
+    {
+        if ([userobj.name isEqualToString:name])
+        {
+            return userobj;
+        }
+    }
+    
+    return nil;
+}
+-(BOOL)hasPics
+{
+    return NO;
+}
+-(BOOL)hasLogUser
+{
+    NSEntityDescription *entity=[NSEntityDescription entityForName:NSStringFromClass([UserInfor class]) inManagedObjectContext:self.contextForUser];
+    NSFetchRequest *fetch=[UserInfor fetchRequest];
+    [fetch setEntity:entity];
+    NSError *fetchError;
+ NSArray *fetchresult=[self.contextForUser executeFetchRequest:fetch error:&fetchError];
+    if (fetchError)
+    {
+        NSLog(@"%@",fetchError);
+        abort();
+    }
+    if (fetchresult.count==0)
+    {
+        return NO;
+    }
+    UserInfor *theonlyUser=[fetchresult lastObject];
+    BOOL islog=theonlyUser.isLogSatus;
+    return islog;
 }
 @end

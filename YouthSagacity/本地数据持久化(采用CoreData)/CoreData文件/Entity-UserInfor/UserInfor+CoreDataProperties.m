@@ -23,7 +23,7 @@
 {
 	return [NSFetchRequest fetchRequestWithEntityName:@"UserInfor"];
 }
--(BOOL)isEqual:(id)object
+-(BOOL)userIsEqual:(id)object
 {
     BOOL superequal=[super isEqual:object];
     if (!superequal)
@@ -39,19 +39,19 @@
     {
         return NO;
     }
-    
+
     if (![self.name isEqualToString:userInfor.name])
     {
         return NO;
     }
-    
+
     return YES;
 }
 @dynamic userid;
 @dynamic isLogSatus;
 @dynamic name;
 @dynamic timeOfLastQuit;
-
+@dynamic password;
 
 //-(void)setUserid:(NSString *)userid
 //{

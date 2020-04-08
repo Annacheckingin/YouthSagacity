@@ -19,7 +19,7 @@
     dispatch_async(backgroundQueue_t, ^
     {
         LzgSimpleNSFamilyDataStore *storeCenter=[LzgSimpleNSFamilyDataStore shareInstance];
-        BOOL issuccess= [storeCenter saveTheDataOfUser:[NSDate date].description andTheName:acount andTheQuitTime:[NSDate date] logStatus:NO];
+        BOOL issuccess= [storeCenter saveTheDataOfUser:[NSDate date].description andTheName:acount andPassword:password  andTheQuitTime:[NSDate date] logStatus:NO];
         dispatch_async(mainQueue_t, ^
         {
             Handler(issuccess);

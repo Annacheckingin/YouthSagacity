@@ -38,7 +38,6 @@ static LzgRootTabBarController *LzgRootTabBarControllerme;
     {
         LzgRootTabBarControllerme=[LzgRootTabBarController shareInstance];
     }
-//    NSLog(@"%@",LzgRootTabBarControllerme);
     NSMutableArray *mutableViewsController=[NSMutableArray array];
     //
     switch(yesornot)
