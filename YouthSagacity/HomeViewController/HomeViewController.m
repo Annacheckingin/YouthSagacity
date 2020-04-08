@@ -36,7 +36,11 @@
     NSMutableArray *collectionViewData=HomeVc[@"homeCollectionVIewCell"];
     _collectionViewCellInfor=collectionViewData;
     //
-    NSMutableArray *tableViewData=HomeVc[@""];
+    NSMutableArray *tableViewData=HomeVc[@"homeTableView"];
+    _tableViewCellInfor=tableViewData;
+    [self.tips reloadData];
+    [self.projects reloadData];
+    _freshedData=NO;
 }
 -(instancetype)init
 {
@@ -63,7 +67,9 @@
         //
 #pragma mark CollectionView
          UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc]init];
+        flowLayout.scrollDirection=UICollectionViewScrollDirectionHorizontal;
         _tips=[[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _tips.backgroundColor=UIColor.whiteColor;
         [self.tips registerClass:[HomeViewControllerCollectionVIewCell class] forCellWithReuseIdentifier:NSStringFromClass([HomeViewControllerCollectionVIewCell class])];
         _tips.delegate=self;
         _tips.dataSource=self;
@@ -81,7 +87,7 @@
 }
 - (void)viewDidLoad
 {
-    
+    _freshedData=YES;
     [super viewDidLoad];
     self.view.backgroundColor=kBackGroundColor;
     [self.baseScroView sd_addSubviews:@[_headLine,_goForPublish ,_tipsLabel,_tips,_projectsLabel,_projects]];
@@ -186,75 +192,27 @@
     HomeViewControllerCollectionVIewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HomeViewControllerCollectionVIewCell class]) forIndexPath:indexPath];
     if (cell==nil)
     {
-        cell=[[HomeViewControllerCollectionVIewCell alloc]initWithFrame:CGRectZero];
+        cell=[[HomeViewControllerCollectionVIewCell alloc]init];
     }
-    
+    cell.backgroundColor=UIColor.redColor;
     
     
 
     return cell;
 }
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 0;
+    return _collectionViewCellInfor.count;
 }
 #pragma mark UICollectionViewFowLayoutDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeZero;
+    return CGSizeMake(100*LZGWIDTH, 100*LZGHEIGHT);
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
-//- (void)encodeWithCoder:(nonnull NSCoder *)coder {
-//    <#code#>
-//}
-//
-//- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
-//    <#code#>
-//}
-//
-//- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-//    <#code#>
-//}
-//
-//- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
-//    <#code#>
-//}
-//
-//- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-//    <#code#>
-//}
-//
-//- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-//    <#code#>
-//}
-//
-//- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-//    <#code#>
-//}
-//
-//- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator {
-//    <#code#>
-//}
-//
-//- (void)setNeedsFocusUpdate {
-//    <#code#>
-//}
-//
-//- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
-//    <#code#>
-//}
-//
-//- (void)updateFocusIfNeeded {
-//    <#code#>
-//}
 
 @end
