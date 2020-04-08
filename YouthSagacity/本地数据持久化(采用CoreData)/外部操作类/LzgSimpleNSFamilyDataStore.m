@@ -268,6 +268,7 @@
         
         if ([obj userIsEqual:currentinfor])
         {
+            NSLog(@"userEqualAction:");
             [obj setIsLogSatus:YES];
             [obj setTimeOfLastQuit:dateOfQuitTime];
             [[[LzgSimpleNSFamilyDataStore shareInstance] contextWithIdentifier:NSStringFromClass([UserInfor class])] deleteObject:currentinfor];
@@ -346,7 +347,7 @@
     UserInfor *decUserInfor=(UserInfor *)[NSEntityDescription entityForName:NSStringFromClass([UserInfor class]) inManagedObjectContext:[self contextWithIdentifier:NSStringFromClass([UserInfor class])]];
     [request setEntity:(NSEntityDescription *)decUserInfor];
     NSError *error;
-  NSArray *result=[[self contextWithIdentifier:NSStringFromClass([UserInfor class])] executeFetchRequest:request error:&error];
+    NSArray *result=[[self contextWithIdentifier:NSStringFromClass([UserInfor class])] executeFetchRequest:request error:&error];
     if (error)
     {
         return nil;

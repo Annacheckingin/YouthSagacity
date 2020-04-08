@@ -14,6 +14,8 @@
 #import "LzgLogStatus.h"
 #import "LzgLogViewController.h"
 #import "LzgBabaBiServerManager.h"
+#import "LzgBundleInforPath.h"
+#import "LzgSandBoxStore.h"
 @interface AppDelegate ()<UITabBarControllerDelegate>
 @property(nonatomic,strong)LzgLogStatus *logstatus;
 @end
@@ -36,9 +38,23 @@
     ]];
     self.window.rootViewController=rootBarVc;
     rootBarVc.delegate=self;
+    [self kCreateFiles];
     [LzgBabaBiServerManager setTheServerName:@"tusermen"];
     [self.window makeKeyAndVisible];
     return YES;
+}
+-(void)kCreateFiles
+{
+    NSString *fileName=@"FixedData.plist";
+    NSString *hardInforInBundle=[[LzgBundleInforPath shareInstance] pathOfFile:fileName];
+    NSString *pathOfSandBoxDocumentDirectory=[[LzgSandBoxStore shareInstance] stringForSandBoxOfDocument];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    BOOL isFileExsit=[fileManager fileExistsAtPath:[pathOfSandBoxDocumentDirectory stringByAppendingFormat:@"/%@",fileName]];
+    NSData *dataOfPlist=[NSData dataWithContentsOfFile:hardInforInBundle];
+    if (!isFileExsit)
+    {
+        [fileManager createFileAtPath:[pathOfSandBoxDocumentDirectory stringByAppendingFormat:@"/%@",fileName] contents:dataOfPlist  attributes:nil];
+    }
 }
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {

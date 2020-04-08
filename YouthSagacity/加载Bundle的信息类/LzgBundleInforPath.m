@@ -33,5 +33,10 @@ static LzgBundleInforPath *me;
     }
     return pathOfImage;
 }
-
+-(NSString *)pathOfFile:(NSString *)fileName
+{
+    NSBundle *mainbundle=[NSBundle mainBundle];
+    NSString *path=[mainbundle pathForResource:fileName ofType:nil];
+    return path;
+}
 @end

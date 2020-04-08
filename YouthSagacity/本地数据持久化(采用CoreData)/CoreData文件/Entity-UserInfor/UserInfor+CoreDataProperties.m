@@ -25,20 +25,13 @@
 }
 -(BOOL)userIsEqual:(id)object
 {
-    BOOL superequal=[super isEqual:object];
-    if (!superequal)
-    {
-        return NO;
-    }
+ 
+    
     if (![object isMemberOfClass:[UserInfor class]])
     {
         return NO;
     }
     UserInfor *userInfor=(UserInfor *)object;
-    if (![self.userid isEqualToString:userInfor.userid])
-    {
-        return NO;
-    }
 
     if (![self.name isEqualToString:userInfor.name])
     {

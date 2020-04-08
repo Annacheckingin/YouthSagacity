@@ -4,6 +4,71 @@
 <dict>
 	<key>HomeViewController</key>
 	<dict>
+		<key>homeTableView</key>
+		<array>
+			<dict>
+				<key>articleTitle</key>
+				<string></string>
+				<key>breifContent</key>
+				<string></string>
+				<key>img</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>articleTitle</key>
+				<string>Free Charted Peyote Stitch Patterns</string>
+				<key>breifContent</key>
+				<string>
+The Abstract Spring peyote bracelet pattern is designed by Jennifer VanBenschoten. It is an even count peyote stitch pattern. It is available for download for your personal use at the link.
+
+To read the word chart, start from the bottom left corner and works from bottom to top.
+
+
+The Abstract Spring peyote bracelet pattern is designed by Jennifer VanBenschoten. It is an even count peyote stitch pattern. It is available for download for your personal use at the link.
+
+To read the word chart, start from the bottom left corner and works from bottom to top.
+
+
+The Abstract Spring peyote bracelet pattern is designed by Jennifer VanBenschoten. It is an even count peyote stitch pattern. It is available for download for your personal use at the link.
+
+To read the word chart, start from the bottom left corner and works from bottom to top.
+
+
+The Abstract Spring peyote bracelet pattern is designed by Jennifer VanBenschoten. It is an even count peyote stitch pattern. It is available for download for your personal use at the link.
+
+To read the word chart, start from the bottom left corner and works from bottom to top.
+
+The Abstract Spring peyote bracelet pattern is designed by Jennifer VanBenschoten. It is an even count peyote stitch pattern. It is available for download for your personal use at the link.
+
+To read the word chart, start from the bottom left corner and works from bottom to top.The full Abstract Spring peyote pattern is shown here in three different color variations.
+
+The Abstract Spring pattern is designed using software called Bead Tool 4 which offers a free download as well as a paid version that has more features. Using bead design software is the easiest way to design patterns.
+
+One of the best features of the software is how easy it is to change the color palette of a design. You can always change the colors you use on any pattern--it&apos;s just that when you use software, it allows you to preview the results before you have stitched it up.
+
+Bead Tool 4 comes with the color palettes of Miyuki, Toho and Preciosa beads pre-loaded in the software, so you just need to select the colors to add to the design. You can also pre-load the beads in your inventory into the tool. This feature is useful for you to make sure you design using bead colors that you already own, or to help you substitute colors.The Abstract Spring color variations vary the look of the pattern by applying light and dark backgrounds as well as tonal color variations in the design. The information on the beads used in these patterns is available for download at the link.
+
+All of the bead colors listed for the peyote stitch designs are Delica beads since they provide the evenest results when using peyote stitch. If you don&apos;t mind a more freeform (i.e. slightly uneven) beadwork bracelet, other beads can be used, but do your best to cull the beads to give yourself similar sizes and shapes to work with. Vastly different sized beads will make the band uneven and possibly expose the thread, making it more likely to fray.</string>
+				<key>img</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>articleTitle</key>
+				<string></string>
+				<key>breifContent</key>
+				<string></string>
+				<key>img</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>articleTitle</key>
+				<string></string>
+				<key>breifContent</key>
+				<string></string>
+				<key>img</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>homeCollectionVIewCell</key>
 		<array>
 			<dict>

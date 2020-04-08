@@ -7,15 +7,36 @@
 //
 
 #import "HomeViewController.h"
+#import "HomeViewControllerCollectionVIewCell.h"
+#import "LzgSandBoxStore.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout>
-
+@property(nonatomic,strong)NSMutableArray *collectionViewCellInfor;
+@property(nonatomic,strong)NSMutableArray *tableViewCellInfor;
+@property(nonatomic,assign) BOOL freshedData;
 @end
 
 @implementation HomeViewController
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.hidden=YES;
+    if (_freshedData)
+    {
+        [self kHomeViewControllerShowData];
+    }
+    
+}
+-(void)kHomeViewControllerShowData
+{
+    NSString *stringOFdocumentPath=[[LzgSandBoxStore shareInstance] stringForSandBoxOfDocument];
+    NSString *stringOfPlistFile=[stringOFdocumentPath stringByAppendingString:@"/FixedData"];
+    //
+    NSMutableDictionary *dictotalData=[[NSMutableDictionary alloc]initWithContentsOfFile:stringOfPlistFile];
+    NSMutableDictionary *HomeVc=dictotalData[@"HomeViewController"];
+    NSMutableArray *collectionViewData=HomeVc[@"homeCollectionVIewCell"];
+    _collectionViewCellInfor=collectionViewData;
+    //
+    NSMutableArray *tableViewData=HomeVc[@""];
 }
 -(instancetype)init
 {
@@ -29,11 +50,12 @@
          @property(nonatomic,strong)UILabel *projectsLabel;
          @property(nonatomic,strong)UITableView *projects;
          **/
+        _freshedData=NO;
         _headLine=[[UILabel alloc]init];
         _headLine.text=@"BeadWork";
         _headLine.font=[UIFont fontWithName:@"CourierNewPS-BoldMT" size:15];
         _goForPublish=[[UIButton alloc]init];
-        [_goForPublish setImage:[UIImage imageNamed:@"5_10"] forState:UIControlStateNormal];
+        [_goForPublish setImage:[UIImage imageNamed:@"realgofor"] forState:UIControlStateNormal];
         _goForPublish.imageView.contentMode=UIViewContentModeScaleAspectFill;
         _tipsLabel=[[UILabel alloc]init];
         _tipsLabel.text=@"BeadWork Tips";
@@ -42,6 +64,7 @@
 #pragma mark CollectionView
          UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc]init];
         _tips=[[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        [self.tips registerClass:[HomeViewControllerCollectionVIewCell class] forCellWithReuseIdentifier:NSStringFromClass([HomeViewControllerCollectionVIewCell class])];
         _tips.delegate=self;
         _tips.dataSource=self;
         //
@@ -79,7 +102,7 @@
     .sd_layout.leftEqualToView(_headLine)
 #pragma mark 上方间隔
     .topSpaceToView(_headLine, 10*LZGHEIGHT)
-    .rightSpaceToView(self.baseScroView, 10*LZGWIDTH)
+    .rightSpaceToView(self.baseScroView, 20*LZGWIDTH)
 #pragma mark 高度
     .heightIs(40*LZGHEIGHT);
     //
@@ -159,7 +182,17 @@
 #pragma mark UICollectionViewDatasource
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    
+    HomeViewControllerCollectionVIewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HomeViewControllerCollectionVIewCell class]) forIndexPath:indexPath];
+    if (cell==nil)
+    {
+        cell=[[HomeViewControllerCollectionVIewCell alloc]initWithFrame:CGRectZero];
+    }
+    
+    
+    
+
+    return cell;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {

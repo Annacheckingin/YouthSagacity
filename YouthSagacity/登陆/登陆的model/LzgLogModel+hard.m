@@ -24,7 +24,7 @@
         LzgSimpleNSFamilyDataStore *storeCenter=[LzgSimpleNSFamilyDataStore shareInstance];
         
        UserInfor *userInfor=[storeCenter userWithName:acount];
-        
+        NSLog(@"%@",userInfor);
         if (userInfor==nil)
         {
             dispatch_async(mainQueue_t, ^
@@ -38,6 +38,7 @@
             {
                 dispatch_async(mainQueue_t, ^
                             {
+                    NSLog(@"登陆成功！");;
 handler(YES,userInfor.userid,userInfor.name,password);
                             });
             }

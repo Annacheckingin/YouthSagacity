@@ -25,8 +25,8 @@
             filePath = "YouthSagacity/&#x672c;&#x5730;&#x6570;&#x636e;&#x6301;&#x4e45;&#x5316;(&#x91c7;&#x7528;CoreData)/&#x5916;&#x90e8;&#x64cd;&#x4f5c;&#x7c7b;/LzgSimpleNSFamilyDataStore.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "-saveTheDataOfUser:andTheName:andPassword:andTheQuitTime:logStatus:"
             landmarkType = "7">
          </BreakpointContent>
