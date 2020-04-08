@@ -445,8 +445,8 @@
 			children = (
 				2732B6C9243D7613000B5119 /* 自定义的tableViewCell */,
 				2732B6C5243D75D0000B5119 /* 自定义的collectionViewCell */,
-				2732B5FB243CA370000B5119 /* HomeViewController.m */,
 				2732B5FC243CA370000B5119 /* HomeViewController.h */,
+				2732B5FB243CA370000B5119 /* HomeViewController.m */,
 			);
 			path = HomeViewController;
 			sourceTree = "<group>";

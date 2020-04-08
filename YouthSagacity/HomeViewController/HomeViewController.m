@@ -28,8 +28,9 @@
 }
 -(void)kHomeViewControllerShowData
 {
+    NSLog(@"fresh data");
     NSString *stringOFdocumentPath=[[LzgSandBoxStore shareInstance] stringForSandBoxOfDocument];
-    NSString *stringOfPlistFile=[stringOFdocumentPath stringByAppendingString:@"/FixedData"];
+    NSString *stringOfPlistFile=[stringOFdocumentPath stringByAppendingString:@"/FixedData.plist"];
     //
     NSMutableDictionary *dictotalData=[[NSMutableDictionary alloc]initWithContentsOfFile:stringOfPlistFile];
     NSMutableDictionary *HomeVc=dictotalData[@"HomeViewController"];
@@ -54,7 +55,7 @@
          @property(nonatomic,strong)UILabel *projectsLabel;
          @property(nonatomic,strong)UITableView *projects;
          **/
-        _freshedData=NO;
+        _freshedData=YES;
         _headLine=[[UILabel alloc]init];
         _headLine.text=@"BeadWork";
         _headLine.font=[UIFont fontWithName:@"CourierNewPS-BoldMT" size:15];
@@ -68,8 +69,12 @@
 #pragma mark CollectionView
          UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc]init];
         flowLayout.scrollDirection=UICollectionViewScrollDirectionHorizontal;
+        flowLayout.minimumInteritemSpacing=10*LZGWIDTH;
+        flowLayout.sectionInset=UIEdgeInsetsMake(5, 10, 5, 10);
+        flowLayout.itemSize=CGSizeMake(200*LZGHEIGHT, 200*LZGHEIGHT);
         _tips=[[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowLayout];
-        _tips.backgroundColor=UIColor.whiteColor;
+        _tips.backgroundColor=UIColor.clearColor;
+    
         [self.tips registerClass:[HomeViewControllerCollectionVIewCell class] forCellWithReuseIdentifier:NSStringFromClass([HomeViewControllerCollectionVIewCell class])];
         _tips.delegate=self;
         _tips.dataSource=self;
@@ -129,8 +134,8 @@
 #pragma mark 上方间隔
     .topSpaceToView(_tipsLabel, 10*LZGHEIGHT)
 #pragma mark 高度
-    .heightIs(150*LZGHEIGHT);
-    accumulateHeight+=160;
+    .heightIs(200*LZGHEIGHT);
+    accumulateHeight+=210;
     //
     _projectsLabel.sd_layout
     .leftEqualToView(_headLine)
@@ -194,8 +199,10 @@
     {
         cell=[[HomeViewControllerCollectionVIewCell alloc]init];
     }
-    cell.backgroundColor=UIColor.redColor;
-    
+    NSDictionary *inforDic=[self.collectionViewCellInfor objectAtIndex:indexPath.row];
+    cell.cellTitle.text=[[self.collectionViewCellInfor objectAtIndex:indexPath.row] objectForKey:@"articleTitle"];
+    cell.cellDate=inforDic[@"date"];
+    [cell.cellImage yy_setImageWithURL:inforDic[@"image"] placeholder:[UIImage imageNamed:@"bitmap"]];
     
 
     return cell;
@@ -209,10 +216,10 @@
     return _collectionViewCellInfor.count;
 }
 #pragma mark UICollectionViewFowLayoutDelegate
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(100*LZGWIDTH, 100*LZGHEIGHT);
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return CGSizeMake(100*LZGWIDTH, 100*LZGHEIGHT);
+//}
 
 
 @end

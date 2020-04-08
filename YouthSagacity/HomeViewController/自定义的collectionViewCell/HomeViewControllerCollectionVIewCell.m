@@ -32,7 +32,7 @@
         self.backgroundColor=UIColor.clearColor;
         _basementView=[[UIView alloc]init];
         _basementView.backgroundColor=UIColor.whiteColor;
-        _basementView.layer.cornerRadius=5;
+        _basementView.layer.cornerRadius=10;
         _basementView.clipsToBounds=YES;
         _cellTitle=[[UILabel alloc]init];
         _cellTitle.font=[UIFont systemFontOfSize:10];
@@ -40,6 +40,7 @@
         _cellImage=[[UIImageView alloc]init];
         _cellImage.layer.cornerRadius=5;
         _cellImage.clipsToBounds=YES;
+        _cellImage.contentMode=UIViewContentModeScaleAspectFill;
         _cellDate=[[UILabel alloc]init];
         _cellDate.textColor=UIColor.lightGrayColor;
         _cellDate.font=[UIFont systemFontOfSize:8];
@@ -55,7 +56,6 @@
         [_detailsBtn setImage:[UIImage imageNamed:@"normaldetail"] forState:UIControlStateNormal];
         _detailsBtn.imageView.contentMode=UIViewContentModeScaleAspectFit;
         [self kSetUpUI];
-        
     }
     return self;
 }
