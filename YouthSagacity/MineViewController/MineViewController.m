@@ -9,6 +9,7 @@
 #import "MineViewController.h"
 #import "LzgMenuDelegate.h"
 #import "LzgMenuDataSource.h"
+#import "LzgDevicePixlesHandle.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
 @interface MineViewController ()
 @property(nonatomic,strong)UIImage *yellowStar;
@@ -199,27 +200,50 @@
     NSLog(@"%lf",SCREENHEIGHT);
     NSLog(@"%lf",SCREENWIDTH);
     accumulateHeight+=theHeigjtOfMenuTableView;
+#warning 调试信息需要删除
+    _menu.backgroundColor=UIColor.redColor;
+//#pragma mark 考虑到TabBar的高度
+//    accumulateHeight+=44;
+//#pragma mark 异形屏还需要34px
+//    if (LZGHEIGHT!=1)
+//    {
+//          accumulateHeight+=34;
+//    }
+//
+//    //
+//#pragma mark 做滑动界面的长度调整
+//    //
+//if (accumulateHeight<SCREENHEIGHT)
+//    {
+//        accumulateHeight=SCREENHEIGHT;
+//    }
+//#pragma mark 作为屏幕的调试
+//    //
+//    accumulateHeight+=100;
+#pragma mark 根据不同设备，滑动长度的调整
     
-    
-#pragma mark 考虑到TabBar的高度
-    accumulateHeight+=44;
-#pragma mark 异形屏还需要34px
-    if (LZGHEIGHT!=1)
+    LzgDevicePixlesHandle *pxHandle=[LzgDevicePixlesHandle shareInstance];
+    NSString *deviceName=[pxHandle deviceName];
+    if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone8])
     {
-          accumulateHeight+=34;
+        accumulateHeight-=60;
     }
-  
-    //
-#pragma mark 做滑动界面的长度调整
-    //
-if (accumulateHeight<SCREENHEIGHT)
+    else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone8plus])
     {
-        NSLog(@"小于");
-        accumulateHeight=SCREENHEIGHT;
+        
     }
-#pragma mark 作为屏幕的调试
-    //
-    accumulateHeight+=100;
+    else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone11])
+    {
+        accumulateHeight+=170;
+    }
+    else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone11Pro])
+    {
+        accumulateHeight+=90;
+    }
+    else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone11ProMax])
+    {
+         accumulateHeight+=90;
+    }
 [self setTheScroViewContentSize:CGSizeMake(SCREENWIDTH, accumulateHeight)];
     
 }

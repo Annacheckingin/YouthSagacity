@@ -11,7 +11,6 @@
 #import "LzgSandBoxStore.h"
 #import "UIButton+LzgBelongtoCell.h"
 #import "HomeViewControllerTableViewCell.h"
-#import "LzgDevicePixlesHandle.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate>
 @property(nonatomic,strong)NSMutableArray *collectionViewCellInfor;
@@ -162,13 +161,6 @@
            accumulateHeight=SCREENHEIGHT;
        }
     //
-    LzgDevicePixlesHandle *pxHandle=[LzgDevicePixlesHandle shareInstance];
-    NSString *devideName=[pxHandle deviceName];
-    if ([devideName isEqualToString:LzgDevicePixlesHandleIphone8])
-    {
-    
-    }
-    
     [self setTheScroViewContentSize:CGSizeMake(SCREENWIDTH, accumulateHeight)];
     
     //
@@ -230,6 +222,7 @@
     cell.cellTitle.text=[inforDic objectForKey:@"articleTitle"];
     [cell.cellImage yy_setImageWithURL:inforDic[@"image"] placeholder:[UIImage imageNamed:@"bitmap"]];
     cell.cellAuthor.text=inforDic[@"author"];
+
     return cell;
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
