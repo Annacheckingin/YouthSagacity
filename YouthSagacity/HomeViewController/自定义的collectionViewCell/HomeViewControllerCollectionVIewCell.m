@@ -55,6 +55,7 @@
         _detailsBtn.imageView.contentMode=_warnningBtn.imageView.contentMode;
         [_detailsBtn setImage:[UIImage imageNamed:@"normaldetail"] forState:UIControlStateNormal];
         _detailsBtn.imageView.contentMode=UIViewContentModeScaleAspectFit;
+        //
         [self kSetUpUI];
     }
     return self;
@@ -72,10 +73,11 @@
     //
     //
     _cellTitle.sd_layout
-    .topSpaceToView(_basementView, 5*LZGHEIGHT)
-    .leftSpaceToView(_basementView, 2*LZGWIDTH)
-    .rightSpaceToView(_basementView, 2*LZGWIDTH)
+    .topSpaceToView(_basementView, 2*LZGHEIGHT)
+    .leftSpaceToView(_basementView, 15*LZGWIDTH)
+    .rightSpaceToView(_basementView, 15*LZGWIDTH)
     .heightIs(12*LZGHEIGHT);
+   
     //
     _cellDate.sd_layout
     .topSpaceToView(_cellTitle, 2*LZGHEIGHT)
@@ -97,17 +99,23 @@
     //
     //
     _forbidBtn.sd_layout
-    .rightEqualToView(_cellImage)
-    .centerYEqualToView(_cellAuthor)
-    .heightIs(20*LZGHEIGHT)
+    .rightEqualToView(_cellImage).offset(-5*LZGWIDTH)
+    .topEqualToView(_cellAuthor)
+    .heightIs(15*LZGHEIGHT)
     .widthEqualToHeight();
     //
     _warnningBtn.sd_layout
-    .rightSpaceToView(_forbidBtn, 2*LZGWIDTH)
+    .rightSpaceToView(_forbidBtn, 10*LZGWIDTH)
     .centerYEqualToView(_forbidBtn)
     .heightRatioToView(_forbidBtn, 1)
     .widthEqualToHeight();
-    
+    //
+    _detailsBtn.sd_layout
+    .centerXEqualToView(_basementView)
+    .bottomSpaceToView(_basementView, 2*LZGHEIGHT)
+    .topSpaceToView(_warnningBtn, 5*LZGHEIGHT)
+    .leftEqualToView(_cellImage)
+    .rightEqualToView(_cellImage);
 }
 -(void)setDelegate:(id<HomeViewControllerCollectionVIewCellDelegate>)delegate
 {

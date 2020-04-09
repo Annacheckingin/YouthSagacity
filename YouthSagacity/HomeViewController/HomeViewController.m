@@ -28,7 +28,7 @@
 }
 -(void)kHomeViewControllerShowData
 {
-    NSLog(@"fresh data");
+  
     NSString *stringOFdocumentPath=[[LzgSandBoxStore shareInstance] stringForSandBoxOfDocument];
     NSString *stringOfPlistFile=[stringOFdocumentPath stringByAppendingString:@"/FixedData.plist"];
     //
@@ -74,7 +74,7 @@
         flowLayout.itemSize=CGSizeMake(200*LZGHEIGHT, 200*LZGHEIGHT);
         _tips=[[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _tips.backgroundColor=UIColor.clearColor;
-    
+        _tips.showsHorizontalScrollIndicator=NO;
         [self.tips registerClass:[HomeViewControllerCollectionVIewCell class] forCellWithReuseIdentifier:NSStringFromClass([HomeViewControllerCollectionVIewCell class])];
         _tips.delegate=self;
         _tips.dataSource=self;
@@ -106,7 +106,7 @@
     .widthIs(80*LZGWIDTH)
 #pragma mark 高度
     .heightIs(30*LZGHEIGHT);
-    accumulateHeight+=50;
+    accumulateHeight+=70;
     //
      
     _goForPublish
@@ -118,6 +118,7 @@
     .heightIs(40*LZGHEIGHT);
     //
     accumulateHeight+=50;
+    //
     _tipsLabel.sd_layout
      .leftEqualToView( _headLine)
 #pragma mark 上方间隔
@@ -146,19 +147,27 @@
     accumulateHeight+=35;
     [_projectsLabel setSingleLineAutoResizeWithMaxWidth:200];
     //
-#pragma mark UItableView布局
+
     //
-    if (accumulateHeight*LZGHEIGHT<SCREENHEIGHT)
+    CGFloat heightOfTableView=250.0;
+    accumulateHeight+=heightOfTableView+5;
+    if (accumulateHeight<SCREENHEIGHT)
        {
+           
            accumulateHeight=SCREENHEIGHT;
        }
     //
-    [self setTheScroViewContentSize:CGSizeMake(SCREENWIDTH, accumulateHeight*LZGHEIGHT)];
-    _projects.sd_layout
-    .topSpaceToView(_projectsLabel, 5*LZGHEIGHT)
+    [self setTheScroViewContentSize:CGSizeMake(SCREENWIDTH, accumulateHeight)];
+    
+    //
+#pragma mark UItableView布局
+     _projects.sd_layout.
+     topSpaceToView(_projectsLabel, 5*LZGHEIGHT)
     .leftEqualToView(self.baseScroView)
     .rightEqualToView(self.baseScroView)
-    .bottomEqualToView(self.baseScroView);
+    .heightIs(heightOfTableView*LZGHEIGHT);
+    
+   
     //
     
    
@@ -193,16 +202,13 @@
 #pragma mark UICollectionViewDatasource
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     HomeViewControllerCollectionVIewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HomeViewControllerCollectionVIewCell class]) forIndexPath:indexPath];
-    if (cell==nil)
-    {
-        cell=[[HomeViewControllerCollectionVIewCell alloc]init];
-    }
     NSDictionary *inforDic=[self.collectionViewCellInfor objectAtIndex:indexPath.row];
-    cell.cellTitle.text=[[self.collectionViewCellInfor objectAtIndex:indexPath.row] objectForKey:@"articleTitle"];
-    cell.cellDate=inforDic[@"date"];
+    cell.cellTitle.textColor=UIColor.blackColor;
+    cell.cellDate.text=inforDic[@"date"];
+    cell.cellTitle.text=[inforDic objectForKey:@"articleTitle"];
     [cell.cellImage yy_setImageWithURL:inforDic[@"image"] placeholder:[UIImage imageNamed:@"bitmap"]];
+    cell.cellAuthor.text=inforDic[@"author"];
     
 
     return cell;

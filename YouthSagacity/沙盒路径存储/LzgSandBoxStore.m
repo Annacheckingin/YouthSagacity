@@ -22,6 +22,7 @@
 {
    NSFileManager *fileManager=[NSFileManager defaultManager];
    NSURL *urlToDocument=[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].lastObject;
+    NSLog(@"%@",urlToDocument.path);
     return urlToDocument.path;
 }
 @end

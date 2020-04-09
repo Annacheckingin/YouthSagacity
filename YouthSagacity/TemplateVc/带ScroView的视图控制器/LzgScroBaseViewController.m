@@ -53,6 +53,7 @@
     if (_baseScroView)
     {
         _baseScroView.contentSize=size;
+        [_baseScroView layoutIfNeeded];
     }
 }
 -(instancetype)init
@@ -75,6 +76,7 @@
     .topEqualToView(self.view)
     .rightEqualToView(self.view)
     .bottomEqualToView(self.view);
+    _baseScroView.contentSize=[UIScreen mainScreen].bounds.size;
     //
     
     // Do any additional setup after loading the view.
