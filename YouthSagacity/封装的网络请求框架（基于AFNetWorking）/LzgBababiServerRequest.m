@@ -41,22 +41,7 @@ static  LzgBababiServerRequest *me;
     
     return TheReturnedValue;
 }
-//-(LzgLogModel *)logModel
-//{
-//    if (_logModel==nil)
-//    {
-//        _logModel=[LzgLogModel shareInstance];
-//    }
-//    return _logModel;
-//}
-//-(LzgRegistModel *)registModel
-//{
-//    if (_registModel==nil)
-//    {
-//        _registModel=[LzgRegistModel shareInstance];
-//    }
-//    return _registModel;
-//}
+
 +(instancetype)shareInstance
 {
     if (me==nil)
@@ -69,11 +54,6 @@ static  LzgBababiServerRequest *me;
 -(BOOL)bababiServerRegistWithAcount:(NSString *)acount andPassWord:(NSString *)password
 {
     
-//    BOOL registValue=[self.registModel registWithAcount:acount andPassword:password];
-//        AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
-//        NSString *thePostActionTarget=[[[[[NSMutableString alloc]initWithUTF8String:kurlPrefixString] stringByAppendingString:_serverUserName] stringByAppendingString:[NSString stringWithUTF8String:kurlTailString]]stringByAppendingString:LzgRegisterString];
-//
-//        return registValue;
     return NO;
 }
 -(BOOL)bababiServerLogWithAcount:(NSString *)acount andPassWord:(NSString *)password;

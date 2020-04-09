@@ -87,6 +87,9 @@
 		2732B6E7243EC3A5000B5119 /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B6E6243EC3A5000B5119 /* NewsTableViewCell.m */; };
 		2732B72A243ED96E000B5119 /* LzgImageCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B729243ED96E000B5119 /* LzgImageCollectionCell.m */; };
 		2732B72E243EE83F000B5119 /* LzgCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B72D243EE83F000B5119 /* LzgCollectionViewLayout.m */; };
+		2732B731243F0891000B5119 /* LzgMenuDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B730243F0891000B5119 /* LzgMenuDelegate.m */; };
+		2732B734243F089E000B5119 /* LzgMenuDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B733243F089E000B5119 /* LzgMenuDataSource.m */; };
+		2732B738243F4996000B5119 /* LzgDevicePixlesHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B737243F4996000B5119 /* LzgDevicePixlesHandle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -246,6 +249,12 @@
 		2732B729243ED96E000B5119 /* LzgImageCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgImageCollectionCell.m; sourceTree = "<group>"; };
 		2732B72C243EE83F000B5119 /* LzgCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgCollectionViewLayout.h; sourceTree = "<group>"; };
 		2732B72D243EE83F000B5119 /* LzgCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgCollectionViewLayout.m; sourceTree = "<group>"; };
+		2732B72F243F0891000B5119 /* LzgMenuDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgMenuDelegate.h; sourceTree = "<group>"; };
+		2732B730243F0891000B5119 /* LzgMenuDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgMenuDelegate.m; sourceTree = "<group>"; };
+		2732B732243F089E000B5119 /* LzgMenuDataSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgMenuDataSource.h; sourceTree = "<group>"; };
+		2732B733243F089E000B5119 /* LzgMenuDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgMenuDataSource.m; sourceTree = "<group>"; };
+		2732B736243F4996000B5119 /* LzgDevicePixlesHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgDevicePixlesHandle.h; sourceTree = "<group>"; };
+		2732B737243F4996000B5119 /* LzgDevicePixlesHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgDevicePixlesHandle.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +287,7 @@
 		2732B593243CA309000B5119 /* YouthSagacity */ = {
 			isa = PBXGroup;
 			children = (
+				2732B735243F4975000B5119 /* 设备像素处理 */,
 				2732B6D1243DAF71000B5119 /* 沙盒路径存储 */,
 				2732B6BF243D5DDB000B5119 /* InforPlist */,
 				2732B61B243CA370000B5119 /* 本地数据持久化(采用CoreData) */,
@@ -630,6 +640,10 @@
 			children = (
 				2732B635243CA370000B5119 /* MineViewController.h */,
 				2732B636243CA370000B5119 /* MineViewController.m */,
+				2732B72F243F0891000B5119 /* LzgMenuDelegate.h */,
+				2732B730243F0891000B5119 /* LzgMenuDelegate.m */,
+				2732B732243F089E000B5119 /* LzgMenuDataSource.h */,
+				2732B733243F089E000B5119 /* LzgMenuDataSource.m */,
 			);
 			path = MineViewController;
 			sourceTree = "<group>";
@@ -837,6 +851,15 @@
 			path = "CollectionView的一个Layout";
 			sourceTree = "<group>";
 		};
+		2732B735243F4975000B5119 /* 设备像素处理 */ = {
+			isa = PBXGroup;
+			children = (
+				2732B736243F4996000B5119 /* LzgDevicePixlesHandle.h */,
+				2732B737243F4996000B5119 /* LzgDevicePixlesHandle.m */,
+			);
+			path = "设备像素处理";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -951,6 +974,7 @@
 				2732B6AA243CA371000B5119 /* YYCache.m in Sources */,
 				2732B682243CA371000B5119 /* LzgScroBaseViewController.m in Sources */,
 				2732B6A2243CA371000B5119 /* LzgReleaseViewController.m in Sources */,
+				2732B738243F4996000B5119 /* LzgDevicePixlesHandle.m in Sources */,
 				2732B69D243CA371000B5119 /* LzgSimpleNSFamilyDataStore.m in Sources */,
 				2732B69E243CA371000B5119 /* LzgLogStatus.m in Sources */,
 				2732B681243CA371000B5119 /* LzgMineCell.m in Sources */,
@@ -966,6 +990,7 @@
 				2732B6E3243EBF7F000B5119 /* LzgLabel.m in Sources */,
 				2732B687243CA371000B5119 /* LzgCommentCell.m in Sources */,
 				2732B68B243CA371000B5119 /* LzgLogViewController.m in Sources */,
+				2732B731243F0891000B5119 /* LzgMenuDelegate.m in Sources */,
 				2732B6B2243CA371000B5119 /* UIImageView+YYWebImage.m in Sources */,
 				2732B6C4243D710E000B5119 /* LzgPlistRead.m in Sources */,
 				2732B6AE243CA371000B5119 /* YYImageCoder.m in Sources */,
@@ -982,6 +1007,7 @@
 				2732B699243CA371000B5119 /* Pictures+CoreDataProperties.m in Sources */,
 				2732B6A4243CA371000B5119 /* UITableView+SDAutoTableViewCellHeight.m in Sources */,
 				2732B6B3243CA371000B5119 /* YYMemoryCache.m in Sources */,
+				2732B734243F089E000B5119 /* LzgMenuDataSource.m in Sources */,
 				2732B6B8243CA371000B5119 /* CALayer+YYWebImage.m in Sources */,
 				2732B695243CA371000B5119 /* AppDelegate.m in Sources */,
 			);

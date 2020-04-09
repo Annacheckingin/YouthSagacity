@@ -56,7 +56,6 @@
         }
         //
         //
-        
         _blockingNews=[[UIButton alloc]init];
         [_blockingNews setImage:[UIImage imageNamed:@"5_153"] forState:UIControlStateNormal];
         _blockingNews.imageView.contentMode=UIViewContentModeScaleAspectFit;
@@ -140,7 +139,6 @@
     .centerYEqualToView(_likesBtn)
     .rightSpaceToView(_baseMentview, 1*LZGWIDTH)
     .heightRatioToView(_likesBtn, 1);
-    
     [self setupAutoHeightWithBottomView:_baseMentview bottomMargin:10*LZGHEIGHT];
 }
 - (void)awakeFromNib {
