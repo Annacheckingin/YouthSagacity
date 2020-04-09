@@ -11,15 +11,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MineViewController : LzgScroBaseViewController
-@property(nonatomic,strong)UIImageView *topimg;
-@property(nonatomic,strong)UIImageView *portrait;
-@property(nonatomic,strong)UILabel *userName;
-@property(nonatomic,strong)UILabel *idLabel;
-@property(nonatomic,strong)UIImageView *likesLabel;
-@property(nonatomic,strong)UICollectionView *likesContent;
-@property(nonatomic,strong)UIImageView *messageLabel;
-@property(nonatomic,strong)UITableView *messagetableView;
-@property(nonatomic,strong)UITableView *menu; 
+@property(nonatomic,readonly)UIImageView *topimg;
+@property(nonatomic,readonly)UIImageView *portrait;
+@property(nonatomic,readonly)UILabel *userName;
+@property(nonatomic,readonly)UILabel *idLabel;
+@property(nonatomic,readonly)UIImageView *likesLabel;
+@property(nonatomic,readonly)UICollectionView *likesContent;
+@property(nonatomic,readonly)UIImageView *messageLabel;
+@property(nonatomic,readonly)UITableView *messagetableView;
+@property(nonatomic,readonly)UITableView *menu;
 @end
 
 NS_ASSUME_NONNULL_END

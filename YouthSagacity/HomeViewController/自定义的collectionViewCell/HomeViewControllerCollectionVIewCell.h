@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)HomeViewControllerCollectionVIewCellWarningTargetActionMethod:(UIButton *)sender;
 -(void)HomeViewControllerCollectionVIewCellForBideTargetActionMethod:(UIButton *)sender;
-
+-(void)HomeViewControllerCollectionVIewCellViewDetailsTargetActionMethod:(UIButton *)sender;
 @end
 @interface HomeViewControllerCollectionVIewCell : UICollectionViewCell
 @property(nonatomic,strong)UILabel *cellTitle;

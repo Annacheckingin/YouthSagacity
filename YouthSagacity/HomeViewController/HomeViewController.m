@@ -9,8 +9,10 @@
 #import "HomeViewController.h"
 #import "HomeViewControllerCollectionVIewCell.h"
 #import "LzgSandBoxStore.h"
+#import "UIButton+LzgBelongtoCell.h"
+#import "HomeViewControllerTableViewCell.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
-@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate>
 @property(nonatomic,strong)NSMutableArray *collectionViewCellInfor;
 @property(nonatomic,strong)NSMutableArray *tableViewCellInfor;
 @property(nonatomic,assign) BOOL freshedData;
@@ -84,8 +86,10 @@
         _projectsLabel.font=_tipsLabel.font;
 #pragma mark TableView
         _projects=[[UITableView alloc]init];
+        _projects.backgroundColor=UIColor.clearColor;
         _projects.delegate=self;
         _projects.dataSource=self;
+        _projects.separatorStyle=UITableViewCellSeparatorStyleNone;
       
     }
     return self;
@@ -166,12 +170,7 @@
     .leftEqualToView(self.baseScroView)
     .rightEqualToView(self.baseScroView)
     .heightIs(heightOfTableView*LZGHEIGHT);
-    
-   
-    //
-    
-   
-    
+     
     // Do any additional setup after loading the view.
 }
 #pragma mark UITableViewDelegate
@@ -182,16 +181,30 @@
 #pragma mark UITableViewDatasource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return nil;
+    HomeViewControllerTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([HomeViewControllerTableViewCell class])];
+    if (cell==nil)
+    {
+        cell=[[HomeViewControllerTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([HomeViewControllerTableViewCell class])];
+    }
+    
+    NSDictionary *dictionary=[_tableViewCellInfor objectAtIndex:indexPath.section];
+    cell.cellTitle.text=dictionary[@"articleTitle"];
+    cell.cellBriefContent.text=dictionary[@"breifContent"];
+    [cell setTheCellDisplayImage:dictionary[@"img"]];
+    
+    return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return 1;
 }
-
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return _tableViewCellInfor.count;
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 0;
+    return [tableView cellHeightForIndexPath:indexPath cellContentViewWidth:SCREENWIDTH tableView:tableView];
 }
 //
 #pragma mark UICollectionViewDelegate
@@ -226,6 +239,29 @@
 //{
 //    return CGSizeMake(100*LZGWIDTH, 100*LZGHEIGHT);
 //}
+
+
+- (void)HomeViewControllerCollectionVIewCellForBideTargetActionMethod:(nonnull UIButton *)sender
+{
+    UICollectionViewCell *belongtoCell=sender.belongto;
+    
+    
+    
+    
+    
+}
+
+- (void)HomeViewControllerCollectionVIewCellViewDetailsTargetActionMethod:(nonnull UIButton *)sender
+{
+    UICollectionViewCell *belongtoCell=sender.belongto;
+       
+}
+
+- (void)HomeViewControllerCollectionVIewCellWarningTargetActionMethod:(nonnull UIButton *)sender
+{
+    UICollectionViewCell *belongtoCell=sender.belongto;
+       
+}
 
 
 @end

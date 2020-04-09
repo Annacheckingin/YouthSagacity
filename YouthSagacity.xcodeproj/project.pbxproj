@@ -82,6 +82,11 @@
 		2732B6CC243D763F000B5119 /* HomeViewControllerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B6CB243D763F000B5119 /* HomeViewControllerTableViewCell.m */; };
 		2732B6D0243DA25F000B5119 /* LzgAcount_PasswordValidate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B6CF243DA25F000B5119 /* LzgAcount_PasswordValidate.m */; };
 		2732B6D4243DAF8D000B5119 /* LzgSandBoxStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B6D3243DAF8D000B5119 /* LzgSandBoxStore.m */; };
+		2732B6DC243EB663000B5119 /* UIButton+LzgBelongtoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B6DB243EB663000B5119 /* UIButton+LzgBelongtoCell.m */; };
+		2732B6E3243EBF7F000B5119 /* LzgLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B6E2243EBF7F000B5119 /* LzgLabel.m */; };
+		2732B6E7243EC3A5000B5119 /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B6E6243EC3A5000B5119 /* NewsTableViewCell.m */; };
+		2732B72A243ED96E000B5119 /* LzgImageCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B729243ED96E000B5119 /* LzgImageCollectionCell.m */; };
+		2732B72E243EE83F000B5119 /* LzgCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B72D243EE83F000B5119 /* LzgCollectionViewLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -231,6 +236,16 @@
 		2732B6CF243DA25F000B5119 /* LzgAcount_PasswordValidate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgAcount_PasswordValidate.m; sourceTree = "<group>"; };
 		2732B6D2243DAF8D000B5119 /* LzgSandBoxStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgSandBoxStore.h; sourceTree = "<group>"; };
 		2732B6D3243DAF8D000B5119 /* LzgSandBoxStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgSandBoxStore.m; sourceTree = "<group>"; };
+		2732B6DA243EB663000B5119 /* UIButton+LzgBelongtoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+LzgBelongtoCell.h"; sourceTree = "<group>"; };
+		2732B6DB243EB663000B5119 /* UIButton+LzgBelongtoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LzgBelongtoCell.m"; sourceTree = "<group>"; };
+		2732B6E1243EBF7F000B5119 /* LzgLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgLabel.h; sourceTree = "<group>"; };
+		2732B6E2243EBF7F000B5119 /* LzgLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgLabel.m; sourceTree = "<group>"; };
+		2732B6E5243EC3A5000B5119 /* NewsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsTableViewCell.h; sourceTree = "<group>"; };
+		2732B6E6243EC3A5000B5119 /* NewsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsTableViewCell.m; sourceTree = "<group>"; };
+		2732B728243ED96E000B5119 /* LzgImageCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgImageCollectionCell.h; sourceTree = "<group>"; };
+		2732B729243ED96E000B5119 /* LzgImageCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgImageCollectionCell.m; sourceTree = "<group>"; };
+		2732B72C243EE83F000B5119 /* LzgCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgCollectionViewLayout.h; sourceTree = "<group>"; };
+		2732B72D243EE83F000B5119 /* LzgCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgCollectionViewLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -454,6 +469,8 @@
 		2732B5FD243CA370000B5119 /* NewsViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2732B727243ED935000B5119 /* 上方单纯的CollectionView的展示图 */,
+				2732B6E4243EC366000B5119 /* 主要展示图的TableViewCell */,
 				2732B5FE243CA370000B5119 /* NewsViewController.m */,
 				2732B5FF243CA370000B5119 /* NewsViewController.h */,
 			);
@@ -739,6 +756,7 @@
 		2732B6C5243D75D0000B5119 /* 自定义的collectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				2732B6D9243EB61B000B5119 /* UIButton对包含自己的Cell的弱引用+类别 */,
 				2732B6C6243D7600000B5119 /* HomeViewControllerCollectionVIewCell.h */,
 				2732B6C7243D7600000B5119 /* HomeViewControllerCollectionVIewCell.m */,
 			);
@@ -748,6 +766,7 @@
 		2732B6C9243D7613000B5119 /* 自定义的tableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				2732B6DD243EBECC000B5119 /* UILabel的靠左上显示的子类 */,
 				2732B6CA243D763F000B5119 /* HomeViewControllerTableViewCell.h */,
 				2732B6CB243D763F000B5119 /* HomeViewControllerTableViewCell.m */,
 			);
@@ -770,6 +789,52 @@
 				2732B6D3243DAF8D000B5119 /* LzgSandBoxStore.m */,
 			);
 			path = "沙盒路径存储";
+			sourceTree = "<group>";
+		};
+		2732B6D9243EB61B000B5119 /* UIButton对包含自己的Cell的弱引用+类别 */ = {
+			isa = PBXGroup;
+			children = (
+				2732B6DA243EB663000B5119 /* UIButton+LzgBelongtoCell.h */,
+				2732B6DB243EB663000B5119 /* UIButton+LzgBelongtoCell.m */,
+			);
+			path = "UIButton对包含自己的Cell的弱引用+类别";
+			sourceTree = "<group>";
+		};
+		2732B6DD243EBECC000B5119 /* UILabel的靠左上显示的子类 */ = {
+			isa = PBXGroup;
+			children = (
+				2732B6E1243EBF7F000B5119 /* LzgLabel.h */,
+				2732B6E2243EBF7F000B5119 /* LzgLabel.m */,
+			);
+			path = "UILabel的靠左上显示的子类";
+			sourceTree = "<group>";
+		};
+		2732B6E4243EC366000B5119 /* 主要展示图的TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2732B6E5243EC3A5000B5119 /* NewsTableViewCell.h */,
+				2732B6E6243EC3A5000B5119 /* NewsTableViewCell.m */,
+			);
+			path = "主要展示图的TableViewCell";
+			sourceTree = "<group>";
+		};
+		2732B727243ED935000B5119 /* 上方单纯的CollectionView的展示图 */ = {
+			isa = PBXGroup;
+			children = (
+				2732B72B243EE708000B5119 /* CollectionView的一个Layout */,
+				2732B728243ED96E000B5119 /* LzgImageCollectionCell.h */,
+				2732B729243ED96E000B5119 /* LzgImageCollectionCell.m */,
+			);
+			path = "上方单纯的CollectionView的展示图";
+			sourceTree = "<group>";
+		};
+		2732B72B243EE708000B5119 /* CollectionView的一个Layout */ = {
+			isa = PBXGroup;
+			children = (
+				2732B72C243EE83F000B5119 /* LzgCollectionViewLayout.h */,
+				2732B72D243EE83F000B5119 /* LzgCollectionViewLayout.m */,
+			);
+			path = "CollectionView的一个Layout";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -853,6 +918,7 @@
 				2732B680243CA371000B5119 /* LzgCategoryValueHandler.m in Sources */,
 				2732B688243CA371000B5119 /* LzgRootTabBarController.m in Sources */,
 				2732B6BD243CA371000B5119 /* AFNetworkReachabilityManager.m in Sources */,
+				2732B6E7243EC3A5000B5119 /* NewsTableViewCell.m in Sources */,
 				2732B69C243CA371000B5119 /* UserInfor.xcdatamodeld in Sources */,
 				2732B6AF243CA371000B5119 /* YYKVStorage.m in Sources */,
 				2732B6B4243CA371000B5119 /* YYAnimatedImageView.m in Sources */,
@@ -897,6 +963,7 @@
 				2732B6A0243CA371000B5119 /* MineViewController.m in Sources */,
 				2732B6A8243CA371000B5119 /* YYWebImageManager.m in Sources */,
 				2732B68D243CA371000B5119 /* LzgRegistModel.m in Sources */,
+				2732B6E3243EBF7F000B5119 /* LzgLabel.m in Sources */,
 				2732B687243CA371000B5119 /* LzgCommentCell.m in Sources */,
 				2732B68B243CA371000B5119 /* LzgLogViewController.m in Sources */,
 				2732B6B2243CA371000B5119 /* UIImageView+YYWebImage.m in Sources */,
@@ -904,9 +971,12 @@
 				2732B6AE243CA371000B5119 /* YYImageCoder.m in Sources */,
 				2732B6A3243CA371000B5119 /* UIView+SDAutoLayout.m in Sources */,
 				2732B6B0243CA371000B5119 /* UIButton+YYWebImage.m in Sources */,
+				2732B6DC243EB663000B5119 /* UIButton+LzgBelongtoCell.m in Sources */,
 				2732B6A5243CA371000B5119 /* _YYWebImageSetter.m in Sources */,
 				2732B6D4243DAF8D000B5119 /* LzgSandBoxStore.m in Sources */,
+				2732B72E243EE83F000B5119 /* LzgCollectionViewLayout.m in Sources */,
 				2732B69B243CA371000B5119 /* UserInfor+CoreDataClass.m in Sources */,
+				2732B72A243ED96E000B5119 /* LzgImageCollectionCell.m in Sources */,
 				2732B69F243CA371000B5119 /* LzgBundleInforPath.m in Sources */,
 				2732B68E243CA371000B5119 /* LzgLogModel+hard.m in Sources */,
 				2732B699243CA371000B5119 /* Pictures+CoreDataProperties.m in Sources */,

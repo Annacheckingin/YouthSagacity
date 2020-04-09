@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewControllerCollectionVIewCell.h"
+#import "UIButton+LzgBelongtoCell.h"
 @interface HomeViewControllerCollectionVIewCell ()
 
 @property(nonatomic,strong)UIView *basementView;
@@ -47,12 +48,17 @@
         _cellAuthor=[[UILabel alloc]init];
         _cellAuthor.font=_cellTitle.font;
         _warnningBtn=[[UIButton alloc]init];
+        _warnningBtn.belongto=self;
         [_warnningBtn setImage:[UIImage imageNamed:@"5_40"] forState:UIControlStateNormal];
         _warnningBtn.imageView.contentMode=UIViewContentModeScaleAspectFit;
+        //
         _forbidBtn=[[UIButton alloc]init];
+        _forbidBtn.belongto=self;
         [_forbidBtn setImage:[UIImage imageNamed:@"5_37"] forState:UIControlStateNormal];
+        //
         _detailsBtn=[[UIButton alloc]init];
-        _detailsBtn.imageView.contentMode=_warnningBtn.imageView.contentMode;
+        _detailsBtn.belongto=self;
+    _detailsBtn.imageView.contentMode=_warnningBtn.imageView.contentMode;
         [_detailsBtn setImage:[UIImage imageNamed:@"normaldetail"] forState:UIControlStateNormal];
         _detailsBtn.imageView.contentMode=UIViewContentModeScaleAspectFit;
         //
@@ -103,6 +109,7 @@
     .topEqualToView(_cellAuthor)
     .heightIs(15*LZGHEIGHT)
     .widthEqualToHeight();
+
     //
     _warnningBtn.sd_layout
     .rightSpaceToView(_forbidBtn, 10*LZGWIDTH)
@@ -124,6 +131,7 @@
     {
         [_warnningBtn addTarget:_delegate action:@selector(HomeViewControllerCollectionVIewCellWarningTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
         [_forbidBtn addTarget:_delegate action:@selector(HomeViewControllerCollectionVIewCellForBideTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
+        [_detailsBtn addTarget:self action:@selector(HomeViewControllerCollectionVIewCellViewDetailsTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
 @end

@@ -7,13 +7,23 @@
 //
 
 #import "HomeViewControllerTableViewCell.h"
+#import "LzgLabel.h"
 @interface HomeViewControllerTableViewCell ()
 @property(nonatomic,strong)UIView *kBackgroundView;
 @property(nonatomic,strong)UIImageView *kCellRightImageView;
+@property(nonatomic,weak)UIImageView *CellRightImageView;
 -(void)kSetUpUI;
 -(void)kSetUpUIWithBaseMentView:(UIView *)basementView;
 @end
 @implementation HomeViewControllerTableViewCell
+-(void)setCellRightImageView:(UIImageView *)CellRightImageView
+{
+    self.kCellRightImageView=CellRightImageView;
+}
+-(UIImageView *)CellRightImageView
+{
+    return  self.kCellRightImageView;
+}
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self=[super initWithStyle:style reuseIdentifier:reuseIdentifier])
@@ -32,9 +42,11 @@
         //
         _cellTitle=[[UILabel alloc]init];
         _cellTitle.lineBreakMode=NSLineBreakByTruncatingTail;
-        _cellTitle.font=[UIFont systemFontOfSize:6];
+        _cellTitle.font=[UIFont systemFontOfSize:10];
+        
         //
-        _cellBriefContent=[[UILabel alloc]init];
+        _cellBriefContent=[[LzgLabel alloc]init];
+        _cellBriefContent.numberOfLines=0;
         _cellBriefContent.textColor=UIColor.lightGrayColor;
         _cellBriefContent.font=[UIFont fontWithName:@"ArialMT" size:9];
         _cellBriefContent.lineBreakMode=NSLineBreakByTruncatingTail;
@@ -90,11 +102,12 @@
 }
 -(void)kSetUpUIWithBaseMentView:(UIView *)basementView
 {
+    [_kBackgroundView sd_addSubviews:@[_cellTitle,_cellBriefContent,_chatBtn,_detailBtn]];
     _cellTitle.sd_layout
     .leftSpaceToView(basementView, 5*LZGWIDTH)
 #pragma mark celltitle的上方间隔
     .topSpaceToView(basementView, 8*LZGHEIGHT)
-    .heightIs(6*LZGHEIGHT)
+    .heightIs(11*LZGHEIGHT)
     .widthIs(SCREENWIDTH-15*LZGWIDTH-100*LZGWIDTH);
     //
     _cellBriefContent.sd_layout
@@ -103,21 +116,35 @@
 #pragma mark cell内容的上方间隔
     .topSpaceToView(_cellTitle, 2*LZGHEIGHT)
 #pragma mark 基础view减去间隔数和下方两个按钮的高度加上按钮和下面的间隔
-    .heightIs(100*LZGHEIGHT-(2+8+5)*LZGHEIGHT-50*LZGWIDTH-10*LZGHEIGHT);
+    .heightIs(100*LZGHEIGHT-(2+8+5)*LZGHEIGHT-35*LZGWIDTH);
+ 
     //
     //
     _chatBtn.sd_layout
-    .topSpaceToView(_cellBriefContent, 10*LZGHEIGHT)
-    .leftEqualToView(_cellBriefContent)
-    .widthIs(60*LZGWIDTH)
+    .topSpaceToView(_cellBriefContent, 2*LZGHEIGHT)
+    .leftEqualToView(_cellBriefContent).offset(10)
+    .widthIs(100*LZGWIDTH)
     .heightIs(20*LZGHEIGHT)
     ;
     //
     _detailBtn.sd_layout
     .leftSpaceToView(_chatBtn, 0)
     .centerYEqualToView(_chatBtn)
-    .heightRatioToView(_chatBtn, 1);
+    .heightRatioToView(_chatBtn, 1)
+    .widthRatioToView(_chatBtn, 1);
+    
     [self setupAutoHeightWithBottomView:_kBackgroundView bottomMargin:5*LZGHEIGHT];
+}
+-(void)setTheCellDisplayImage:(id)imageSource
+{
+    if ([imageSource isKindOfClass:[UIImage class]])
+    {
+        self.kCellRightImageView.image=imageSource;
+    }
+    if ([imageSource isKindOfClass:[NSString class]])
+    {
+        [self.kCellRightImageView yy_setImageWithURL:imageSource placeholder:[UIImage imageNamed:@"bitmap"]];
+    }
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

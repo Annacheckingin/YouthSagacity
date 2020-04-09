@@ -8,14 +8,6 @@
 		<array>
 			<dict>
 				<key>articleTitle</key>
-				<string></string>
-				<key>breifContent</key>
-				<string></string>
-				<key>img</key>
-				<string></string>
-			</dict>
-			<dict>
-				<key>articleTitle</key>
 				<string>Free Charted Peyote Stitch Patterns</string>
 				<key>breifContent</key>
 				<string>The Abstract Spring peyote bracelet pattern is designed by Jennifer VanBenschoten. It is an even count peyote stitch pattern. It is available for download for your personal use at the link.
@@ -260,7 +252,7 @@ There is a similar Huichol flower tutorial that has the advantage of being in En
 	</dict>
 	<key>NewsViewController</key>
 	<dict>
-		<key>NewsTableViewCell </key>
+		<key>NewsTableViewCell</key>
 		<array>
 			<dict>
 				<key>articleTitle</key>

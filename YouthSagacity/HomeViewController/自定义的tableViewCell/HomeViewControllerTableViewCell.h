@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UILabel *cellBriefContent;
 @property(nonatomic,strong)UIButton *chatBtn;
 @property(nonatomic,strong)UIButton *detailBtn;
+@property(nonatomic,readonly,weak)UIImageView *CellRightImageView;
 @property(nonatomic,weak) id<HomeViewControllerTableViewCellDelegate> delegate;
 -(void)setTheCellDisplayImage:(id)imageSource;
 @end
