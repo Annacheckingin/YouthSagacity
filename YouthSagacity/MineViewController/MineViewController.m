@@ -10,8 +10,9 @@
 #import "LzgMenuDelegate.h"
 #import "LzgMenuDataSource.h"
 #import "LzgDevicePixlesHandle.h"
+#import "LzgLikesModel.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
-@interface MineViewController ()
+@interface MineViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property(nonatomic,strong)UIImage *yellowStar;
 @property(nonatomic,strong)UIImageView *topimg;
 @property(nonatomic,strong)UIImageView *portrait;
@@ -25,6 +26,7 @@
 @property(nonatomic,strong)UILabel *fixedDataLabel_Personal;
 @property(nonatomic,strong)LzgMenuDelegate *menuDelegate;
 @property(nonatomic,strong)LzgMenuDataSource *menuDataSource;
+@property(nonatomic,strong)LzgLikesModel *likes;
 -(void)p_setupUI;
 @end
 
@@ -64,6 +66,8 @@
          @property(nonatomic,strong)UITableView *messagetableView;
          @property(nonatomic,strong)UITableView *menu;
          **/
+        
+        _likes=[LzgLikesModel shareInstance];
         self.baseScroView.backgroundColor=kBackGroundColor;
 #pragma mark 固定搭配的声明信息
         _fixedDataLabel_Personal=[[UILabel alloc]init];
@@ -93,6 +97,8 @@
         UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc]init];
         
         _likesContent=[[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _likesContent.delegate=self;
+        _likesContent.dataSource=self;
         _likesContent.backgroundColor=UIColor.clearColor;
         _messageLabel=[[UIImageView alloc]init];
         _messageLabel.contentMode=_likesLabel.contentMode;
@@ -256,6 +262,7 @@
      [self p_setupUI];
     // Do any additional setup after loading the view.
 }
+
 
 /*
 #pragma mark - Navigation

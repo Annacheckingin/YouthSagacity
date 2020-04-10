@@ -208,7 +208,7 @@
         
         
     };
-    NSLog(@"ok");
+ 
     [self.navigationController pushViewController:vc animated:YES];
     
 }

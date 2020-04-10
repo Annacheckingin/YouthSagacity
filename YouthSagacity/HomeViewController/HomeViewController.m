@@ -344,7 +344,7 @@
 
 - (void)HomeViewControllerCollectionVIewCellViewDetailsTargetActionMethod:(nonnull UIButton *)sender
 {
-    NSLog(@"ok");
+   
     UICollectionViewCell *belongtoCell=sender.belongto;
     NSIndexPath *indexPath=[_tips indexPathForCell:belongtoCell];
     [self collectionView:_tips didSelectItemAtIndexPath:indexPath];
@@ -364,7 +364,6 @@
 
 - (void)HomeViewControllerTableViewCellTheTargetActionMethodOfDetailBtn:(nonnull UIButton *)sender
 {
-    NSLog(@"------");
      UITableViewCell *cell=sender.belongto;
     NSIndexPath *indexpath=[_projects indexPathForCell:cell];
     [self tableView:_projects didSelectRowAtIndexPath:indexpath];
