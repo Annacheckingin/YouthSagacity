@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LzgMessageModel : NSObject
-
+@property(nonatomic,strong)NSString *urlofPortraite;
+@property(nonatomic,strong)NSString *nameOfUser;
+@property(nonatomic,strong)NSString *mesageBody;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -26,7 +26,7 @@
     NSLog(@"%@",urlToDocument.path);
     return urlToDocument.path;
 }
--(BOOL)fileExistWithName:(NSString *)fileName
+-(BOOL)fileExistInDocumentDirectoryWithName:(NSString *)fileName
 {
     NSString *filePath=[[self stringForSandBoxOfDocument] stringByAppendingFormat:@"/%@",fileName];
     NSFileManager *fileMana=[NSFileManager defaultManager];

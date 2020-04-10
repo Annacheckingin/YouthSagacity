@@ -7,11 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "LzgMessageModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LzgMessageCenter : NSObject
-
++(instancetype)shareInstance;
+-(void)saveMessage:(LzgMessageModel *)aMessage;
+-(void)deleteALike:(LzgMessageModel *)aMS;
+-(void)deleteAMSAtIndex:(NSInteger)index;
+-(NSInteger)numOfMesages;
 @end
 
 NS_ASSUME_NONNULL_END

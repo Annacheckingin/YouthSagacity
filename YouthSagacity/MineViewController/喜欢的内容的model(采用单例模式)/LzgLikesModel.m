@@ -53,4 +53,28 @@ const NSString *LzgLikesModelFileName=@"likes.plist";
     [_kcontainner writeToFile:[pathToDocumentDirectory stringByAppendingFormat:@"/%@",LzgLikesModelFileName] atomically:YES];
     
 }
+-(void)deleteALike:(LikesModel *)alike
+{
+    for (LikesModel *obj in _kcontainner)
+    {
+        if ([obj isEqual:alike])
+        {
+            [_kcontainner removeObject:obj];
+        }
+    }
+    LzgSandBoxStore *store=[LzgSandBoxStore shareInstance];
+        NSString *pathToDocumentDirectory=[store stringForSandBoxOfDocument];
+    [_kcontainner writeToFile:[pathToDocumentDirectory stringByAppendingFormat:@"/%@",LzgLikesModelFileName] atomically:YES];
+}
+-(void)deleteAlikeAtIndex:(NSInteger)index
+{
+    [_kcontainner removeObjectAtIndex:index];
+    LzgSandBoxStore *store=[LzgSandBoxStore shareInstance];
+          NSString *pathToDocumentDirectory=[store stringForSandBoxOfDocument];
+      [_kcontainner writeToFile:[pathToDocumentDirectory stringByAppendingFormat:@"/%@",LzgLikesModelFileName] atomically:YES];
+}
+-(NSInteger)numOfLikes
+{
+    return _kcontainner.count;
+}
 @end

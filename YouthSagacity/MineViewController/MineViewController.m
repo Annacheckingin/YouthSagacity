@@ -11,8 +11,10 @@
 #import "LzgMenuDataSource.h"
 #import "LzgDevicePixlesHandle.h"
 #import "LzgLikesModel.h"
+#import "LzgMessageCenter.h"
+#import "LzgLikesModel.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
-@interface MineViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface MineViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIImage *yellowStar;
 @property(nonatomic,strong)UIImageView *topimg;
 @property(nonatomic,strong)UIImageView *portrait;
@@ -27,6 +29,8 @@
 @property(nonatomic,strong)LzgMenuDelegate *menuDelegate;
 @property(nonatomic,strong)LzgMenuDataSource *menuDataSource;
 @property(nonatomic,strong)LzgLikesModel *likes;
+@property(nonatomic,strong)LzgLikesModel *likesCenter;
+@property(nonatomic,strong)LzgMessageCenter *messageCenter;
 -(void)p_setupUI;
 @end
 
@@ -66,7 +70,8 @@
          @property(nonatomic,strong)UITableView *messagetableView;
          @property(nonatomic,strong)UITableView *menu;
          **/
-        
+        _likesCenter=[LzgLikesModel shareInstance];
+        _messageCenter=[LzgMessageCenter shareInstance];
         _likes=[LzgLikesModel shareInstance];
         self.baseScroView.backgroundColor=kBackGroundColor;
 #pragma mark 固定搭配的声明信息
@@ -97,6 +102,11 @@
         UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc]init];
         
         _likesContent=[[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+#pragma mark collectionViewLayout的布局
+        flowLayout.minimumLineSpacing=10;
+        flowLayout.scrollDirection=UICollectionViewScrollDirectionHorizontal;
+        flowLayout.itemSize=CGSizeMake(160*LZGWIDTH, 70*LZGHEIGHT);
+        flowLayout.sectionInset=UIEdgeInsetsMake(5, 10, 5, 10);
         _likesContent.delegate=self;
         _likesContent.dataSource=self;
         _likesContent.backgroundColor=UIColor.clearColor;
@@ -263,7 +273,6 @@
     // Do any additional setup after loading the view.
 }
 
-
 /*
 #pragma mark - Navigation
 
@@ -273,5 +282,32 @@
     // Pass the selected object to the new view controller.
 }
 */
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [_likesCenter numOfLikes];
+}
+#pragma mark UITableView
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    return 0;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [_messageCenter numOfMesages];
+}
+
 
 @end

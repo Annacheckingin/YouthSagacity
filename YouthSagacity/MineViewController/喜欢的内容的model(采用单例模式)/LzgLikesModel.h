@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LzgLikesModel : NSObject
 +(instancetype)shareInstance;
 -(void)saveAlike:(LikesModel * _Nonnull )alike;
+-(void)deleteALike:(LikesModel *)alike;
+-(void)deleteAlikeAtIndex:(NSInteger)index;
+-(NSInteger)numOfLikes;
 @end
 
 NS_ASSUME_NONNULL_END

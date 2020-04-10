@@ -25,6 +25,23 @@
     return self;
     
 }
+-(BOOL)isEqual:(id)object
+{
+    if ([self class]!=[object class])
+    {
+        return NO;
+    }
+    LikesModel *mode=(LikesModel *)object;
+    if (![mode.theLikes_content isEqualToString:self.theLikes_content])
+    {
+        return NO;
+    }
+    if (![mode.theLikes_title isEqualToString:self.theLikes_title])
+    {
+        return NO;
+    }
+    return YES;
+}
 //-(instancetype)initlikesModelWithTitle:(NSString *)title andContent:(NSString *)content Image1Url:(NSString *)url Image2Url:(NSString *)url2 image3Url:(NSString *)url3
 //{
 //    if (title==nil&&content==nil&&url==nil&&url2==nil&&url3==nil)
