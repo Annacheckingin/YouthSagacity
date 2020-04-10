@@ -171,7 +171,9 @@ static LzgLogViewController *me;
         [self dismissViewControllerAnimated:YES completion:^{
             
         }];
+        [[LzgLogStatus shareInstance] changeTheCurrentLoggerStatus:YES];
         [[LzgLogStatus shareInstance] setLoggingStatus:YES WithId:userid anduserName:usrName andPassword:passWord];
+        [LzgLogStatus shareInstance].currentLogName=usrName;
     }
     
 }

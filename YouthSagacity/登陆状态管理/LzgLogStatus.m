@@ -8,12 +8,19 @@
 
 #import "LzgLogStatus.h"
 #import "LzgSimpleNSFamilyDataStore.h"
+#import "LzgSandBoxStore.h"
+#import "UserInfor+CoreDataProperties.h"
+
+
 @interface LzgLogStatus ()
 @property(nonatomic,assign) BOOL islogging;
 @property(nonatomic,strong)LzgSimpleNSFamilyDataStore *storeCenter;
 @property(nonatomic,assign)BOOL freshedData;
+
 -(BOOL)kaccessTheData;
 @end
+
+const NSString *LzgLogStatusUserPlistFileName=@"CurrentLogger";
 @implementation LzgLogStatus
 static LzgLogStatus *me;
 +(instancetype)shareInstance
@@ -31,6 +38,14 @@ static LzgLogStatus *me;
     {
         _islogging=NO;
         _freshedData=NO;
+        LzgSandBoxStore *sandStore=[LzgSandBoxStore shareInstance];
+        NSString *pathToDocDy=[sandStore stringForSandBoxOfDocument];
+        NSString *userPlistFileName=[NSString stringWithFormat:@"/%@",LzgLogStatusUserPlistFileName];
+        if (![sandStore fileExistInDocumentDirectoryWithName:userPlistFileName])
+        {
+            _currentLogName=nil;
+        }
+        _currentLogName=[NSString stringWithContentsOfFile:pathToDocDy usedEncoding:NSUTF8StringEncoding error:nil];
     }
     return self;
 }
@@ -63,5 +78,33 @@ static LzgLogStatus *me;
     self.islogging=status;
     [self.storeCenter saveTheDataOfUser:userid andTheName:userName andPassword:password  andTheQuitTime:[NSDate date] logStatus:status];
      _freshedData=NO;
+}
+-(void)setCurrentLogName:(NSString *)currentLogName
+{
+    LzgSandBoxStore *sandStore=[LzgSandBoxStore shareInstance];
+    NSString *pathToDocDy=[sandStore stringForSandBoxOfDocument];
+    NSString *userPlistFileName=[NSString stringWithFormat:@"/%@",LzgLogStatusUserPlistFileName];
+    _currentLogName=currentLogName;
+    if (![sandStore fileExistInDocumentDirectoryWithName:userPlistFileName])
+    {
+        NSFileManager *FM=[NSFileManager defaultManager];
+        [FM createFileAtPath:userPlistFileName contents:[NSKeyedArchiver archivedDataWithRootObject:currentLogName] attributes:nil];
+    }
+    [currentLogName writeToFile:userPlistFileName atomically:YES];
+}
+-(void)changeTheCurrentLoggerStatus:(BOOL)status
+{
+    _islogging=status;
+    UserInfor *currentUser=[self.storeCenter userWithName:_currentLogName];
+    if (currentUser)
+    {
+         currentUser.isLogSatus=status;
+           [self.storeCenter saveTheDataOfUser:currentUser.userid andTheName:currentUser.name andPassword:currentUser.password andTheQuitTime:currentUser.timeOfLastQuit logStatus:status];
+    }
+    else{
+        return;
+    }
+   
+      
 }
 @end

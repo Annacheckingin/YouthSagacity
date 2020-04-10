@@ -39,6 +39,7 @@
 {
     if (_menuDataSource==nil)
     {
+        NSLog(@"In Data");
         _menuDataSource=[[LzgMenuDataSource alloc]init];
     }
     return _menuDataSource;
@@ -47,6 +48,7 @@
 {
     if (_menuDelegate==nil)
     {
+        NSLog(@"In Dele");
         _menuDelegate=[[LzgMenuDelegate alloc]init];
     }
     return _menuDelegate;
@@ -114,21 +116,54 @@
         _messageLabel.contentMode=_likesLabel.contentMode;
         _messageLabel.image=[UIImage imageNamed:@"5_29"];
         _messagetableView=[[UITableView alloc]init];
+        _messagetableView.delegate=self;
+        _messagetableView.dataSource=self;
+        _messagetableView.separatorStyle=UITableViewCellSeparatorStyleNone;
         _messagetableView.backgroundColor=UIColor.clearColor;
         _menu=[[UITableView alloc]init];
-        _menu.delegate=self.menuDelegate;
+       _menu.delegate=self.menuDelegate;
+       _menu.dataSource=self.menuDataSource;
         self.menuDelegate.belongto=self.menu;
-        _menu.dataSource=self.menuDataSource;
         self.menuDataSource.belongto=self.menu;
-        _menu.scrollEnabled=NO;
-        _menu.separatorStyle=UITableViewCellSelectionStyleNone;
+//        _menu.scrollEnabled=NO;
+        _menu.separatorStyle=UITableViewCellSeparatorStyleNone;
         _menu.backgroundColor=UIColor.clearColor;
+        self.baseScroView.delegate=self;
+#pragma mark 测试
+        
+        
+//        _menu.backgroundColor=UIColor.redColor;
+#pragma mark UISroView
+//        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(P_tap:)];
+//        [self.menu addGestureRecognizer:tap];
+//        tap.delegate=self;
         
         
     }
- 
     return self;
 }
+//-(void)P_tap:(UITapGestureRecognizer *)tap
+//{
+//    NSLog(@"ol");
+//    NSLog(@"%@",[tap.view class]);
+//    NSIndexPath *path=[NSIndexPath indexPathForRow:1 inSection:0];
+//    if ([tap.view isKindOfClass:[UITableViewCell class]]||[NSStringFromClass([tap.view class]) isEqualToString:@"UITableViewCellContentView"])
+//    {
+//        [self.menu.delegate tableView:_menu didSelectRowAtIndexPath:path];
+//    }
+//}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+//    NSLog(@"reg");
+//if ([touch.view isKindOfClass:[UITableView class]]){
+//    return YES;
+//}
+//if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"])
+//    {
+//        return YES;
+//    }
+//return NO;
+//}
+
 -(void)p_setupUI
 {
     

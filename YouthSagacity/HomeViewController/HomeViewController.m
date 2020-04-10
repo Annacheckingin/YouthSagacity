@@ -59,6 +59,8 @@
          @property(nonatomic,strong)UILabel *projectsLabel;
          @property(nonatomic,strong)UITableView *projects;
          **/
+        
+ 
         _freshedData=YES;
         _headLine=[[UILabel alloc]init];
         _headLine.text=@"BeadWork";
@@ -96,6 +98,7 @@
     }
     return self;
 }
+
 - (void)viewDidLoad
 {
     _freshedData=YES;
@@ -249,10 +252,12 @@
 {
     return [tableView cellHeightForIndexPath:indexPath cellContentViewWidth:SCREENWIDTH tableView:tableView];
 }
+
 //
 #pragma mark UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"collectionViewCell selected");
      NSDictionary *inforDic=[self.collectionViewCellInfor objectAtIndex:indexPath.row];
     LzgDetailsViewController *detailsVc=[[LzgDetailsViewController alloc]init];
     detailsVc.hanleUI = ^(UIImageView * _Nonnull portarit, UILabel * _Nonnull name, UILabel * _Nonnull date, UILabel * _Nonnull articleTitle, UILabel * _Nonnull content, UIImageView * _Nonnull contentImgae, UILabel * _Nonnull thumbNum,UIView *baseView)

@@ -177,10 +177,7 @@
         
         UIScrollView *base=(UIScrollView *)basementView;
                      CGSize theScroViewContentSize=base.contentSize;
-                     NSString *theContent=curentData[@"content"];
-             //        NSAttributedString *attributedContent=[[NSAttributedString alloc]initWithString:theContent];
-             //        CGSize theStringSize=[attributedContent size];
-                     
+                     NSString *theContent=curentData[@"content"];            
                      CGSize refenreceSize=CGSizeMake(SCREENWIDTH-40*LZGWIDTH, MAXFLOAT);
                      LzgLabel *templabel=[[LzgLabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH-40*LZGWIDTH,0)];
                      templabel.numberOfLines=0;
@@ -189,9 +186,7 @@
                      templabel.text=theContent;
                      CGSize theStringSize=[templabel sizeThatFits:refenreceSize];
              #pragma mark 由于使用了自定义的Label，故计算的高度需要调整
-             //        =[theContent boundingRectWithSize:CGSizeMake(SCREENWIDTH-20*LZGWIDTH, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil];
-             //         CGSize  theSize=theStringRect.size;
-                     
+ 
                      theScroViewContentSize.height+=theStringSize.height;
                      theScroViewContentSize.height+=200;
                      //
@@ -204,9 +199,7 @@
                       content.text=[curentData objectForKey:@"content"];
                       //
                      base.contentSize=theScroViewContentSize;
-        
-        
-        
+
     };
  
     [self.navigationController pushViewController:vc animated:YES];

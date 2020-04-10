@@ -37,7 +37,7 @@
             {
                 dispatch_async(mainQueue_t, ^
                             {
-                    NSLog(@"登陆成功！");;
+                      NSLog(@"登陆成功！");;
 handler(YES,userInfor.userid,userInfor.name,password);
                             });
             }
