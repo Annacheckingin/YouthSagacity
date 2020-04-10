@@ -10,6 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @class LzgLabel;
+@protocol NewsTableViewCellButtonDelegate <NSObject>
+
+-(void)NewsTableViewCellLikeButtonTargetActionMethod:(UIButton *)sender;
+-(void)NewsTableViewCellViewDetailsTargetActionMethod:(UIButton *)sender;
+-(void)NewsTableViewCellBlockingTargetActionMethod:(UIButton *)sender;
+
+@end
 @interface NewsTableViewCell : UITableViewCell
 @property(nonatomic,readonly)UIView *baseMentview;
 @property(nonatomic,readonly)UILabel *cellTitle;
@@ -20,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,readonly)UIButton *blockingNews;
 @property(nonatomic,readonly)UIButton *likesBtn;
 @property(nonatomic,readonly)UIButton *biewDetailsBtn;
+@property(nonatomic,weak) id<NewsTableViewCellButtonDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -11,12 +11,16 @@
 #import "LzgImageCollectionCell.h"
 #import "LzgSandBoxStore.h"
 #import "LzgLabel.h"
+#import "UIButton+LzgBelongtoCell.h"
+#import "NewsDetailViewController.h"
 #define kLzgTopCollectionViewHeight 150
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
-@interface NewsViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource>
+@interface NewsViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,NewsTableViewCellButtonDelegate>
 @property(nonatomic,strong)NSMutableArray *headImages;
 @property(nonatomic,strong)NSMutableArray *tableViewData;
 @property(nonatomic,assign)BOOL kfreshed;
+@property(nonatomic,strong)UICollectionView *topShow;
+@property(nonatomic,strong)UITableView *mainDisplay;
 @end
 
 @implementation NewsViewController
@@ -143,6 +147,10 @@
         cell=[[NewsTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([NewsTableViewCell class])];
     }
     NSDictionary *curentData=[_tableViewData objectAtIndex:indexPath.section];
+    cell.delegate=self;
+    cell.blockingNews.belongto=cell;
+    cell.likesBtn.belongto=cell;
+    cell.biewDetailsBtn.belongto=cell;
     cell.cellTitle.text=curentData[@"articleTitle"];
     cell.cellBriefContent.text=curentData[@"content"];
     [cell.img_1 yy_setImageWithURL:curentData[@"image_1"] placeholder:[UIImage imageNamed:@"bitmap"]];
@@ -155,10 +163,79 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+     NSDictionary *curentData=[_tableViewData objectAtIndex:indexPath.section];
+    NewsDetailViewController *vc=[[NewsDetailViewController alloc]init];
+    vc.handleUi = ^(UILabel * _Nonnull title, LzgLabel * _Nonnull content, UIImageView * _Nonnull img_1, UIImageView * _Nonnull img_2, UIImageView * _Nonnull img_3,UIView *basementView,UIButton *blocking)
+    {
+        title.text=curentData[@"articleTitle"];
+        content.text=curentData[@"content"];
+        [img_1 yy_setImageWithURL:curentData[@"image_1"] placeholder:[UIImage imageNamed:@"bitmap"]];
+        [img_2  yy_setImageWithURL:curentData[@"image_2"] placeholder:[UIImage imageNamed:@"bitmap"]];
+        [img_3  yy_setImageWithURL:curentData[@"image_3"] placeholder:[UIImage imageNamed:@"bitmap"]];
+        
+        UIScrollView *base=(UIScrollView *)basementView;
+                     CGSize theScroViewContentSize=base.contentSize;
+                     NSString *theContent=curentData[@"content"];
+             //        NSAttributedString *attributedContent=[[NSAttributedString alloc]initWithString:theContent];
+             //        CGSize theStringSize=[attributedContent size];
+                     
+                     CGSize refenreceSize=CGSizeMake(SCREENWIDTH-40*LZGWIDTH, MAXFLOAT);
+                     LzgLabel *templabel=[[LzgLabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH-40*LZGWIDTH,0)];
+                     templabel.numberOfLines=0;
+                     templabel.font=content.font;
+                     templabel.textAlignment=NSTextAlignmentNatural;
+                     templabel.text=theContent;
+                     CGSize theStringSize=[templabel sizeThatFits:refenreceSize];
+             #pragma mark 由于使用了自定义的Label，故计算的高度需要调整
+             //        =[theContent boundingRectWithSize:CGSizeMake(SCREENWIDTH-20*LZGWIDTH, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil];
+             //         CGSize  theSize=theStringRect.size;
+                     
+                     theScroViewContentSize.height+=theStringSize.height;
+                     theScroViewContentSize.height+=200;
+                     //
+                     //
+                      content.sd_resetLayout
+                     .heightIs(theStringSize.height*LZGHEIGHT)
+                     .leftEqualToView(title)
+                     .rightSpaceToView(basementView, 20*LZGWIDTH)
+                     .topSpaceToView(blocking, 5*LZGHEIGHT);
+                      content.text=[curentData objectForKey:@"content"];
+                      //
+                     base.contentSize=theScroViewContentSize;
+        
+        
+        
+    };
+    NSLog(@"ok");
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return _tableViewData.count;
+}
+
+
+
+
+
+
+
+- (void)NewsTableViewCellBlockingTargetActionMethod:(nonnull UIButton *)sender {
+    
+}
+
+- (void)NewsTableViewCellLikeButtonTargetActionMethod:(nonnull UIButton *)sender {
+    
+}
+
+- (void)NewsTableViewCellViewDetailsTargetActionMethod:(nonnull UIButton *)sender {
+    NewsTableViewCell *cell=sender.belongto;
+    NSIndexPath *indexpath= [_mainDisplay indexPathForCell:cell];
+    [self tableView:_mainDisplay didSelectRowAtIndexPath:indexpath];
+   
 }
 
 

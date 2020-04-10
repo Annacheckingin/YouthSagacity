@@ -9,7 +9,7 @@
 #import "LzgBackBtnWithScroViewViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-typedef void (^DetailPageDataBlock)(UIImageView *portarit,UILabel *name,UILabel *date,UILabel *content,UIImageView *contentImgae,UILabel *thumbNum);
+typedef void (^DetailPageDataBlock)(UIImageView *portarit,UILabel *name,UILabel *date,UILabel *articleTitle,UILabel *content,UIImageView *contentImgae,UILabel *thumbNum,UIView *baseView);
 @class LzgLabel;
 @interface LzgDetailsViewController : LzgBackBtnWithScroViewViewController
 @property(nonatomic,readonly)UIImageView *portraite;
@@ -21,7 +21,7 @@ typedef void (^DetailPageDataBlock)(UIImageView *portarit,UILabel *name,UILabel 
 @property(nonatomic,readonly)LzgLabel *content;
 @property(nonatomic,readonly)UIImageView *contentImage;
 @property(nonatomic,readonly)UILabel *thumbNums;
-@property(nonatomic,weak,readwrite)id datasource;
+
 @property(nonatomic,strong) DetailPageDataBlock hanleUI;
 @end
 

@@ -91,6 +91,7 @@
 		2732B734243F089E000B5119 /* LzgMenuDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B733243F089E000B5119 /* LzgMenuDataSource.m */; };
 		2732B738243F4996000B5119 /* LzgDevicePixlesHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B737243F4996000B5119 /* LzgDevicePixlesHandle.m */; };
 		2732B73C244003EF000B5119 /* LzgDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B73B244003EF000B5119 /* LzgDetailsViewController.m */; };
+		2732B745244042B7000B5119 /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B744244042B7000B5119 /* NewsDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -258,6 +259,8 @@
 		2732B737243F4996000B5119 /* LzgDevicePixlesHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgDevicePixlesHandle.m; sourceTree = "<group>"; };
 		2732B73A244003EF000B5119 /* LzgDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgDetailsViewController.h; sourceTree = "<group>"; };
 		2732B73B244003EF000B5119 /* LzgDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgDetailsViewController.m; sourceTree = "<group>"; };
+		2732B743244042B7000B5119 /* NewsDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewController.h; sourceTree = "<group>"; };
+		2732B744244042B7000B5119 /* NewsDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +293,7 @@
 		2732B593243CA309000B5119 /* YouthSagacity */ = {
 			isa = PBXGroup;
 			children = (
+				2732B73D24403483000B5119 /* 富文本的高度计算（带空格或换行符） */,
 				2732B735243F4975000B5119 /* 设备像素处理 */,
 				2732B6D1243DAF71000B5119 /* 沙盒路径存储 */,
 				2732B6BF243D5DDB000B5119 /* InforPlist */,
@@ -306,6 +310,7 @@
 				2732B614243CA370000B5119 /* AppDelegate */,
 				2732B739244003A4000B5119 /* 详情界面 */,
 				2732B60E243CA370000B5119 /* Images */,
+				2732B6DD243EBECC000B5119 /* UILabel的靠左上显示的子类 */,
 				2732B5FA243CA370000B5119 /* HomeViewController */,
 				2732B634243CA370000B5119 /* MineViewController */,
 				2732B5FD243CA370000B5119 /* NewsViewController */,
@@ -784,7 +789,6 @@
 		2732B6C9243D7613000B5119 /* 自定义的tableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				2732B6DD243EBECC000B5119 /* UILabel的靠左上显示的子类 */,
 				2732B6CA243D763F000B5119 /* HomeViewControllerTableViewCell.h */,
 				2732B6CB243D763F000B5119 /* HomeViewControllerTableViewCell.m */,
 			);
@@ -867,10 +871,35 @@
 		2732B739244003A4000B5119 /* 详情界面 */ = {
 			isa = PBXGroup;
 			children = (
+				2732B74224404287000B5119 /* 新闻详情 */,
+				2732B74124404279000B5119 /* 首页详情 */,
+			);
+			path = "详情界面";
+			sourceTree = "<group>";
+		};
+		2732B73D24403483000B5119 /* 富文本的高度计算（带空格或换行符） */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "富文本的高度计算（带空格或换行符）";
+			sourceTree = "<group>";
+		};
+		2732B74124404279000B5119 /* 首页详情 */ = {
+			isa = PBXGroup;
+			children = (
 				2732B73A244003EF000B5119 /* LzgDetailsViewController.h */,
 				2732B73B244003EF000B5119 /* LzgDetailsViewController.m */,
 			);
-			path = "详情界面";
+			path = "首页详情";
+			sourceTree = "<group>";
+		};
+		2732B74224404287000B5119 /* 新闻详情 */ = {
+			isa = PBXGroup;
+			children = (
+				2732B743244042B7000B5119 /* NewsDetailViewController.h */,
+				2732B744244042B7000B5119 /* NewsDetailViewController.m */,
+			);
+			path = "新闻详情";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -949,6 +978,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2732B6A1243CA371000B5119 /* LzgTextField.m in Sources */,
+				2732B745244042B7000B5119 /* NewsDetailViewController.m in Sources */,
 				2732B6AB243CA371000B5119 /* MPublicManager.m in Sources */,
 				2732B683243CA371000B5119 /* LzgBaseWithBackButtonViewController.m in Sources */,
 				2732B680243CA371000B5119 /* LzgCategoryValueHandler.m in Sources */,

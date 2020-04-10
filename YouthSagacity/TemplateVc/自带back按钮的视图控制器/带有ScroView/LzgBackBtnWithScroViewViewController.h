@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,readonly)UIButton *backButton;
 +(void)configureTheBackBtnImage:(UIImage *)image;
 -(void)setInstanceImage:(UIImage *)image;
++(void)initialize;
 @end
 
 NS_ASSUME_NONNULL_END

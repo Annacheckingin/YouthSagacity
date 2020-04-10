@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NewsViewController : LzgScroBaseViewController
-@property(nonatomic,strong)UICollectionView *topShow;
-@property(nonatomic,strong)UITableView *mainDisplay; 
+@property(nonatomic,readonly)UICollectionView *topShow;
+@property(nonatomic,readonly)UITableView *mainDisplay;
 @end
 
 NS_ASSUME_NONNULL_END

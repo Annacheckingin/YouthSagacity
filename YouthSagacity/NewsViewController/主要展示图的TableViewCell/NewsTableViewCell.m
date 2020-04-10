@@ -7,6 +7,7 @@
 //
 #import "LzgLabel.h"
 #import "NewsTableViewCell.h"
+
 @interface NewsTableViewCell ()
 @property(nonatomic,strong)UIView *baseMentview;
 @property(nonatomic,strong)UILabel *cellTitle;
@@ -140,6 +141,34 @@
     .rightSpaceToView(_baseMentview, 1*LZGWIDTH)
     .heightRatioToView(_likesBtn, 1);
     [self setupAutoHeightWithBottomView:_baseMentview bottomMargin:10*LZGHEIGHT];
+}
+-(void)setDelegate:(id<NewsTableViewCellButtonDelegate>)delegate
+{
+    _delegate=delegate;
+    if ([delegate conformsToProtocol:@protocol(NewsTableViewCellButtonDelegate) ])
+    {
+        /*
+         -(void)NewsTableViewCellLikeButtonTargetActionMethod:(UIButton *)sender;
+         -(void)NewsTableViewCellViewDetailsTargetActionMethod:(UIButton *)sender;
+         -(void)NewsTableViewCellBlockingTargetActionMethod:(UIButton *)sender;
+
+         **/
+        if ([_delegate respondsToSelector:@selector(NewsTableViewCellBlockingTargetActionMethod:)])
+        {
+             [self.blockingNews addTarget:_delegate action:@selector(NewsTableViewCellBlockingTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if ([_delegate respondsToSelector:@selector(NewsTableViewCellLikeButtonTargetActionMethod:)])
+        {
+             [self.likesBtn addTarget:_delegate action:@selector(NewsTableViewCellLikeButtonTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if ([_delegate respondsToSelector:@selector(NewsTableViewCellViewDetailsTargetActionMethod:)])
+        {
+             [self.viewDetailsBtn addTarget:_delegate action:@selector(NewsTableViewCellViewDetailsTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
+        }
+       
+       
+       
+    }
 }
 - (void)awakeFromNib {
     [super awakeFromNib];

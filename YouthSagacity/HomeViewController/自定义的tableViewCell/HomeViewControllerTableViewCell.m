@@ -30,6 +30,7 @@
     {
         self.contentView.backgroundColor=UIColor.clearColor;
         self.backgroundColor=UIColor.clearColor;
+        self.selectionStyle=UITableViewCellSelectionStyleNone;
         _kBackgroundView=[[UIView alloc]init];
         _kBackgroundView.backgroundColor=UIColor.whiteColor;
         _kBackgroundView.layer.borderColor=UIColor.lightGrayColor.CGColor;

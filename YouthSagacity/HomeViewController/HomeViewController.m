@@ -12,8 +12,9 @@
 #import "UIButton+LzgBelongtoCell.h"
 #import "HomeViewControllerTableViewCell.h"
 #import "LzgDetailsViewController.h"
+#import "LzgLabel.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
-@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate>
+@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate,HomeViewControllerTableViewCellDelegate>
 @property(nonatomic,strong)NSMutableArray *collectionViewCellInfor;
 @property(nonatomic,strong)NSMutableArray *tableViewCellInfor;
 @property(nonatomic,assign) BOOL freshedData;
@@ -177,7 +178,46 @@
 #pragma mark UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+     NSDictionary *dictionary=[_tableViewCellInfor objectAtIndex:indexPath.section];
+    LzgDetailsViewController *vc=[[LzgDetailsViewController alloc]init];
+    vc.hanleUI = ^(UIImageView * _Nonnull portarit, UILabel * _Nonnull name, UILabel * _Nonnull date, UILabel * _Nonnull articleTitle, UILabel * _Nonnull content, UIImageView * _Nonnull contentImgae, UILabel * _Nonnull thumbNum, UIView * _Nonnull baseView)
+    {
+        articleTitle.text=dictionary[@"articleTitle"];
+        content.text=dictionary[@"breifContent"];
+        [contentImgae yy_setImageWithURL:dictionary[@"img"] placeholder:[UIImage imageNamed:@"bitmap"]];
+        
+        
+             UIScrollView *base=(UIScrollView *)baseView;
+                CGSize theScroViewContentSize=base.contentSize;
+                NSString *theContent=dictionary[@"breifContent"];
+        //        NSAttributedString *attributedContent=[[NSAttributedString alloc]initWithString:theContent];
+        //        CGSize theStringSize=[attributedContent size];
+                
+                CGSize refenreceSize=CGSizeMake(SCREENWIDTH-40*LZGWIDTH, MAXFLOAT);
+                LzgLabel *templabel=[[LzgLabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH-40*LZGWIDTH,0)];
+                templabel.numberOfLines=0;
+                templabel.font=content.font;
+                templabel.textAlignment=NSTextAlignmentNatural;
+                templabel.text=theContent;
+                CGSize theStringSize=[templabel sizeThatFits:refenreceSize];
+        #pragma mark 由于使用了自定义的Label，故计算的高度需要调整
+        //        =[theContent boundingRectWithSize:CGSizeMake(SCREENWIDTH-20*LZGWIDTH, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil];
+        //         CGSize  theSize=theStringRect.size;
+                
+                theScroViewContentSize.height+=theStringSize.height;
+                theScroViewContentSize.height+=200;
+                //
+                //
+                 content.sd_resetLayout
+                .heightIs(theStringSize.height*LZGHEIGHT)
+                .leftEqualToView(portarit)
+                .rightSpaceToView(baseView, 20*LZGWIDTH)
+                .topSpaceToView(articleTitle, 10*LZGHEIGHT);
+                 content.text=[dictionary objectForKey:@"breifContent"];
+                 //
+                base.contentSize=theScroViewContentSize;
+    };
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark UITableViewDatasource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -189,10 +229,12 @@
     }
     
     NSDictionary *dictionary=[_tableViewCellInfor objectAtIndex:indexPath.section];
+    cell.delegate=self;
     cell.cellTitle.text=dictionary[@"articleTitle"];
     cell.cellBriefContent.text=dictionary[@"breifContent"];
     [cell setTheCellDisplayImage:dictionary[@"img"]];
-    
+    cell.chatBtn.belongto=cell;
+    cell.detailBtn.belongto=cell;
     return cell;
 }
 
@@ -211,8 +253,57 @@
 #pragma mark UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+     NSDictionary *inforDic=[self.collectionViewCellInfor objectAtIndex:indexPath.row];
     LzgDetailsViewController *detailsVc=[[LzgDetailsViewController alloc]init];
-       [self.navigationController pushViewController:detailsVc animated:YES];
+    detailsVc.hanleUI = ^(UIImageView * _Nonnull portarit, UILabel * _Nonnull name, UILabel * _Nonnull date, UILabel * _Nonnull articleTitle, UILabel * _Nonnull content, UIImageView * _Nonnull contentImgae, UILabel * _Nonnull thumbNum,UIView *baseView)
+    {
+        /*
+         cell.cellTitle.textColor=UIColor.blackColor;
+         cell.cellDate.text=inforDic[@"date"];
+         cell.cellTitle.text=[inforDic objectForKey:@"articleTitle"];
+         [cell.cellImage yy_setImageWithURL:inforDic[@"image"] placeholder:[UIImage imageNamed:@"bitmap"]];
+         cell.cellAuthor.text=inforDic[@"author"];
+         **/
+        [portarit yy_setImageWithURL:inforDic[@"potrait"] placeholder:[UIImage imageNamed:@"bitmap"]];
+        //
+        name.text=inforDic[@"author"];
+        date.text=inforDic[@"date"];
+        articleTitle.text=[inforDic objectForKey:@"articleTitle"];
+       
+        [contentImgae  yy_setImageWithURL:inforDic[@"image"] placeholder:[UIImage imageNamed:@"bitmap"]];
+#pragma mark 针对内容进行高度自适应
+        UIScrollView *base=(UIScrollView *)baseView;
+        CGSize theScroViewContentSize=base.contentSize;
+        NSString *theContent=inforDic[@"content"];
+//        NSAttributedString *attributedContent=[[NSAttributedString alloc]initWithString:theContent];
+//        CGSize theStringSize=[attributedContent size];
+        
+        CGSize refenreceSize=CGSizeMake(SCREENWIDTH-40*LZGWIDTH, MAXFLOAT);
+        LzgLabel *templabel=[[LzgLabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH-40*LZGWIDTH,0)];
+        templabel.numberOfLines=0;
+        templabel.font=content.font;
+        templabel.textAlignment=NSTextAlignmentNatural;
+        templabel.text=theContent;
+        CGSize theStringSize=[templabel sizeThatFits:refenreceSize];
+#pragma mark 由于使用了自定义的Label，故计算的高度需要调整
+//        =[theContent boundingRectWithSize:CGSizeMake(SCREENWIDTH-20*LZGWIDTH, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:nil context:nil];
+//         CGSize  theSize=theStringRect.size;
+        
+        theScroViewContentSize.height+=theStringSize.height;
+        theScroViewContentSize.height+=200;
+        //
+        //
+         content.sd_resetLayout
+        .heightIs(theStringSize.height*LZGHEIGHT)
+        .leftEqualToView(portarit)
+        .rightSpaceToView(baseView, 20*LZGWIDTH)
+        .topSpaceToView(articleTitle, 10*LZGHEIGHT);
+         content.text=[inforDic objectForKey:@"content"];
+         //
+        base.contentSize=theScroViewContentSize;
+        
+    };
+    [self.navigationController pushViewController:detailsVc animated:YES];
 }
 #pragma mark UICollectionViewDatasource
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -220,7 +311,6 @@
     HomeViewControllerCollectionVIewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HomeViewControllerCollectionVIewCell class]) forIndexPath:indexPath];
     NSDictionary *inforDic=[self.collectionViewCellInfor objectAtIndex:indexPath.row];
     cell.delegate=self;
-    cell.cellTitle.textColor=UIColor.blackColor;
     cell.cellDate.text=inforDic[@"date"];
     cell.cellTitle.text=[inforDic objectForKey:@"articleTitle"];
     [cell.cellImage yy_setImageWithURL:inforDic[@"image"] placeholder:[UIImage imageNamed:@"bitmap"]];
@@ -265,6 +355,22 @@
     UICollectionViewCell *belongtoCell=sender.belongto;
        
 }
+
+
+- (void)HomeViewControllerTableViewCellTheTargetActionMethodOfChatBtn:(nonnull UIButton *)sender
+{
+   
+}
+
+- (void)HomeViewControllerTableViewCellTheTargetActionMethodOfDetailBtn:(nonnull UIButton *)sender
+{
+    NSLog(@"------");
+     UITableViewCell *cell=sender.belongto;
+    NSIndexPath *indexpath=[_projects indexPathForCell:cell];
+    [self tableView:_projects didSelectRowAtIndexPath:indexpath];
+}
+
+ 
 
 
 @end

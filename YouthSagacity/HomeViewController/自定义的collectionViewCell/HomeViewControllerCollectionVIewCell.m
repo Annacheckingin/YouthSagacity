@@ -129,7 +129,6 @@
     _delegate=delegate;
     if ([_delegate conformsToProtocol:@protocol(HomeViewControllerCollectionVIewCellDelegate) ])
     {
-        NSLog(@"delegate action");
         [_warnningBtn addTarget:_delegate action:@selector(HomeViewControllerCollectionVIewCellWarningTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
         [_forbidBtn addTarget:_delegate action:@selector(HomeViewControllerCollectionVIewCellForBideTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
         [_detailsBtn addTarget:_delegate action:@selector(HomeViewControllerCollectionVIewCellViewDetailsTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
