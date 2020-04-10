@@ -90,6 +90,7 @@
 		2732B731243F0891000B5119 /* LzgMenuDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B730243F0891000B5119 /* LzgMenuDelegate.m */; };
 		2732B734243F089E000B5119 /* LzgMenuDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B733243F089E000B5119 /* LzgMenuDataSource.m */; };
 		2732B738243F4996000B5119 /* LzgDevicePixlesHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B737243F4996000B5119 /* LzgDevicePixlesHandle.m */; };
+		2732B73C244003EF000B5119 /* LzgDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B73B244003EF000B5119 /* LzgDetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -255,6 +256,8 @@
 		2732B733243F089E000B5119 /* LzgMenuDataSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgMenuDataSource.m; sourceTree = "<group>"; };
 		2732B736243F4996000B5119 /* LzgDevicePixlesHandle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgDevicePixlesHandle.h; sourceTree = "<group>"; };
 		2732B737243F4996000B5119 /* LzgDevicePixlesHandle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgDevicePixlesHandle.m; sourceTree = "<group>"; };
+		2732B73A244003EF000B5119 /* LzgDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgDetailsViewController.h; sourceTree = "<group>"; };
+		2732B73B244003EF000B5119 /* LzgDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgDetailsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +304,7 @@
 				2732B631243CA370000B5119 /* 加载Bundle的信息类 */,
 				2732B5D6243CA370000B5119 /* 信息处理返回类 */,
 				2732B614243CA370000B5119 /* AppDelegate */,
+				2732B739244003A4000B5119 /* 详情界面 */,
 				2732B60E243CA370000B5119 /* Images */,
 				2732B5FA243CA370000B5119 /* HomeViewController */,
 				2732B634243CA370000B5119 /* MineViewController */,
@@ -860,6 +864,15 @@
 			path = "设备像素处理";
 			sourceTree = "<group>";
 		};
+		2732B739244003A4000B5119 /* 详情界面 */ = {
+			isa = PBXGroup;
+			children = (
+				2732B73A244003EF000B5119 /* LzgDetailsViewController.h */,
+				2732B73B244003EF000B5119 /* LzgDetailsViewController.m */,
+			);
+			path = "详情界面";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -966,6 +979,7 @@
 				2732B68F243CA371000B5119 /* LzgLogModel.m in Sources */,
 				2732B69A243CA371000B5119 /* UserInfor+CoreDataProperties.m in Sources */,
 				2732B685243CA371000B5119 /* UIViewController+LzgBackButtonImage.m in Sources */,
+				2732B73C244003EF000B5119 /* LzgDetailsViewController.m in Sources */,
 				2732B698243CA371000B5119 /* Pictures.xcdatamodeld in Sources */,
 				2732B6BC243CA371000B5119 /* AFURLRequestSerialization.m in Sources */,
 				2732B684243CA371000B5119 /* LzgBackBtnWithScroViewViewController.m in Sources */,

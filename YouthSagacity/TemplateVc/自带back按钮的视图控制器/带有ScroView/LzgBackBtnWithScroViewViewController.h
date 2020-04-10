@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LzgBackBtnWithScroViewViewController :LzgScroBaseViewController
+@property(nonatomic,readonly)UIButton *backButton;
 +(void)configureTheBackBtnImage:(UIImage *)image;
 -(void)setInstanceImage:(UIImage *)image;
 @end

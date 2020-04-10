@@ -17,6 +17,7 @@ static UIImage *backbtnimage;
 }
 @property(nonatomic,strong)UIImage *intanceBackBtnImage;
 @property(nonatomic,strong)UIButton *backAction;
+@property(nonatomic,readwrite)UIButton *backButton;
 @end
 
 @implementation LzgBackBtnWithScroViewViewController
@@ -33,20 +34,25 @@ static UIImage *backbtnimage;
     if (self=[super init])
     {
         _backAction=[[UIButton alloc]init];
+        _backAction.imageView.contentMode=UIViewContentModeScaleAspectFit;
         [_backAction addTarget:self action:@selector(kbackAction:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     UIImage *aimg=[LzgBackBtnWithScroViewViewController theBackButtonImage];
     if (aimg)
     {
+        NSLog(@"已经设置好back图片");
         [_backAction setImage:aimg forState:UIControlStateNormal];
     }
     else
     {
+        NSLog(@"没有设置好back图片");
         if (_intanceBackBtnImage)
         {
+            NSLog(@"实例图片已经设置好e");
             [_backAction setImage:_intanceBackBtnImage forState:UIControlStateNormal];
         }
+        
     }
     return self;
 }
@@ -61,6 +67,13 @@ static UIImage *backbtnimage;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self addTheViewInBottomView:_backAction andSDAutoLayoutModel:^(UIView * _Nonnull theview, UIView * _Nonnull theBaseView)
+    {
+        theview.sd_layout.leftSpaceToView(theBaseView, 10*LZGWIDTH)
+        .topSpaceToView(theBaseView, 5*LZGHEIGHT)
+        .widthIs(100*LZGWIDTH)
+        .heightIs(20*LZGHEIGHT);
+    }];
     [self addTheViewInBottomView:_backAction andSDAutoLayoutModel:^(UIView * _Nonnull theview, UIView * _Nonnull theBaseView)
     {
         theview.sd_layout.leftSpaceToView(theBaseView, 15*LZGWIDTH)

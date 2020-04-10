@@ -37,8 +37,6 @@
     NSDictionary *dicOfNewsData=[NSDictionary dictionaryWithContentsOfFile:nameOfPlistFile];
     
     _tableViewData=dicOfNewsData[@"NewsViewController"][@"NewsTableViewCell"];
-    NSLog(@"%@",dicOfNewsData[@"NewsViewController"]);
-    NSLog(@"%@",_tableViewData);
     _kfreshed=NO;
 }
 -(instancetype)init
@@ -160,7 +158,6 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSLog(@"%ld",_tableViewData.count);
     return _tableViewData.count;
 }
 

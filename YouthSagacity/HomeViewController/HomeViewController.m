@@ -11,6 +11,7 @@
 #import "LzgSandBoxStore.h"
 #import "UIButton+LzgBelongtoCell.h"
 #import "HomeViewControllerTableViewCell.h"
+#import "LzgDetailsViewController.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate>
 @property(nonatomic,strong)NSMutableArray *collectionViewCellInfor;
@@ -176,7 +177,7 @@
 #pragma mark UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+   
 }
 #pragma mark UITableViewDatasource
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -210,19 +211,20 @@
 #pragma mark UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    LzgDetailsViewController *detailsVc=[[LzgDetailsViewController alloc]init];
+       [self.navigationController pushViewController:detailsVc animated:YES];
 }
 #pragma mark UICollectionViewDatasource
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     HomeViewControllerCollectionVIewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HomeViewControllerCollectionVIewCell class]) forIndexPath:indexPath];
     NSDictionary *inforDic=[self.collectionViewCellInfor objectAtIndex:indexPath.row];
+    cell.delegate=self;
     cell.cellTitle.textColor=UIColor.blackColor;
     cell.cellDate.text=inforDic[@"date"];
     cell.cellTitle.text=[inforDic objectForKey:@"articleTitle"];
     [cell.cellImage yy_setImageWithURL:inforDic[@"image"] placeholder:[UIImage imageNamed:@"bitmap"]];
     cell.cellAuthor.text=inforDic[@"author"];
-
     return cell;
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -252,8 +254,10 @@
 
 - (void)HomeViewControllerCollectionVIewCellViewDetailsTargetActionMethod:(nonnull UIButton *)sender
 {
+    NSLog(@"ok");
     UICollectionViewCell *belongtoCell=sender.belongto;
-       
+    NSIndexPath *indexPath=[_tips indexPathForCell:belongtoCell];
+    [self collectionView:_tips didSelectItemAtIndexPath:indexPath];
 }
 
 - (void)HomeViewControllerCollectionVIewCellWarningTargetActionMethod:(nonnull UIButton *)sender

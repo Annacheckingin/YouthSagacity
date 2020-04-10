@@ -197,11 +197,9 @@
     .rightEqualToView(self.baseScroView)
     .topSpaceToView(_messagetableView, 10*LZGHEIGHT)
     .heightIs(theHeigjtOfMenuTableView*LZGHEIGHT);
-    NSLog(@"%lf",SCREENHEIGHT);
-    NSLog(@"%lf",SCREENWIDTH);
     accumulateHeight+=theHeigjtOfMenuTableView;
-#warning 调试信息需要删除
-    _menu.backgroundColor=UIColor.redColor;
+
+   
 //#pragma mark 考虑到TabBar的高度
 //    accumulateHeight+=44;
 //#pragma mark 异形屏还需要34px
@@ -224,26 +222,30 @@
     
     LzgDevicePixlesHandle *pxHandle=[LzgDevicePixlesHandle shareInstance];
     NSString *deviceName=[pxHandle deviceName];
-    if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone8])
-    {
-        accumulateHeight-=60;
-    }
-    else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone8plus])
-    {
-        
-    }
-    else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone11])
-    {
-        accumulateHeight+=170;
-    }
-    else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone11Pro])
-    {
-        accumulateHeight+=90;
-    }
-    else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone11ProMax])
-    {
-         accumulateHeight+=90;
-    }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-pointer-types"
+       if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone8])
+         {
+             accumulateHeight-=60;
+         }
+         else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone8plus])
+         {
+             
+         }
+         else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone11])
+         {
+             accumulateHeight+=170;
+         }
+         else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone11Pro])
+         {
+             accumulateHeight+=90;
+         }
+         else if ([deviceName isEqualToString:LzgDevicePixlesHandleIphone11ProMax])
+         {
+              accumulateHeight+=90;
+         }
+#pragma clang diagnostic pop
+   
 [self setTheScroViewContentSize:CGSizeMake(SCREENWIDTH, accumulateHeight)];
     
 }
