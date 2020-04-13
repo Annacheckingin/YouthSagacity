@@ -18,6 +18,7 @@ const NSString *LzgLikesModelFileName=@"likes.plist";
 {
     if (self=[super init])
     {
+        _kcontainner=[NSMutableArray array];
         LzgSandBoxStore *store=[LzgSandBoxStore shareInstance];
         NSString *pathToDocumentDirectory=[store stringForSandBoxOfDocument];
         NSString *likePlistName=LzgLikesModelFileName;
@@ -29,7 +30,17 @@ const NSString *LzgLikesModelFileName=@"likes.plist";
         }
         else
         {
-            _kcontainner =[NSMutableArray arrayWithContentsOfFile:[pathToDocumentDirectory stringByAppendingFormat:@"/%@",likePlistName]];
+            NSArray *temparray=[NSMutableArray arrayWithContentsOfFile:[pathToDocumentDirectory stringByAppendingFormat:@"/%@",likePlistName]];
+                       for (NSDictionary *obj in temparray)
+                       {
+                           NSString *tt=obj[@"title"];
+                           NSString  *ct=obj[@"content"];
+                           NSString *img1;
+                           NSString *img2;
+                           NSString *img3;
+                LikesModel *model=[[LikesModel alloc]initWithTitile:tt content:ct image1:img1 image2:img2 image3:img3];
+                           [_kcontainner  addObject:model];
+                       }
         }
 
     }

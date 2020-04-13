@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)deleteALike:(LzgMessageModel *)aMS;
 -(void)deleteAMSAtIndex:(NSInteger)index;
 -(NSInteger)numOfMesages;
+-(NSMutableArray <LzgMessageModel *>*)messages;
 @end
 
 NS_ASSUME_NONNULL_END

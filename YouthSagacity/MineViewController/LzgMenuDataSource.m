@@ -16,7 +16,7 @@
 {
     if (self=[super init])
     {
-        NSLog(@"data");
+        
     }
     return self;
 }

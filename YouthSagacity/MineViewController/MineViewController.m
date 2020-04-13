@@ -13,8 +13,14 @@
 #import "LzgLikesModel.h"
 #import "LzgMessageCenter.h"
 #import "LzgLikesModel.h"
+#import "LzgLogStatus.h"
+#import "LzgMessageCell.h"
+#import "LzgSandBoxStore.h"
+#import "LzgMessageCenter.h"
+#import "UIButton+LzgBelongtoCell.h"
+#import "LzgScrollView.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
-@interface MineViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource>
+@interface MineViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,LzgMessageCellDelegate>
 @property(nonatomic,strong)UIImage *yellowStar;
 @property(nonatomic,strong)UIImageView *topimg;
 @property(nonatomic,strong)UIImageView *portrait;
@@ -31,6 +37,7 @@
 @property(nonatomic,strong)LzgLikesModel *likes;
 @property(nonatomic,strong)LzgLikesModel *likesCenter;
 @property(nonatomic,strong)LzgMessageCenter *messageCenter;
+@property(nonatomic,strong)NSMutableArray *messageArray;
 -(void)p_setupUI;
 @end
 
@@ -39,7 +46,7 @@
 {
     if (_menuDataSource==nil)
     {
-        NSLog(@"In Data");
+       
         _menuDataSource=[[LzgMenuDataSource alloc]init];
     }
     return _menuDataSource;
@@ -48,7 +55,7 @@
 {
     if (_menuDelegate==nil)
     {
-        NSLog(@"In Dele");
+     
         _menuDelegate=[[LzgMenuDelegate alloc]init];
     }
     return _menuDelegate;
@@ -56,6 +63,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.hidden=YES;
+    
 }
 -(instancetype)init
 {
@@ -72,6 +80,8 @@
          @property(nonatomic,strong)UITableView *messagetableView;
          @property(nonatomic,strong)UITableView *menu;
          **/
+        LzgScrollView *sc=(LzgScrollView *)self.baseScroView;
+        [sc setThekAllowDifferentGR:NO];
         _likesCenter=[LzgLikesModel shareInstance];
         _messageCenter=[LzgMessageCenter shareInstance];
         _likes=[LzgLikesModel shareInstance];
@@ -120,6 +130,7 @@
         _messagetableView.dataSource=self;
         _messagetableView.separatorStyle=UITableViewCellSeparatorStyleNone;
         _messagetableView.backgroundColor=UIColor.clearColor;
+        
         _menu=[[UITableView alloc]init];
        _menu.delegate=self.menuDelegate;
        _menu.dataSource=self.menuDataSource;
@@ -132,37 +143,13 @@
 #pragma mark 测试
         
         
-//        _menu.backgroundColor=UIColor.redColor;
+
 #pragma mark UISroView
-//        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(P_tap:)];
-//        [self.menu addGestureRecognizer:tap];
-//        tap.delegate=self;
-        
+   
         
     }
     return self;
 }
-//-(void)P_tap:(UITapGestureRecognizer *)tap
-//{
-//    NSLog(@"ol");
-//    NSLog(@"%@",[tap.view class]);
-//    NSIndexPath *path=[NSIndexPath indexPathForRow:1 inSection:0];
-//    if ([tap.view isKindOfClass:[UITableViewCell class]]||[NSStringFromClass([tap.view class]) isEqualToString:@"UITableViewCellContentView"])
-//    {
-//        [self.menu.delegate tableView:_menu didSelectRowAtIndexPath:path];
-//    }
-//}
-//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-//    NSLog(@"reg");
-//if ([touch.view isKindOfClass:[UITableView class]]){
-//    return YES;
-//}
-//if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"])
-//    {
-//        return YES;
-//    }
-//return NO;
-//}
 
 -(void)p_setupUI
 {
@@ -303,11 +290,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=kBackGroundColor;
-    
+    self.userName.text=[[LzgLogStatus shareInstance] currentLogName];
+    NSLog(@"%@",[[LzgLogStatus shareInstance] currentLogName]);
      [self p_setupUI];
+    [self p_initializeData];
     // Do any additional setup after loading the view.
 }
-
+-(void)p_initializeData
+{
+    self.messageArray=[[LzgMessageCenter shareInstance] messages] ;
+    
+    
+}
 /*
 #pragma mark - Navigation
 
@@ -333,7 +327,19 @@
 #pragma mark UITableView
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    return 0;
+    LzgMessageCell *cell=[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([LzgMessageCell class])];
+    if (cell==nil)
+    {
+        cell=[[LzgMessageCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass([LzgMessageCell class])];
+    }
+    cell.delegate=self;
+    LzgMessageModel *cellmodel=[[LzgMessageCenter shareInstance].messages objectAtIndex:indexPath.section];
+    cell.deleteMesage.belongto=cell;
+    cell.reply.belongto=cell;
+    [cell.portrait yy_setImageWithURL:cellmodel.urlofPortraite placeholder:[UIImage imageNamed:@"bitmap"]];
+    cell.userName.text=cellmodel.nameOfUser;
+    cell.message.text=cellmodel.mesageBody;
+    return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -341,8 +347,35 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [_messageCenter numOfMesages];
+    static int i;
+    NSLog(@"%ld:coutput:%ld",i,[[LzgMessageCenter shareInstance].messages count]);
+    i++;
+    NSLog(@"%@",[LzgMessageCenter shareInstance].messages);
+    return [[LzgMessageCenter shareInstance].messages count];
 }
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [_messagetableView cellHeightForIndexPath:indexPath cellContentViewWidth:SCREENWIDTH tableView:_messagetableView];
+}
+- (void)LzgMessageCellDeletteAction:(nonnull UIButton *)sender
+{
+    UITableViewCell *cell=sender.belongto;
+//    [_messagetableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:[_messagetableView indexPathForCell:cell].section]] withRowAnimation:UITableViewRowAnimationFade];
+    NSIndexSet *setSections=[NSIndexSet indexSetWithIndex:[_messagetableView indexPathForCell:cell].section];
+       NSLog(@"%@",setSections);
+    
+//    [_messagetableView beginUpdates];
+   [[LzgMessageCenter shareInstance] deleteAMSAtIndex:[_messagetableView indexPathForCell:cell].section];
+    [_messagetableView  deleteSections:setSections withRowAnimation:UITableViewRowAnimationFade];
+//    [_messagetableView endUpdates];
+    
+}
+
+- (void)LzgMessageCellReplyAction:(nonnull UIButton *)sender {
+    
+}
+
 
 
 @end

@@ -366,7 +366,7 @@
 {
     return NO;
 }
--(BOOL)hasLogUser
+-(BOOL)hasLogUser:(void(^)(NSString  *userName))UserNameInfor
 {
     NSEntityDescription *entity=[NSEntityDescription entityForName:NSStringFromClass([UserInfor class]) inManagedObjectContext:self.contextForUser];
     NSFetchRequest *fetch=[UserInfor fetchRequest];
@@ -383,6 +383,7 @@
         return NO;
     }
     UserInfor *theonlyUser=[fetchresult lastObject];
+    UserNameInfor(theonlyUser.name);
     BOOL islog=theonlyUser.isLogSatus;
     return islog;
 }

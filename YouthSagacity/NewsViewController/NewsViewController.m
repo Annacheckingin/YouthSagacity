@@ -13,14 +13,15 @@
 #import "LzgLabel.h"
 #import "UIButton+LzgBelongtoCell.h"
 #import "NewsDetailViewController.h"
+#import "LzgTableView.h"
 #define kLzgTopCollectionViewHeight 150
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
-@interface NewsViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,NewsTableViewCellButtonDelegate>
+@interface NewsViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,NewsTableViewCellButtonDelegate,UIScrollViewDelegate>
 @property(nonatomic,strong)NSMutableArray *headImages;
 @property(nonatomic,strong)NSMutableArray *tableViewData;
 @property(nonatomic,assign)BOOL kfreshed;
 @property(nonatomic,strong)UICollectionView *topShow;
-@property(nonatomic,strong)UITableView *mainDisplay;
+@property(nonatomic,strong)LzgTableView *mainDisplay;
 @end
 
 @implementation NewsViewController
@@ -61,13 +62,49 @@
         _topShow.delegate=self;
         _topShow.dataSource=self;
         _topShow.backgroundColor=UIColor.clearColor;
-        _mainDisplay=[[UITableView alloc]init];
+        _mainDisplay=[[LzgTableView alloc]init];
         _mainDisplay.delegate=self;
         _mainDisplay.dataSource=self;
         _mainDisplay.separatorStyle=UITableViewCellSeparatorStyleNone;
         _mainDisplay.backgroundColor=UIColor.clearColor;
+        self.baseScroView.delegate=self;
     }
     return self;
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (_mainDisplay.contentOffset.y==0||_mainDisplay.contentOffset.y==_mainDisplay.bounds.size.height)
+    {
+        _mainDisplay.LzgAllowToSlide=NO;
+    }
+    else
+    {
+        _mainDisplay.LzgAllowToSlide=YES;
+    }
+}
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    
+    if (_mainDisplay.contentOffset.y==0||_mainDisplay.contentOffset.y==_mainDisplay.bounds.size.height)
+    {
+        _mainDisplay.LzgAllowToSlide=NO;
+    }
+    else
+    {
+        _mainDisplay.LzgAllowToSlide=YES;
+    }
+    CGPoint currentPoint=scrollView.contentOffset;
+    if (_mainDisplay.LzgAllowToSlide)
+    {
+        scrollView.contentOffset=currentPoint;
+    }
+    else
+    {
+        CGPoint currentPointOfTableview=_mainDisplay.contentOffset;
+        _mainDisplay.contentOffset=currentPointOfTableview;
+    }
+    
+
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -17,13 +17,13 @@
 {
     if (self=[super init])
     {
-        NSLog(@"dele");
+      
     }
     return self;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"okl");
+   
     if (indexPath.section==0)
     {
         
@@ -39,29 +39,29 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%s",sel_getName(_cmd));
+
     UITableView *tablev=self.belongto;
     return  [tablev cellHeightForIndexPath:indexPath cellContentViewWidth:SCREENWIDTH tableView:tablev];
     
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    NSLog(@"%s",sel_getName(_cmd));
+   
     return [UIView new];
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    NSLog(@"%s",sel_getName(_cmd));
+    
     return [UIView new];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    NSLog(@"%s",sel_getName(_cmd));
+   
     return 10*LZGHEIGHT;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    NSLog(@"%s",sel_getName(_cmd));
+    
     return 10*LZGHEIGHT;
 }
 @end

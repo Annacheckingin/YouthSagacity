@@ -7,7 +7,7 @@
 //
 
 #import "LzgScroBaseViewController.h"
-
+#import "LzgScrollView.h"
 @interface LzgScroBaseViewController ()
 {
     @protected
@@ -60,7 +60,8 @@
 {
     if (self=[super init])
     {
-        _baseScroView=[[UIScrollView alloc]init];
+        _baseScroView=[[LzgScrollView alloc]init];
+        _baseScroView.showsVerticalScrollIndicator=NO;
     }
     return self;
 }

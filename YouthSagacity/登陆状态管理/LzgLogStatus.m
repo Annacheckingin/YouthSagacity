@@ -13,6 +13,9 @@
 
 
 @interface LzgLogStatus ()
+{
+    NSString *_currentLogName;
+}
 @property(nonatomic,assign) BOOL islogging;
 @property(nonatomic,strong)LzgSimpleNSFamilyDataStore *storeCenter;
 @property(nonatomic,assign)BOOL freshedData;
@@ -60,7 +63,10 @@ static LzgLogStatus *me;
 -(BOOL)kaccessTheData
 {
     _freshedData=YES;
-    return  [self.storeCenter hasLogUser];
+    return  [self.storeCenter hasLogUser:^(NSString * _Nonnull userName)
+    {
+        
+    }];
 }
 -(BOOL)hasLogged
 {
@@ -91,6 +97,18 @@ static LzgLogStatus *me;
         [FM createFileAtPath:userPlistFileName contents:[NSKeyedArchiver archivedDataWithRootObject:currentLogName] attributes:nil];
     }
     [currentLogName writeToFile:userPlistFileName atomically:YES];
+}
+-(NSString  *)currentLogName
+{
+    if (_currentLogName==nil)
+    {
+        LzgSandBoxStore *sandStore=[LzgSandBoxStore shareInstance];
+        NSString *pathToDocDy=[sandStore stringForSandBoxOfDocument];
+        NSString *userPlistFileName=[NSString stringWithFormat:@"/%@",LzgLogStatusUserPlistFileName];
+        NSString *Aloger=[NSString stringWithContentsOfFile:userPlistFileName encoding:NSUTF8StringEncoding error:nil];
+        _currentLogName=Aloger;
+    }
+    return _currentLogName;
 }
 -(void)changeTheCurrentLoggerStatus:(BOOL)status
 {

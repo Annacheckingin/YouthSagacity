@@ -92,6 +92,15 @@
 		2732B738243F4996000B5119 /* LzgDevicePixlesHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B737243F4996000B5119 /* LzgDevicePixlesHandle.m */; };
 		2732B73C244003EF000B5119 /* LzgDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B73B244003EF000B5119 /* LzgDetailsViewController.m */; };
 		2732B745244042B7000B5119 /* NewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B744244042B7000B5119 /* NewsDetailViewController.m */; };
+		2732B74A244052D8000B5119 /* LzgLikesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B749244052D8000B5119 /* LzgLikesModel.m */; };
+		2732B74E244053B5000B5119 /* LikesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B74D244053B5000B5119 /* LikesModel.m */; };
+		2732B75124405FBC000B5119 /* LzgMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B75024405FBC000B5119 /* LzgMessageModel.m */; };
+		2732B75424405FD4000B5119 /* LzgMessageCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B75324405FD4000B5119 /* LzgMessageCenter.m */; };
+		2732B75C24416467000B5119 /* message.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2732B75B24416467000B5119 /* message.plist */; };
+		2732B76024416D53000B5119 /* likes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2732B75F24416D53000B5119 /* likes.plist */; };
+		2732B764244170ED000B5119 /* LzgMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B763244170ED000B5119 /* LzgMessageCell.m */; };
+		2732B76824442695000B5119 /* LzgScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B76724442695000B5119 /* LzgScrollView.m */; };
+		2732B76C24443630000B5119 /* LzgTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B76B24443630000B5119 /* LzgTableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -261,6 +270,22 @@
 		2732B73B244003EF000B5119 /* LzgDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgDetailsViewController.m; sourceTree = "<group>"; };
 		2732B743244042B7000B5119 /* NewsDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsDetailViewController.h; sourceTree = "<group>"; };
 		2732B744244042B7000B5119 /* NewsDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsDetailViewController.m; sourceTree = "<group>"; };
+		2732B748244052D8000B5119 /* LzgLikesModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgLikesModel.h; sourceTree = "<group>"; };
+		2732B749244052D8000B5119 /* LzgLikesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgLikesModel.m; sourceTree = "<group>"; };
+		2732B74C244053B5000B5119 /* LikesModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LikesModel.h; sourceTree = "<group>"; };
+		2732B74D244053B5000B5119 /* LikesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LikesModel.m; sourceTree = "<group>"; };
+		2732B74F24405FBC000B5119 /* LzgMessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgMessageModel.h; sourceTree = "<group>"; };
+		2732B75024405FBC000B5119 /* LzgMessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgMessageModel.m; sourceTree = "<group>"; };
+		2732B75224405FD4000B5119 /* LzgMessageCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgMessageCenter.h; sourceTree = "<group>"; };
+		2732B75324405FD4000B5119 /* LzgMessageCenter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgMessageCenter.m; sourceTree = "<group>"; };
+		2732B75B24416467000B5119 /* message.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = message.plist; sourceTree = "<group>"; };
+		2732B75F24416D53000B5119 /* likes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = likes.plist; sourceTree = "<group>"; };
+		2732B762244170ED000B5119 /* LzgMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgMessageCell.h; sourceTree = "<group>"; };
+		2732B763244170ED000B5119 /* LzgMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgMessageCell.m; sourceTree = "<group>"; };
+		2732B76624442695000B5119 /* LzgScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgScrollView.h; sourceTree = "<group>"; };
+		2732B76724442695000B5119 /* LzgScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgScrollView.m; sourceTree = "<group>"; };
+		2732B76A2444362F000B5119 /* LzgTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgTableView.h; sourceTree = "<group>"; };
+		2732B76B24443630000B5119 /* LzgTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgTableView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -404,6 +429,8 @@
 		2732B5E4243CA370000B5119 /* 带ScroView的视图控制器 */ = {
 			isa = PBXGroup;
 			children = (
+				2732B7692444360C000B5119 /* 自定义的 UITableView */,
+				2732B76524442676000B5119 /* 自定义的UISCrollView */,
 				2732B5E5243CA370000B5119 /* LzgScroBaseViewController.m */,
 				2732B5E6243CA370000B5119 /* LzgScroBaseViewController.h */,
 			);
@@ -647,6 +674,9 @@
 		2732B634243CA370000B5119 /* MineViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2732B76124417087000B5119 /* 自定义消息 Cell */,
+				2732B74724405295000B5119 /* 消息的model（采用的是单例模式） */,
+				2732B74624405277000B5119 /* 喜欢的内容的model(采用单例模式) */,
 				2732B635243CA370000B5119 /* MineViewController.h */,
 				2732B636243CA370000B5119 /* MineViewController.m */,
 				2732B72F243F0891000B5119 /* LzgMenuDelegate.h */,
@@ -770,8 +800,10 @@
 			isa = PBXGroup;
 			children = (
 				2732B6C0243D5E22000B5119 /* FixedData.plist */,
+				2732B75B24416467000B5119 /* message.plist */,
 				2732B6C2243D710E000B5119 /* LzgPlistRead.h */,
 				2732B6C3243D710E000B5119 /* LzgPlistRead.m */,
+				2732B75F24416D53000B5119 /* likes.plist */,
 			);
 			path = InforPlist;
 			sourceTree = "<group>";
@@ -902,6 +934,63 @@
 			path = "新闻详情";
 			sourceTree = "<group>";
 		};
+		2732B74624405277000B5119 /* 喜欢的内容的model(采用单例模式) */ = {
+			isa = PBXGroup;
+			children = (
+				2732B74B2440539D000B5119 /* 喜欢的数据模型 */,
+				2732B748244052D8000B5119 /* LzgLikesModel.h */,
+				2732B749244052D8000B5119 /* LzgLikesModel.m */,
+			);
+			path = "喜欢的内容的model(采用单例模式)";
+			sourceTree = "<group>";
+		};
+		2732B74724405295000B5119 /* 消息的model（采用的是单例模式） */ = {
+			isa = PBXGroup;
+			children = (
+				2732B74F24405FBC000B5119 /* LzgMessageModel.h */,
+				2732B75024405FBC000B5119 /* LzgMessageModel.m */,
+				2732B75224405FD4000B5119 /* LzgMessageCenter.h */,
+				2732B75324405FD4000B5119 /* LzgMessageCenter.m */,
+			);
+			path = "消息的model（采用的是单例模式）";
+			sourceTree = "<group>";
+		};
+		2732B74B2440539D000B5119 /* 喜欢的数据模型 */ = {
+			isa = PBXGroup;
+			children = (
+				2732B74C244053B5000B5119 /* LikesModel.h */,
+				2732B74D244053B5000B5119 /* LikesModel.m */,
+			);
+			path = "喜欢的数据模型";
+			sourceTree = "<group>";
+		};
+		2732B76124417087000B5119 /* 自定义消息 Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2732B762244170ED000B5119 /* LzgMessageCell.h */,
+				2732B763244170ED000B5119 /* LzgMessageCell.m */,
+			);
+			path = "自定义消息 Cell";
+			sourceTree = "<group>";
+		};
+		2732B76524442676000B5119 /* 自定义的UISCrollView */ = {
+			isa = PBXGroup;
+			children = (
+				2732B76624442695000B5119 /* LzgScrollView.h */,
+				2732B76724442695000B5119 /* LzgScrollView.m */,
+			);
+			path = "自定义的UISCrollView";
+			sourceTree = "<group>";
+		};
+		2732B7692444360C000B5119 /* 自定义的 UITableView */ = {
+			isa = PBXGroup;
+			children = (
+				2732B76A2444362F000B5119 /* LzgTableView.h */,
+				2732B76B24443630000B5119 /* LzgTableView.m */,
+			);
+			path = "自定义的 UITableView";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -963,10 +1052,12 @@
 				2732B694243CA371000B5119 /* Youth Sagacity.jpg in Resources */,
 				2732B5A4243CA30D000B5119 /* LaunchScreen.storyboard in Resources */,
 				2732B6C1243D5E22000B5119 /* FixedData.plist in Resources */,
+				2732B75C24416467000B5119 /* message.plist in Resources */,
 				2732B690243CA371000B5119 /* xuanzhong.png in Resources */,
 				2732B5A1243CA30D000B5119 /* Assets.xcassets in Resources */,
 				2732B693243CA371000B5119 /* back_transparent.pic in Resources */,
 				2732B692243CA371000B5119 /* weixuanzhong.png in Resources */,
+				2732B76024416D53000B5119 /* likes.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -984,6 +1075,7 @@
 				2732B680243CA371000B5119 /* LzgCategoryValueHandler.m in Sources */,
 				2732B688243CA371000B5119 /* LzgRootTabBarController.m in Sources */,
 				2732B6BD243CA371000B5119 /* AFNetworkReachabilityManager.m in Sources */,
+				2732B75424405FD4000B5119 /* LzgMessageCenter.m in Sources */,
 				2732B6E7243EC3A5000B5119 /* NewsTableViewCell.m in Sources */,
 				2732B69C243CA371000B5119 /* UserInfor.xcdatamodeld in Sources */,
 				2732B6AF243CA371000B5119 /* YYKVStorage.m in Sources */,
@@ -1005,10 +1097,12 @@
 				2732B6AD243CA371000B5119 /* YYImage.m in Sources */,
 				2732B5A7243CA30D000B5119 /* main.m in Sources */,
 				2732B6A7243CA371000B5119 /* YYDiskCache.m in Sources */,
+				2732B76C24443630000B5119 /* LzgTableView.m in Sources */,
 				2732B697243CA371000B5119 /* Pictures+CoreDataClass.m in Sources */,
 				2732B68F243CA371000B5119 /* LzgLogModel.m in Sources */,
 				2732B69A243CA371000B5119 /* UserInfor+CoreDataProperties.m in Sources */,
 				2732B685243CA371000B5119 /* UIViewController+LzgBackButtonImage.m in Sources */,
+				2732B74A244052D8000B5119 /* LzgLikesModel.m in Sources */,
 				2732B73C244003EF000B5119 /* LzgDetailsViewController.m in Sources */,
 				2732B698243CA371000B5119 /* Pictures.xcdatamodeld in Sources */,
 				2732B6BC243CA371000B5119 /* AFURLRequestSerialization.m in Sources */,
@@ -1018,6 +1112,7 @@
 				2732B6AA243CA371000B5119 /* YYCache.m in Sources */,
 				2732B682243CA371000B5119 /* LzgScroBaseViewController.m in Sources */,
 				2732B6A2243CA371000B5119 /* LzgReleaseViewController.m in Sources */,
+				2732B764244170ED000B5119 /* LzgMessageCell.m in Sources */,
 				2732B738243F4996000B5119 /* LzgDevicePixlesHandle.m in Sources */,
 				2732B69D243CA371000B5119 /* LzgSimpleNSFamilyDataStore.m in Sources */,
 				2732B69E243CA371000B5119 /* LzgLogStatus.m in Sources */,
@@ -1039,6 +1134,8 @@
 				2732B6C4243D710E000B5119 /* LzgPlistRead.m in Sources */,
 				2732B6AE243CA371000B5119 /* YYImageCoder.m in Sources */,
 				2732B6A3243CA371000B5119 /* UIView+SDAutoLayout.m in Sources */,
+				2732B76824442695000B5119 /* LzgScrollView.m in Sources */,
+				2732B75124405FBC000B5119 /* LzgMessageModel.m in Sources */,
 				2732B6B0243CA371000B5119 /* UIButton+YYWebImage.m in Sources */,
 				2732B6DC243EB663000B5119 /* UIButton+LzgBelongtoCell.m in Sources */,
 				2732B6A5243CA371000B5119 /* _YYWebImageSetter.m in Sources */,
@@ -1054,6 +1151,7 @@
 				2732B734243F089E000B5119 /* LzgMenuDataSource.m in Sources */,
 				2732B6B8243CA371000B5119 /* CALayer+YYWebImage.m in Sources */,
 				2732B695243CA371000B5119 /* AppDelegate.m in Sources */,
+				2732B74E244053B5000B5119 /* LikesModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,7 +13,17 @@
 {
     if (self=[super init])
     {
-        
+        @throw [NSException exceptionWithName:@"Method Error" reason:@"Use initWithPortraite: andName: andBody: instead " userInfo:nil];
+    }
+    return self;
+}
+-(instancetype)initWithPortraite:(NSString *)po andName:(NSString *)name andBody:(NSString *)bod
+{
+    if (self=[super init])
+    {
+        self.urlofPortraite=po;
+        self.nameOfUser=name;
+        self.mesageBody=bod;
     }
     return self;
 }
@@ -32,5 +42,9 @@
         return NO;
     }
     return YES;
+}
+-(NSString  *)description
+{
+  return   [NSString stringWithFormat:@"portraite%@;name->:%@;message->:%@",self.urlofPortraite,self.nameOfUser,self.mesageBody];
 }
 @end

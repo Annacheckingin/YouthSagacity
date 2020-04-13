@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>potrait</key>
+		<string>https://himg.baidu.com/sys/portrait/item/tb.1.7eee9eda.X_mNr-CwvDfgl3Xdy6rOzA</string>
+		<key>name</key>
+		<string>methrew</string>
+		<key>content</key>
+		<string>hello</string>
+	</dict>
+	<dict>
+		<key>potrait</key>
+		<string>https://himg.baidu.com/sys/portrait/item/tb.1.862125f9.-Pvp746tvgURUWQZ6iZMJg</string>
+		<key>name</key>
+		<string>peach</string>
+		<key>content</key>
+		<string>lol</string>
+	</dict>
+</array>
+</plist>

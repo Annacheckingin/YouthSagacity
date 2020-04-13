@@ -13,8 +13,9 @@
 #import "HomeViewControllerTableViewCell.h"
 #import "LzgDetailsViewController.h"
 #import "LzgLabel.h"
+#import "LzgTableView.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
-@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate,HomeViewControllerTableViewCellDelegate>
+@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate,HomeViewControllerTableViewCellDelegate,UIScrollViewDelegate>
 @property(nonatomic,strong)NSMutableArray *collectionViewCellInfor;
 @property(nonatomic,strong)NSMutableArray *tableViewCellInfor;
 @property(nonatomic,assign) BOOL freshedData;
@@ -60,7 +61,7 @@
          @property(nonatomic,strong)UITableView *projects;
          **/
         
- 
+        self.baseScroView.delegate=self;
         _freshedData=YES;
         _headLine=[[UILabel alloc]init];
         _headLine.text=@"BeadWork";
@@ -89,7 +90,7 @@
         _projectsLabel.text=@"Beginner project works";
         _projectsLabel.font=_tipsLabel.font;
 #pragma mark TableView
-        _projects=[[UITableView alloc]init];
+        _projects=[[LzgTableView alloc]init];
         _projects.backgroundColor=UIColor.clearColor;
         _projects.delegate=self;
         _projects.dataSource=self;
@@ -178,6 +179,34 @@
      
     // Do any additional setup after loading the view.
 }
+#pragma UIscrollViewDelegete
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    if (_projects.contentOffset.y==0||_projects.contentOffset.y==_projects.bounds.size.height)
+    {
+        _projects.LzgAllowToSlide=NO;
+    }
+    else
+    {
+        _projects.LzgAllowToSlide=YES;
+    }
+    CGPoint currentPoint=scrollView.contentOffset;
+    if (_projects.LzgAllowToSlide)
+    {
+        scrollView.contentOffset=currentPoint;
+    }
+    else
+    {
+        CGPoint currentPointOfTableview=_projects.contentOffset;
+        _projects.contentOffset=currentPointOfTableview;
+    }
+    
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+   
+}
 #pragma mark UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -238,6 +267,8 @@
     [cell setTheCellDisplayImage:dictionary[@"img"]];
     cell.chatBtn.belongto=cell;
     cell.detailBtn.belongto=cell;
+//   
+    NSLog(@"%ld",cell.selectionStyle);
     return cell;
 }
 

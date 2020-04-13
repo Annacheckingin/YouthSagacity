@@ -7,7 +7,7 @@
 //
 
 #import "LzgScroBaseViewController.h"
-
+@class LzgTableView;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeViewController : LzgScroBaseViewController
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UILabel *tipsLabel;
 @property(nonatomic,strong)UICollectionView *tips;
 @property(nonatomic,strong)UILabel *projectsLabel;
-@property(nonatomic,strong)UITableView *projects;
+@property(nonatomic,strong) LzgTableView*projects;
 
 @end
 

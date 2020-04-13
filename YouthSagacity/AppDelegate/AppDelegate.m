@@ -16,6 +16,7 @@
 #import "LzgBabaBiServerManager.h"
 #import "LzgBundleInforPath.h"
 #import "LzgSandBoxStore.h"
+#import "LzgSimpleNSFamilyDataStore.h"
 @interface AppDelegate ()<UITabBarControllerDelegate>
 @property(nonatomic,strong)LzgLogStatus *logstatus;
 @end
@@ -55,17 +56,41 @@
     {
         [fileManager createFileAtPath:[pathOfSandBoxDocumentDirectory stringByAppendingFormat:@"/%@",fileName] contents:dataOfPlist  attributes:nil];
     }
+    [self creatMessage];
+}
+-(void)creatMessage
+{
+    //mesage.plist
+    NSLog(@"creat message file");
+    NSString *fileName=@"message.plist";
+    NSString *hardInforInBundle=[[LzgBundleInforPath shareInstance] pathOfFile:fileName];
+    NSString *pathOfSandBoxDocumentDirectory=[[LzgSandBoxStore shareInstance] stringForSandBoxOfDocument];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    BOOL isFileExsit=[fileManager fileExistsAtPath:[pathOfSandBoxDocumentDirectory stringByAppendingFormat:@"/%@",fileName]];
+    NSData *dataOfPlist=[NSData dataWithContentsOfFile:hardInforInBundle];
+    if (!isFileExsit)
+    {
+        [fileManager createFileAtPath:[pathOfSandBoxDocumentDirectory stringByAppendingFormat:@"/%@",fileName] contents:dataOfPlist  attributes:nil];
+    }
 }
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    _logstatus=[LzgLogStatus shareInstance];
-    if (![_logstatus hasLogged])
+    LzgSimpleNSFamilyDataStore *dataStore=[LzgSimpleNSFamilyDataStore shareInstance];
+   __block NSString *loggerName;
+    if (![dataStore hasLogUser:^(NSString * _Nonnull userName){
+        loggerName=userName;
+    }])
     {
         LzgLogViewController *logViewController=[LzgLogViewController shareInstance];
         [self.window.rootViewController presentViewController:logViewController animated:YES completion:nil];
     }
     else
     {
+        if (loggerName&&[loggerName isEqualToString:@""])
+        {
+             [[LzgLogStatus shareInstance] setCurrentLogName:loggerName];
+        }
+       
         return YES;
     }
     return NO;

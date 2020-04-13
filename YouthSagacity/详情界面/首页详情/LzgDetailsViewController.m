@@ -68,6 +68,8 @@
         _reportBtn.imageView.contentMode=_forbidBtn.imageView.contentMode;
         [_reportBtn setImage:[UIImage imageNamed:@"5_40"] forState:UIControlStateNormal];
         _articleTitle=[[UILabel alloc]init];
+        _articleTitle.numberOfLines=0;
+        
         _articleTitle.font=[UIFont fontWithName:@"AmericanTypewriter" size:15];
         _content=[[LzgLabel alloc]init];
         _content.textColor=UIColor.lightGrayColor;
@@ -167,7 +169,7 @@
      .leftEqualToView(_portraite)
      .topSpaceToView(_portraite, 10*LZGHEIGHT)
      .heightIs(13);
-     [_articleTitle setSingleLineAutoResizeWithMaxWidth:400];
+     [_articleTitle setSingleLineAutoResizeWithMaxWidth:SCREENWIDTH-40*LZGWIDTH];
      //
      //
     _content.sd_layout.topSpaceToView(_articleTitle, 10*LZGHEIGHT)

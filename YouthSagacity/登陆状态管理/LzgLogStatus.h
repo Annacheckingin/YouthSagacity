@@ -11,10 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LzgLogStatus : NSObject
-@property(nonatomic,strong)NSString *currentLogName;
+
 +(instancetype)shareInstance;
 -(void)setLoggingStatus:(BOOL)status WithId:(NSString *)userid anduserName:(NSString *)userName andPassword:(NSString *)password;
 @property(nonatomic,readonly) BOOL islogging;
+@property(nonatomic,strong)  NSString *currentLogName;
 -(BOOL)hasLogged;
 -(void)changeTheCurrentLoggerStatus:(BOOL)status;
 @end
