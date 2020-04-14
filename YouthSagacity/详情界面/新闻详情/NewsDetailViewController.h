@@ -11,6 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 @class LzgLabel;
 typedef void  (^NewsDetailViewControllerUIHandle)(UILabel *title, LzgLabel *content,UIImageView *img_1,UIImageView *img_2,UIImageView *img_3,UIView *basementView,UIButton *blocking);
+@protocol NewsDetailViewControllerDelegate <NSObject>
+@required
+-(void)NewsDetailViewControllerDelegateLikeAction:(UIButton *)sender;
+-(void)NewsDetailViewControllerDelegateBlockingAction:(UIButton *)sender;
+
+@end
 @interface NewsDetailViewController : LzgBackBtnWithScroViewViewController
 @property(nonatomic,readonly)UILabel *newsTitle;
 @property(nonatomic,readonly)UIButton *blockingBtn;
@@ -20,6 +26,8 @@ typedef void  (^NewsDetailViewControllerUIHandle)(UILabel *title, LzgLabel *cont
 @property(nonatomic,readonly)UIImageView *img_2;
 @property(nonatomic,readonly)UIImageView *img_3;
 @property(nonatomic,strong) NewsDetailViewControllerUIHandle handleUi;
+@property(nonatomic,weak) id<NewsDetailViewControllerDelegate> delegate;
+@property(nonatomic,copy)NSIndexPath *comeFromCellIndex;
 @end
 
 NS_ASSUME_NONNULL_END

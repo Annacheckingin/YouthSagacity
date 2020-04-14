@@ -291,7 +291,7 @@
     [super viewDidLoad];
     self.view.backgroundColor=kBackGroundColor;
     self.userName.text=[[LzgLogStatus shareInstance] currentLogName];
-    NSLog(@"%@",[[LzgLogStatus shareInstance] currentLogName]);
+//    NSLog(@"%@",[[LzgLogStatus shareInstance] currentLogName]);
      [self p_setupUI];
     [self p_initializeData];
     // Do any additional setup after loading the view.
@@ -347,10 +347,7 @@
 }
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    static int i;
-    NSLog(@"%ld:coutput:%ld",i,[[LzgMessageCenter shareInstance].messages count]);
-    i++;
-    NSLog(@"%@",[LzgMessageCenter shareInstance].messages);
+    
     return [[LzgMessageCenter shareInstance].messages count];
 }
 
@@ -363,7 +360,7 @@
     UITableViewCell *cell=sender.belongto;
 //    [_messagetableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:[_messagetableView indexPathForCell:cell].section]] withRowAnimation:UITableViewRowAnimationFade];
     NSIndexSet *setSections=[NSIndexSet indexSetWithIndex:[_messagetableView indexPathForCell:cell].section];
-       NSLog(@"%@",setSections);
+      
     
 //    [_messagetableView beginUpdates];
    [[LzgMessageCenter shareInstance] deleteAMSAtIndex:[_messagetableView indexPathForCell:cell].section];

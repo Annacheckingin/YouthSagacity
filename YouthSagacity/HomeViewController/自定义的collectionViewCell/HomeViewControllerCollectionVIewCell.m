@@ -60,7 +60,7 @@
         _detailsBtn.belongto=self;
     _detailsBtn.imageView.contentMode=_warnningBtn.imageView.contentMode;
         [_detailsBtn setImage:[UIImage imageNamed:@"normaldetail"] forState:UIControlStateNormal];
-        _detailsBtn.imageView.contentMode=UIViewContentModeScaleAspectFit;
+        _detailsBtn.imageView.contentMode=UIViewContentModeScaleAspectFit;    
         //
         [self kSetUpUI];
     }
@@ -134,4 +134,5 @@
         [_detailsBtn addTarget:_delegate action:@selector(HomeViewControllerCollectionVIewCellViewDetailsTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
     }
 }
+
 @end

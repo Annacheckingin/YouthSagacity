@@ -8,6 +8,7 @@
 
 #import "NewsDetailViewController.h"
 #import "LzgLabel.h"
+#import "UIButton+LzgButtonBelongToVc.h"
 @interface NewsDetailViewController ()
 @property(nonatomic,strong)UILabel *newsTitle;
 @property(nonatomic,strong)UIButton *blockingBtn;
@@ -35,11 +36,14 @@
         _newsTitle=[[UILabel alloc]init];
         _newsTitle.font=[UIFont fontWithName:@"Georgia-Bold" size:11];
         _blockingBtn=[[UIButton alloc]init];
+        _blockingBtn.belongToVc=self;
         _blockingBtn.imageView.contentMode=UIViewContentModeScaleAspectFit;
         [_blockingBtn setImage:[UIImage imageNamed:@"5_153"] forState:UIControlStateNormal];
         _likesBtn=[[UIButton alloc]init];
+        _likesBtn.belongToVc=self;
         _likesBtn.imageView.contentMode=_blockingBtn.imageView.contentMode;
-        [_likesBtn setImage:[UIImage imageNamed:@"5_156"] forState:UIControlStateNormal];
+        [_likesBtn setImage:[UIImage imageNamed:@"5_161"] forState:UIControlStateNormal];
+        [_likesBtn setImage:[UIImage imageNamed:@"5_156"] forState:UIControlStateSelected];
         _content=[[LzgLabel alloc]init];
         _content.numberOfLines=0;
         _img_1=[[UIImageView alloc]init];
@@ -119,7 +123,22 @@
    
     // Do any additional setup after loading the view.
 }
-
+-(void)setDelegate:(id<NewsDetailViewControllerDelegate>)delegate
+{
+    _delegate=delegate;
+    if ([_delegate conformsToProtocol:@protocol(NewsDetailViewControllerDelegate) ])
+    {
+        if ([_delegate respondsToSelector:@selector(NewsDetailViewControllerDelegateLikeAction:)])
+        {
+             [_likesBtn addTarget:_delegate action:@selector(NewsDetailViewControllerDelegateLikeAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+       if ([_delegate respondsToSelector:@selector(NewsDetailViewControllerDelegateBlockingAction:)])
+       {
+           [_blockingBtn addTarget:_delegate action:@selector(NewsDetailViewControllerDelegateBlockingAction:) forControlEvents:UIControlEventTouchUpInside];
+       }
+        
+    }
+}
 /*
 #pragma mark - Navigation
 

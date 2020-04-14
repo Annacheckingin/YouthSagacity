@@ -7,7 +7,8 @@
 //
 
 #import "LzgBaseWithBackButtonViewController.h"
-
+FOUNDATION_EXTERN
+const NSString *LzgReleaseViewControllerNotificationName;
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LzgReleaseViewController : LzgBaseWithBackButtonViewController

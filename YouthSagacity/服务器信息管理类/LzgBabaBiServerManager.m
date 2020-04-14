@@ -19,9 +19,11 @@
 #import <objc/runtime.h>
 @implementation LzgBabaBiServerManager
 static LzgBabaBiServerManager *LzgBabaBiServerManagerme;
-static const char *kurlPrefixString="http://ios.bababi.cc/";
+#warning change
+static const char *kurlPrefixString="";
 static const char *kurlTailString="/api/";
-static const char* LzgBabaBiServerManagerClassKey="LzgBabaBiServerManagerClassKey";
+#warning change
+static const char* LzgBabaBiServerManagerClassKey="LzgServerManagerClassKey";
 +(void)setTheServerName:(NSString *)name
 {
     objc_setAssociatedObject(self, LzgBabaBiServerManagerClassKey, name, OBJC_ASSOCIATION_RETAIN);
@@ -57,7 +59,7 @@ static const char* LzgBabaBiServerManagerClassKey="LzgBabaBiServerManagerClassKe
     }
     return [LzgBabaBiServerManager theServerName];
 }
-// http://ios.bababi.cc/tusermen/api/catlist
+
 -(NSString *)generateTheCategoryPostApi;
 {
     return [NSString stringWithFormat:@"%s%@%s%@",kurlPrefixString,self.theServerName,kurlTailString,LzgCategoryString];

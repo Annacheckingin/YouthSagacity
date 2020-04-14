@@ -14,6 +14,8 @@
 #import "LzgDetailsViewController.h"
 #import "LzgLabel.h"
 #import "LzgTableView.h"
+#import "LzgReleaseViewController.h"
+#import "LzgReportViewController.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
 @interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate,HomeViewControllerTableViewCellDelegate,UIScrollViewDelegate>
 @property(nonatomic,strong)NSMutableArray *collectionViewCellInfor;
@@ -24,6 +26,7 @@
 @implementation HomeViewController
 -(void)viewWillAppear:(BOOL)animated
 {
+//    NSLog(@"%s",sel_getName(_cmd));
     self.navigationController.navigationBar.hidden=YES;
     if (_freshedData)
     {
@@ -39,11 +42,19 @@
     //
     NSMutableDictionary *dictotalData=[[NSMutableDictionary alloc]initWithContentsOfFile:stringOfPlistFile];
     NSMutableDictionary *HomeVc=dictotalData[@"HomeViewController"];
-    NSMutableArray *collectionViewData=HomeVc[@"homeCollectionVIewCell"];
+    NSMutableArray *collectionViewData=[NSMutableArray arrayWithArray:HomeVc[@"homeCollectionVIewCell"]];
     _collectionViewCellInfor=collectionViewData;
     //
-    NSMutableArray *tableViewData=HomeVc[@"homeTableView"];
+    NSMutableArray *tableViewData=[NSMutableArray arrayWithArray:HomeVc[@"homeTableView"]];
+    
     _tableViewCellInfor=tableViewData;
+//    NSLog(@"%@",NSStringFromClass([NSArray class]));
+//    NSLog(@"%@",NSStringFromClass([NSMutableArray class]));
+//    if ([_collectionViewCellInfor isKindOfClass:[NSMutableArray class]])
+//    {
+//          NSLog(@"-----%s:%@",sel_getName(_cmd),NSStringFromClass([_collectionViewCellInfor class]));
+//    }
+  
     [self.tips reloadData];
     [self.projects reloadData];
     _freshedData=NO;
@@ -52,33 +63,26 @@
 {
     if (self=[super init])
     {
-        /*
-         @property(nonatomic,strong)UILabel *headLine;
-         @property(nonatomic,strong)UIButton *goForPublish;
-         @property(nonatomic,strong)UILabel *tipsLabel;
-         @property(nonatomic,strong)UICollectionView *tips;
-         @property(nonatomic,strong)UILabel *projectsLabel;
-         @property(nonatomic,strong)UITableView *projects;
-         **/
-        
         self.baseScroView.delegate=self;
-        _freshedData=YES;
+//        _freshedData=YES;
         _headLine=[[UILabel alloc]init];
         _headLine.text=@"BeadWork";
         _headLine.font=[UIFont fontWithName:@"CourierNewPS-BoldMT" size:15];
         _goForPublish=[[UIButton alloc]init];
+        [_goForPublish addTarget:self action:@selector(p_punlishContent:) forControlEvents:UIControlEventTouchUpInside];
         [_goForPublish setImage:[UIImage imageNamed:@"realgofor"] forState:UIControlStateNormal];
         _goForPublish.imageView.contentMode=UIViewContentModeScaleAspectFill;
         _tipsLabel=[[UILabel alloc]init];
         _tipsLabel.text=@"BeadWork Tips";
         _tipsLabel.font=[UIFont fontWithName:@"Courier" size:12];
         //
+        
 #pragma mark CollectionView
          UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc]init];
         flowLayout.scrollDirection=UICollectionViewScrollDirectionHorizontal;
         flowLayout.minimumInteritemSpacing=10*LZGWIDTH;
         flowLayout.sectionInset=UIEdgeInsetsMake(5, 10, 5, 10);
-        flowLayout.itemSize=CGSizeMake(200*LZGHEIGHT, 200*LZGHEIGHT);
+        flowLayout.itemSize=CGSizeMake(190*LZGHEIGHT, 180*LZGHEIGHT);
         _tips=[[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _tips.backgroundColor=UIColor.clearColor;
         _tips.showsHorizontalScrollIndicator=NO;
@@ -99,7 +103,11 @@
     }
     return self;
 }
-
+-(void)p_punlishContent:(UIButton *)sender
+{
+    LzgReleaseViewController *rvc=[[LzgReleaseViewController alloc]init];
+    [self.navigationController pushViewController:rvc animated:YES];
+}
 - (void)viewDidLoad
 {
     _freshedData=YES;
@@ -183,6 +191,7 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+//    NSLog(@"%s",sel_getName(_cmd));
     if (_projects.contentOffset.y==0||_projects.contentOffset.y==_projects.bounds.size.height)
     {
         _projects.LzgAllowToSlide=NO;
@@ -191,6 +200,11 @@
     {
         _projects.LzgAllowToSlide=YES;
     }
+    
+    
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
     CGPoint currentPoint=scrollView.contentOffset;
     if (_projects.LzgAllowToSlide)
     {
@@ -201,11 +215,9 @@
         CGPoint currentPointOfTableview=_projects.contentOffset;
         _projects.contentOffset=currentPointOfTableview;
     }
-    
-}
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-   
+//    static int i;
+//    NSLog(@"%d--%s",i,sel_getName(_cmd));
+//    i++;
 }
 #pragma mark UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -268,7 +280,7 @@
     cell.chatBtn.belongto=cell;
     cell.detailBtn.belongto=cell;
 //   
-    NSLog(@"%ld",cell.selectionStyle);
+ 
     return cell;
 }
 
@@ -288,7 +300,7 @@
 #pragma mark UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"collectionViewCell selected");
+//    NSLog(@"collectionViewCell selected");
      NSDictionary *inforDic=[self.collectionViewCellInfor objectAtIndex:indexPath.row];
     LzgDetailsViewController *detailsVc=[[LzgDetailsViewController alloc]init];
     detailsVc.hanleUI = ^(UIImageView * _Nonnull portarit, UILabel * _Nonnull name, UILabel * _Nonnull date, UILabel * _Nonnull articleTitle, UILabel * _Nonnull content, UIImageView * _Nonnull contentImgae, UILabel * _Nonnull thumbNum,UIView *baseView)
@@ -351,6 +363,8 @@
     cell.cellTitle.text=[inforDic objectForKey:@"articleTitle"];
     [cell.cellImage yy_setImageWithURL:inforDic[@"image"] placeholder:[UIImage imageNamed:@"bitmap"]];
     cell.cellAuthor.text=inforDic[@"author"];
+    cell.forbidBtn.belongto=cell;
+    cell.warnningBtn.belongto=cell;
     return cell;
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -359,6 +373,7 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+//    NSLog(@"---%s%@",sel_getName(_cmd),NSStringFromClass([_collectionViewCellInfor class]));
     return _collectionViewCellInfor.count;
 }
 #pragma mark UICollectionViewFowLayoutDelegate
@@ -370,29 +385,34 @@
 
 - (void)HomeViewControllerCollectionVIewCellForBideTargetActionMethod:(nonnull UIButton *)sender
 {
+    
     UICollectionViewCell *belongtoCell=sender.belongto;
-    
-    
+    [_collectionViewCellInfor removeObjectAtIndex:[_tips indexPathForCell:belongtoCell].row];
+    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:[_tips indexPathForCell:belongtoCell].row inSection:0];
+    [_tips deleteItemsAtIndexPaths:@[indexPath]];
     
     
     
 }
 
+- (void)HomeViewControllerCollectionVIewCellWarningTargetActionMethod:(nonnull UIButton *)sender
+{
+    LzgReportViewController *rpVc=[[LzgReportViewController alloc]init];
+    [rpVc.navigationController.navigationBar setHidden:NO];
+    [self.navigationController pushViewController:rpVc animated:YES];
+}
+//
 - (void)HomeViewControllerCollectionVIewCellViewDetailsTargetActionMethod:(nonnull UIButton *)sender
 {
-   
     UICollectionViewCell *belongtoCell=sender.belongto;
     NSIndexPath *indexPath=[_tips indexPathForCell:belongtoCell];
     [self collectionView:_tips didSelectItemAtIndexPath:indexPath];
 }
 
-- (void)HomeViewControllerCollectionVIewCellWarningTargetActionMethod:(nonnull UIButton *)sender
-{
-    UICollectionViewCell *belongtoCell=sender.belongto;
-       
-}
 
 
+
+//
 - (void)HomeViewControllerTableViewCellTheTargetActionMethodOfChatBtn:(nonnull UIButton *)sender
 {
    

@@ -20,6 +20,10 @@
 @end
 
 @implementation LzgBaseWithBackButtonViewController
++(void)initialize
+{
+    [self configureTheBackBtnImage:[UIImage imageNamed:@"back"]];
+}
 -(void)setInstanceImage:(UIImage *)image
 {
     _instanceImage=image;
@@ -64,9 +68,12 @@
     [self.view addSubview:_backBtn];
     _backBtn.sd_layout
     .leftSpaceToView(self.view, 15*LZGWIDTH)
-    .topSpaceToView(self.view, 15*LZGHEIGHT)
-    .widthIs(25*LZGWIDTH)
-    .heightIs(15*LZGHEIGHT);
+    .topSpaceToView(self.view, 30*LZGHEIGHT)
+    .widthIs(50*LZGWIDTH)
+    .heightIs(20*LZGHEIGHT);
+    
+   
+
     // Do any additional setup after loading the view.
 }
 

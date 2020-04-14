@@ -101,6 +101,8 @@
 		2732B764244170ED000B5119 /* LzgMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B763244170ED000B5119 /* LzgMessageCell.m */; };
 		2732B76824442695000B5119 /* LzgScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B76724442695000B5119 /* LzgScrollView.m */; };
 		2732B76C24443630000B5119 /* LzgTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B76B24443630000B5119 /* LzgTableView.m */; };
+		27700891244581F400592954 /* LzgReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27700890244581F400592954 /* LzgReportViewController.m */; };
+		2770089924458DCF00592954 /* UIButton+LzgButtonBelongToVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 2770089824458DCF00592954 /* UIButton+LzgButtonBelongToVc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -286,6 +288,10 @@
 		2732B76724442695000B5119 /* LzgScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgScrollView.m; sourceTree = "<group>"; };
 		2732B76A2444362F000B5119 /* LzgTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgTableView.h; sourceTree = "<group>"; };
 		2732B76B24443630000B5119 /* LzgTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgTableView.m; sourceTree = "<group>"; };
+		2770088F244581F400592954 /* LzgReportViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgReportViewController.h; sourceTree = "<group>"; };
+		27700890244581F400592954 /* LzgReportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgReportViewController.m; sourceTree = "<group>"; };
+		2770089724458DCF00592954 /* UIButton+LzgButtonBelongToVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+LzgButtonBelongToVc.h"; sourceTree = "<group>"; };
+		2770089824458DCF00592954 /* UIButton+LzgButtonBelongToVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LzgButtonBelongToVc.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,6 +324,7 @@
 		2732B593243CA309000B5119 /* YouthSagacity */ = {
 			isa = PBXGroup;
 			children = (
+				2770088E244581C200592954 /* 报告vc */,
 				2732B73D24403483000B5119 /* 富文本的高度计算（带空格或换行符） */,
 				2732B735243F4975000B5119 /* 设备像素处理 */,
 				2732B6D1243DAF71000B5119 /* 沙盒路径存储 */,
@@ -928,6 +935,7 @@
 		2732B74224404287000B5119 /* 新闻详情 */ = {
 			isa = PBXGroup;
 			children = (
+				2770089324458D9100592954 /* UIButton的类别，用于标记属于的页面 */,
 				2732B743244042B7000B5119 /* NewsDetailViewController.h */,
 				2732B744244042B7000B5119 /* NewsDetailViewController.m */,
 			);
@@ -989,6 +997,24 @@
 				2732B76B24443630000B5119 /* LzgTableView.m */,
 			);
 			path = "自定义的 UITableView";
+			sourceTree = "<group>";
+		};
+		2770088E244581C200592954 /* 报告vc */ = {
+			isa = PBXGroup;
+			children = (
+				2770088F244581F400592954 /* LzgReportViewController.h */,
+				27700890244581F400592954 /* LzgReportViewController.m */,
+			);
+			path = "报告vc";
+			sourceTree = "<group>";
+		};
+		2770089324458D9100592954 /* UIButton的类别，用于标记属于的页面 */ = {
+			isa = PBXGroup;
+			children = (
+				2770089724458DCF00592954 /* UIButton+LzgButtonBelongToVc.h */,
+				2770089824458DCF00592954 /* UIButton+LzgButtonBelongToVc.m */,
+			);
+			path = "UIButton的类别，用于标记属于的页面";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1069,6 +1095,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2732B6A1243CA371000B5119 /* LzgTextField.m in Sources */,
+				27700891244581F400592954 /* LzgReportViewController.m in Sources */,
 				2732B745244042B7000B5119 /* NewsDetailViewController.m in Sources */,
 				2732B6AB243CA371000B5119 /* MPublicManager.m in Sources */,
 				2732B683243CA371000B5119 /* LzgBaseWithBackButtonViewController.m in Sources */,
@@ -1119,6 +1146,7 @@
 				2732B681243CA371000B5119 /* LzgMineCell.m in Sources */,
 				2732B6BA243CA371000B5119 /* AFHTTPSessionManager.m in Sources */,
 				2732B68A243CA371000B5119 /* NewsViewController.m in Sources */,
+				2770089924458DCF00592954 /* UIButton+LzgButtonBelongToVc.m in Sources */,
 				2732B68C243CA371000B5119 /* LzgRegistModel+hard.m in Sources */,
 				2732B67D243CA371000B5119 /* LzgBabaBiServerManager.m in Sources */,
 				2732B6BE243CA371000B5119 /* AFSecurityPolicy.m in Sources */,

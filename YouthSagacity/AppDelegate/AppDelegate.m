@@ -61,7 +61,6 @@
 -(void)creatMessage
 {
     //mesage.plist
-    NSLog(@"creat message file");
     NSString *fileName=@"message.plist";
     NSString *hardInforInBundle=[[LzgBundleInforPath shareInstance] pathOfFile:fileName];
     NSString *pathOfSandBoxDocumentDirectory=[[LzgSandBoxStore shareInstance] stringForSandBoxOfDocument];

@@ -120,7 +120,7 @@ const NSString *lzgMSModeContentkey=@"content";
 -(void)deleteAMSAtIndex:(NSInteger)index
 {
     [_k_MSContainer removeObjectAtIndex:index];
-    NSLog(@"%@",_k_MSContainer);
+//    NSLog(@"%@",_k_MSContainer);
     LzgSandBoxStore *store=[LzgSandBoxStore shareInstance];
     NSString *pathToDocumentDirectory=[store stringForSandBoxOfDocument];
     NSLog(@"数据持久化开始");

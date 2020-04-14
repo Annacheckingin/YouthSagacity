@@ -34,6 +34,7 @@ static UIImage *backbtnimage;
     if (self=[super init])
     {
         _backAction=[[UIButton alloc]init];
+        
         _backAction.imageView.contentMode=UIViewContentModeScaleAspectFit;
         [_backAction addTarget:self action:@selector(kbackAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -70,7 +71,7 @@ static UIImage *backbtnimage;
     [self addTheViewInBottomView:_backAction andSDAutoLayoutModel:^(UIView * _Nonnull theview, UIView * _Nonnull theBaseView)
     {
         theview.sd_layout.leftSpaceToView(theBaseView, 10*LZGWIDTH)
-        .topSpaceToView(theBaseView, 5*LZGHEIGHT)
+        .topSpaceToView(theBaseView, 30*LZGHEIGHT)
         .widthIs(150*LZGWIDTH)
         .heightIs(50*LZGHEIGHT);
     }];

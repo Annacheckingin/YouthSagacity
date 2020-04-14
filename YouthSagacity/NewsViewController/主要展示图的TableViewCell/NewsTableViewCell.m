@@ -64,7 +64,8 @@
         //
         _likesBtn=[[UIButton alloc]init];
         _likesBtn.imageView.contentMode=_blockingNews.imageView.contentMode;
-        [_likesBtn setImage:[UIImage imageNamed:@"5_156"] forState:UIControlStateNormal];
+        [_likesBtn setImage:[UIImage imageNamed:@"5_161"] forState:UIControlStateNormal];
+        [_likesBtn setImage:[UIImage imageNamed:@"5_156"] forState:UIControlStateSelected];
         ////
         ////
         ///
