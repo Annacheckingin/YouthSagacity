@@ -8,7 +8,7 @@
 
 #import "LzgRegistModel.h"
 #import <objc/runtime.h>
-#import "LzgBabaBiServerManager.h"
+#import "LzgWraithServerManager.h"
 #import "AFNetworking.h"
 #import "LzgRegisterValueHandler.h"
 ////
@@ -21,7 +21,7 @@ typedef NS_OPTIONS(NSInteger, LzgRegistInforCondition)
     hasMobile=1<<3
 };
 @interface LzgRegistModel ()
-@property(nonatomic,strong)LzgBabaBiServerManager *serverManager;
+@property(nonatomic,strong)LzgWraithServerManager *serverManager;
 @end
 
 @implementation LzgRegistModel
@@ -31,7 +31,7 @@ static LzgRegistModel *RegisterModelme;
 {
     if (self=[super init])
     {
-        _serverManager=[LzgBabaBiServerManager shareInstance];
+        _serverManager=[LzgWraithServerManager shareInstance];
     }
     return self;
 }
@@ -64,9 +64,9 @@ static LzgRegistModel *RegisterModelme;
     if (inforWithsequence_em_ni_he_mo==nil)
     {
         AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
-        [LzgBabaBiServerManager setTheServerName:@"tusermen"];
-        NSString *thePostTarget=[[LzgBabaBiServerManager shareInstance] registerApiString];
-        NSDictionary *registerDic=[[LzgBabaBiServerManager shareInstance] registerGenerateParameterDictionaryWithAcount:acount andPassword:password withAdditionalInfor:nil];
+        [LzgWraithServerManager setTheServerName:@"tusermen"];
+        NSString *thePostTarget=[[LzgWraithServerManager shareInstance] registerApiString];
+        NSDictionary *registerDic=[[LzgWraithServerManager shareInstance] registerGenerateParameterDictionaryWithAcount:acount andPassword:password withAdditionalInfor:nil];
         [manager POST:thePostTarget parameters:registerDic success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
          {
             LzgRegisterValueHandler *handerler=[LzgRegisterValueHandler shareInstance];

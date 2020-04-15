@@ -10,7 +10,7 @@
 		2732B5A1243CA30D000B5119 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2732B5A0243CA30D000B5119 /* Assets.xcassets */; };
 		2732B5A4243CA30D000B5119 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2732B5A2243CA30D000B5119 /* LaunchScreen.storyboard */; };
 		2732B5A7243CA30D000B5119 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B5A6243CA30D000B5119 /* main.m */; };
-		2732B67D243CA371000B5119 /* LzgBabaBiServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B5D4243CA370000B5119 /* LzgBabaBiServerManager.m */; };
+		2732B67D243CA371000B5119 /* LzgWraithServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B5D4243CA370000B5119 /* LzgWraithServerManager.m */; };
 		2732B67E243CA371000B5119 /* LzgLogValueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B5D8243CA370000B5119 /* LzgLogValueHandler.m */; };
 		2732B67F243CA371000B5119 /* LzgRegisterValueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B5DB243CA370000B5119 /* LzgRegisterValueHandler.m */; };
 		2732B680243CA371000B5119 /* LzgCategoryValueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B5DE243CA370000B5119 /* LzgCategoryValueHandler.m */; };
@@ -35,7 +35,7 @@
 		2732B693243CA371000B5119 /* back_transparent.pic in Resources */ = {isa = PBXBuildFile; fileRef = 2732B612243CA370000B5119 /* back_transparent.pic */; };
 		2732B694243CA371000B5119 /* Youth Sagacity.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2732B613243CA370000B5119 /* Youth Sagacity.jpg */; };
 		2732B695243CA371000B5119 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B616243CA370000B5119 /* AppDelegate.m */; };
-		2732B696243CA371000B5119 /* LzgBababiServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B61A243CA370000B5119 /* LzgBababiServerRequest.m */; };
+		2732B696243CA371000B5119 /* LzgWraithServerRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B61A243CA370000B5119 /* LzgWraithServerRequest.m */; };
 		2732B697243CA371000B5119 /* Pictures+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B620243CA370000B5119 /* Pictures+CoreDataClass.m */; };
 		2732B698243CA371000B5119 /* Pictures.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2732B621243CA370000B5119 /* Pictures.xcdatamodeld */; };
 		2732B699243CA371000B5119 /* Pictures+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B623243CA370000B5119 /* Pictures+CoreDataProperties.m */; };
@@ -115,8 +115,8 @@
 		2732B5A5243CA30D000B5119 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2732B5A6243CA30D000B5119 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2732B5D2243CA370000B5119 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		2732B5D4243CA370000B5119 /* LzgBabaBiServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LzgBabaBiServerManager.m; sourceTree = "<group>"; };
-		2732B5D5243CA370000B5119 /* LzgBabaBiServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LzgBabaBiServerManager.h; sourceTree = "<group>"; };
+		2732B5D4243CA370000B5119 /* LzgWraithServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LzgWraithServerManager.m; sourceTree = "<group>"; };
+		2732B5D5243CA370000B5119 /* LzgWraithServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LzgWraithServerManager.h; sourceTree = "<group>"; };
 		2732B5D8243CA370000B5119 /* LzgLogValueHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LzgLogValueHandler.m; sourceTree = "<group>"; };
 		2732B5D9243CA370000B5119 /* LzgLogValueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LzgLogValueHandler.h; sourceTree = "<group>"; };
 		2732B5DB243CA370000B5119 /* LzgRegisterValueHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LzgRegisterValueHandler.m; sourceTree = "<group>"; };
@@ -160,8 +160,8 @@
 		2732B613243CA370000B5119 /* Youth Sagacity.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Youth Sagacity.jpg"; sourceTree = "<group>"; };
 		2732B615243CA370000B5119 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2732B616243CA370000B5119 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2732B619243CA370000B5119 /* LzgBababiServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LzgBababiServerRequest.h; sourceTree = "<group>"; };
-		2732B61A243CA370000B5119 /* LzgBababiServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LzgBababiServerRequest.m; sourceTree = "<group>"; };
+		2732B619243CA370000B5119 /* LzgWraithServerRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LzgWraithServerRequest.h; sourceTree = "<group>"; };
+		2732B61A243CA370000B5119 /* LzgWraithServerRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LzgWraithServerRequest.m; sourceTree = "<group>"; };
 		2732B61E243CA370000B5119 /* Pictures+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pictures+CoreDataClass.h"; sourceTree = "<group>"; };
 		2732B61F243CA370000B5119 /* Pictures+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Pictures+CoreDataProperties.h"; sourceTree = "<group>"; };
 		2732B620243CA370000B5119 /* Pictures+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Pictures+CoreDataClass.m"; sourceTree = "<group>"; };
@@ -377,8 +377,8 @@
 		2732B5D3243CA370000B5119 /* 服务器信息管理类 */ = {
 			isa = PBXGroup;
 			children = (
-				2732B5D4243CA370000B5119 /* LzgBabaBiServerManager.m */,
-				2732B5D5243CA370000B5119 /* LzgBabaBiServerManager.h */,
+				2732B5D4243CA370000B5119 /* LzgWraithServerManager.m */,
+				2732B5D5243CA370000B5119 /* LzgWraithServerManager.h */,
 			);
 			path = "服务器信息管理类";
 			sourceTree = "<group>";
@@ -613,8 +613,8 @@
 		2732B618243CA370000B5119 /* 封装的网络请求框架（基于AFNetWorking） */ = {
 			isa = PBXGroup;
 			children = (
-				2732B619243CA370000B5119 /* LzgBababiServerRequest.h */,
-				2732B61A243CA370000B5119 /* LzgBababiServerRequest.m */,
+				2732B619243CA370000B5119 /* LzgWraithServerRequest.h */,
+				2732B61A243CA370000B5119 /* LzgWraithServerRequest.m */,
 			);
 			path = "封装的网络请求框架（基于AFNetWorking）";
 			sourceTree = "<group>";
@@ -1146,7 +1146,7 @@
 				2732B69C243CA371000B5119 /* UserInfor.xcdatamodeld in Sources */,
 				2732B6AF243CA371000B5119 /* YYKVStorage.m in Sources */,
 				2732B6B4243CA371000B5119 /* YYAnimatedImageView.m in Sources */,
-				2732B696243CA371000B5119 /* LzgBababiServerRequest.m in Sources */,
+				2732B696243CA371000B5119 /* LzgWraithServerRequest.m in Sources */,
 				2732B6A6243CA371000B5119 /* YYImageCache.m in Sources */,
 				2732B6AC243CA371000B5119 /* YYSpriteSheetImage.m in Sources */,
 				2732B6A9243CA371000B5119 /* UIView+GoodView.m in Sources */,
@@ -1187,7 +1187,7 @@
 				2732B68A243CA371000B5119 /* NewsViewController.m in Sources */,
 				2770089924458DCF00592954 /* UIButton+LzgButtonBelongToVc.m in Sources */,
 				2732B68C243CA371000B5119 /* LzgRegistModel+hard.m in Sources */,
-				2732B67D243CA371000B5119 /* LzgBabaBiServerManager.m in Sources */,
+				2732B67D243CA371000B5119 /* LzgWraithServerManager.m in Sources */,
 				2732B6BE243CA371000B5119 /* AFSecurityPolicy.m in Sources */,
 				2732B6B6243CA371000B5119 /* MKAnnotationView+YYWebImage.m in Sources */,
 				2732B6A0243CA371000B5119 /* MineViewController.m in Sources */,
@@ -1273,6 +1273,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1289,7 +1290,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1331,6 +1332,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1341,7 +1343,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1354,7 +1356,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7RBZUVYPSP;
+				DEVELOPMENT_TEAM = MK5K573P5H;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$SRCROOT/YouthSagacity/Prefix文件/PrefixHeader.pch";
 				INFOPLIST_FILE = YouthSagacity/Info.plist;
@@ -1362,7 +1364,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cpp.lzg.YouthSagacity;
+				MARKETING_VERSION = 1.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cpp.loop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1373,7 +1376,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7RBZUVYPSP;
+				DEVELOPMENT_TEAM = MK5K573P5H;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$SRCROOT/YouthSagacity/Prefix文件/PrefixHeader.pch";
 				INFOPLIST_FILE = YouthSagacity/Info.plist;
@@ -1381,7 +1384,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cpp.lzg.YouthSagacity;
+				MARKETING_VERSION = 1.4;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cpp.loop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -16,7 +16,7 @@
 #define LZGHEIGHT  (SCREENHEIGHT/667)
 #import "SDAutoLayout.h"
 #import "YYWebImage.h"
-#import "LzgBababiServerRequest.h"
+#import "LzgWraithServerRequest.h"
 //
 
 // Include any system framework and library headers here that should be included in all compilation units.

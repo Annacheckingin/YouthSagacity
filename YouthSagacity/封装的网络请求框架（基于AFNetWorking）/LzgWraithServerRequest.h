@@ -1,5 +1,5 @@
 //
-//  LzgBababiServerRequest.h
+//  LzgWraithServerRequest.h
 //  Youth Sagacity
 //
 //  Created by LiZhengGuo on 2020/4/2.
@@ -10,11 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LzgBababiServerRequest : NSObject
+@interface LzgWraithServerRequest : NSObject
 //@property(nonatomic,weak) id delegate;
 +(instancetype)shareInstance;
--(BOOL)bababiServerRegistWithAcount:(NSString *)acount andPassWord:(NSString *)password;
--(BOOL)bababiServerLogWithAcount:(NSString *)acount andPassWord:(NSString *)password;
+-(BOOL)WraithServerRegistWithAcount:(NSString *)acount andPassWord:(NSString *)password;
+-(BOOL)WraithServerLogWithAcount:(NSString *)acount andPassWord:(NSString *)password;
 -(id)fetchDataAboutTheCategory:(NSString *)category;
 @end
 

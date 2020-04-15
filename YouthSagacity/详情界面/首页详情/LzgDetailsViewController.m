@@ -185,6 +185,24 @@
     
     
 }
+-(void)setDelegate:(id<LzgDetailsViewControllerDelegate>)delegate
+{
+    
+    _delegate=delegate;
+    if ([_delegate conformsToProtocol:@protocol(LzgDetailsViewControllerDelegate) ])
+    {
+     
+        if ([_delegate respondsToSelector:@selector(LzgDetailsViewControllerForBideAction:)])
+        {
+      
+            [_forbidBtn addTarget:_delegate action:@selector(LzgDetailsViewControllerForBideAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if ([_delegate respondsToSelector:@selector(LzgDetailsViewControllerReportAtion:)])
+        {
+            [_reportBtn addTarget:_delegate action:@selector(LzgDetailsViewControllerReportAtion:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
+}
 /*
 #pragma mark - Navigation
 

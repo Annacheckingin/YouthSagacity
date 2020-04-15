@@ -1,35 +1,35 @@
 //
-//  LzgBababiServerRequest.m
+//  LzgWraithServerRequest.m
 //  Youth Sagacity
 //
 //  Created by LiZhengGuo on 2020/4/2.
 //  Copyright © 2020 LiZhengGuo. All rights reserved.
 //
 
-#import "LzgBababiServerRequest.h"
+#import "LzgWraithServerRequest.h"
 #import "AFNetworking.h"
 #import "LzgRegistModel.h"
 #import "LzgLogModel.h"
-#import "LzgBabaBiServerManager.h"
+#import "LzgWraithServerManager.h"
 
 //typedef NS_ENUM(NSInteger,kHasDelegate)
 //{
 //    have_no_deleagte,
 //    have_delegate
 //};
-@interface LzgBababiServerRequest ()
+@interface LzgWraithServerRequest ()
 //@property(nonatomic,strong)NSString *serverUserName;
 //@property(nonatomic,assign)kHasDelegate hasDelegate;
 
 @end
-@implementation LzgBababiServerRequest
+@implementation LzgWraithServerRequest
 
-static  LzgBababiServerRequest *me;
+static  LzgWraithServerRequest *me;
 -(id)fetchDataAboutTheCategory:(NSString *)category
 {
     __block id TheReturnedValue;
-    NSString *theCategoryTarget=[[LzgBabaBiServerManager shareInstance] generateTheCategoryPostApi];
-    NSDictionary *dicParameterOfCategory=[[LzgBabaBiServerManager shareInstance] categoryGenerteDictionaryWithCategoryName:category];
+    NSString *theCategoryTarget=[[LzgWraithServerManager shareInstance] generateTheCategoryPostApi];
+    NSDictionary *dicParameterOfCategory=[[LzgWraithServerManager shareInstance] categoryGenerteDictionaryWithCategoryName:category];
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
     [manager POST:theCategoryTarget parameters:dicParameterOfCategory success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
@@ -46,17 +46,17 @@ static  LzgBababiServerRequest *me;
 {
     if (me==nil)
     {
-        me=[[LzgBababiServerRequest alloc]init];
+        me=[[LzgWraithServerRequest alloc]init];
 //        me.hasDelegate=have_no_deleagte;
     }
     return me;
 }
--(BOOL)bababiServerRegistWithAcount:(NSString *)acount andPassWord:(NSString *)password
+-(BOOL)WraithServerRegistWithAcount:(NSString *)acount andPassWord:(NSString *)password
 {
     
     return NO;
 }
--(BOOL)bababiServerLogWithAcount:(NSString *)acount andPassWord:(NSString *)password;
+-(BOOL)WraithServerLogWithAcount:(NSString *)acount andPassWord:(NSString *)password;
 {
 //    BOOL logValue=[self.logModel loggingWithAcount:acount andPassWord:password];
 //    return logValue;

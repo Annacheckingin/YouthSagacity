@@ -17,8 +17,9 @@
 #import "LzgReleaseViewController.h"
 #import "LzgReportViewController.h"
 #import "inputView.h"
+#import "UIButton+LzgBelongtoCell.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
-@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate,HomeViewControllerTableViewCellDelegate,UIScrollViewDelegate,inputViewDelegate>
+@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate,HomeViewControllerTableViewCellDelegate,UIScrollViewDelegate,inputViewDelegate,LzgDetailsViewControllerDelegate>
 @property(nonatomic,strong)NSMutableArray *collectionViewCellInfor;
 @property(nonatomic,strong)NSMutableArray *tableViewCellInfor;
 @property(nonatomic,assign) BOOL freshedData;
@@ -255,6 +256,9 @@
                  //
                 base.contentSize=theScroViewContentSize;
     };
+    vc.delegate=self;
+    vc.forbidBtn.belongto=[_projects cellForRowAtIndexPath:indexPath];
+    vc.reportBtn.belongto=[_projects cellForRowAtIndexPath:indexPath];
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark UITableViewDatasource
@@ -348,6 +352,9 @@
         base.contentSize=theScroViewContentSize;
         
     };
+    detailsVc.delegate=self;
+    detailsVc.forbidBtn.belongto=[_tips cellForItemAtIndexPath:indexPath];
+    detailsVc.reportBtn.belongto=[_tips cellForItemAtIndexPath:indexPath];
     [self.navigationController pushViewController:detailsVc animated:YES];
 }
 #pragma mark UICollectionViewDatasource
@@ -362,6 +369,7 @@
     cell.cellAuthor.text=inforDic[@"author"];
     cell.forbidBtn.belongto=cell;
     cell.warnningBtn.belongto=cell;
+    
     return cell;
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -435,6 +443,31 @@
    
  
 }
-
+#pragma mark 详情页面的代理
+-(void)LzgDetailsViewControllerForBideAction:(UIButton *)sender
+{
+    
+    if ([sender.belongto isKindOfClass:[UICollectionViewCell class]])
+    {
+        UICollectionViewCell *cell=sender.belongto;
+        [_collectionViewCellInfor removeObjectAtIndex:[_tips indexPathForCell:cell].row];
+        [_tips reloadData];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    if ([sender.belongto isKindOfClass:[UITableViewCell class]])
+    {
+        UITableViewCell *cell=sender.belongto;
+        [_tableViewCellInfor removeObjectAtIndex:[_projects indexPathForCell:cell].section];
+        [_projects reloadData];
+       [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+    
+}
+-(void)LzgDetailsViewControllerReportAtion:(UIButton *)sender
+{
+    LzgReportViewController *repor=[[LzgReportViewController alloc]init];
+    [self.navigationController pushViewController:repor animated:YES];
+}
 
 @end

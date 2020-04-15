@@ -13,7 +13,7 @@
 #import "LzgRootTabBarController.h"
 #import "LzgLogStatus.h"
 #import "LzgLogViewController.h"
-#import "LzgBabaBiServerManager.h"
+#import "LzgWraithServerManager.h"
 #import "LzgBundleInforPath.h"
 #import "LzgSandBoxStore.h"
 #import "LzgSimpleNSFamilyDataStore.h"
@@ -40,7 +40,7 @@
     self.window.rootViewController=rootBarVc;
     rootBarVc.delegate=self;
     [self kCreateFiles];
-    [LzgBabaBiServerManager setTheServerName:@"tusermen"];
+    [LzgWraithServerManager setTheServerName:@"tusermen"];
     [self.window makeKeyAndVisible];
     return YES;
 }

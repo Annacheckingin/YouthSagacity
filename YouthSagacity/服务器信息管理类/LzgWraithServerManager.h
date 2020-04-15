@@ -1,5 +1,5 @@
 //
-//  LzgBabaBiServerManager.h
+//  LzgWraithServerManager.h
 //  Youth Sagacity
 //
 //  Created by LiZhengGuo on 2020/4/2.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LzgBabaBiServerManager : NSObject
+@interface LzgWraithServerManager : NSObject
 +(instancetype)shareInstance;
 @property(nonatomic,strong)NSString *theServerName;
 

@@ -8,7 +8,7 @@
 
 #import "LzgLogModel.h"
 #import "AFNetworking.h"
-#import "LzgBabaBiServerManager.h"
+#import "LzgWraithServerManager.h"
 #import "LzgLogValueHandler.h"
 static LzgLogModel *me;
 @interface LzgLogModel ()
@@ -40,13 +40,13 @@ static LzgLogModel *me;
     }
     __block BOOL returnedValue=NO;
     AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
-    NSString *theLogActionApiTarget=[[LzgBabaBiServerManager shareInstance] logApiString];
-    NSDictionary *dicParameterOfLog=[[LzgBabaBiServerManager shareInstance] logGenerateParameterDictionaryWithAcount:acount andPassword:password];
+    NSString *theLogActionApiTarget=[[LzgWraithServerManager shareInstance] logApiString];
+    NSDictionary *dicParameterOfLog=[[LzgWraithServerManager shareInstance] logGenerateParameterDictionaryWithAcount:acount andPassword:password];
     [manager POST:theLogActionApiTarget parameters:dicParameterOfLog success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
         returnedValue=[[LzgLogValueHandler shareInstance] logSuccess:responseObject];
         NSString *userid=responseObject[@"data"][@"_id"];
-        NSString *userNameKey=[[LzgBabaBiServerManager shareInstance] l_userName];
+        NSString *userNameKey=[[LzgWraithServerManager shareInstance] l_userName];
         NSString *username=responseObject[@"data"][userNameKey];
         handler(returnedValue,userid,username);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

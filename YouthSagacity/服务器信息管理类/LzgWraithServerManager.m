@@ -1,12 +1,12 @@
 //
-//  LzgBabaBiServerManager.m
+//  LzgWraithServerManager.m
 //  Youth Sagacity
 //
 //  Created by LiZhengGuo on 2020/4/2.
 //  Copyright © 2020 LiZhengGuo. All rights reserved.
 //
 
-#import "LzgBabaBiServerManager.h"
+#import "LzgWraithServerManager.h"
 #define LzgRegisterString @"register"
 #define LzgLogString @"login"
 #define LzgCategoryString @"catlist"
@@ -17,36 +17,36 @@
 #define LzgMobilePlaceHoder @"mobile"
 #define LzgHeadPlaceHolder @"head"
 #import <objc/runtime.h>
-@implementation LzgBabaBiServerManager
-static LzgBabaBiServerManager *LzgBabaBiServerManagerme;
+@implementation LzgWraithServerManager
+static LzgWraithServerManager *LzgWraithServerManagerme;
 #warning change
 static const char *kurlPrefixString="";
 static const char *kurlTailString="/api/";
 #warning change
-static const char* LzgBabaBiServerManagerClassKey="LzgServerManagerClassKey";
+static const char* LzgWraithServerManagerClassKey="LzgServerManagerClassKey";
 +(void)setTheServerName:(NSString *)name
 {
-    objc_setAssociatedObject(self, LzgBabaBiServerManagerClassKey, name, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(self, LzgWraithServerManagerClassKey, name, OBJC_ASSOCIATION_RETAIN);
 }
 -(NSDictionary *)logGenerateParameterDictionaryWithAcount:(NSString *)acount andPassword:(NSString *)password
 {
     return @{
-        [[NSString stringWithFormat:@"%@%@",[LzgBabaBiServerManager theServerName],[LzgBabaBiServerManager shareInstance].fixedPlaceholderString] stringByAppendingString:LzgUserNamePlaceHolder]:acount,
-        [[NSString stringWithFormat:@"%@%@",[LzgBabaBiServerManager theServerName],[LzgBabaBiServerManager shareInstance].fixedPlaceholderString] stringByAppendingString:LzgPwdPlaceHolder]:password
+        [[NSString stringWithFormat:@"%@%@",[LzgWraithServerManager theServerName],[LzgWraithServerManager shareInstance].fixedPlaceholderString] stringByAppendingString:LzgUserNamePlaceHolder]:acount,
+        [[NSString stringWithFormat:@"%@%@",[LzgWraithServerManager theServerName],[LzgWraithServerManager shareInstance].fixedPlaceholderString] stringByAppendingString:LzgPwdPlaceHolder]:password
     };
 }
 +(NSString *)theServerName
 {
-    id objc=objc_getAssociatedObject(self, LzgBabaBiServerManagerClassKey);
+    id objc=objc_getAssociatedObject(self, LzgWraithServerManagerClassKey);
     if (objc==nil)
     {
         @throw [NSException exceptionWithName:@"Error" reason:@"serverName didnt initialized" userInfo:nil];
     }
-  return   objc_getAssociatedObject(self, LzgBabaBiServerManagerClassKey);
+  return   objc_getAssociatedObject(self, LzgWraithServerManagerClassKey);
 }
 -(NSString *)theServerName
 {
-    if ([LzgBabaBiServerManager theServerName]==nil)
+    if ([LzgWraithServerManager theServerName]==nil)
     {
         if (_theServerName)
         {
@@ -57,7 +57,7 @@ static const char* LzgBabaBiServerManagerClassKey="LzgServerManagerClassKey";
             @throw [NSException exceptionWithName:@"Null Exception!" reason:@"'theSerVerName' expected property is nil" userInfo:nil];
         }
     }
-    return [LzgBabaBiServerManager theServerName];
+    return [LzgWraithServerManager theServerName];
 }
 
 -(NSString *)generateTheCategoryPostApi;
@@ -101,11 +101,11 @@ static const char* LzgBabaBiServerManagerClassKey="LzgServerManagerClassKey";
 }
 +(instancetype)shareInstance
 {
-    if (LzgBabaBiServerManagerme==nil)
+    if (LzgWraithServerManagerme==nil)
     {
-        LzgBabaBiServerManagerme=[[LzgBabaBiServerManager alloc]init];
+        LzgWraithServerManagerme=[[LzgWraithServerManager alloc]init];
     }
-    return LzgBabaBiServerManagerme;
+    return LzgWraithServerManagerme;
 }
 //-(BOOL)kregistAction
 //{
@@ -133,7 +133,7 @@ static const char* LzgBabaBiServerManagerClassKey="LzgServerManagerClassKey";
    
     if (_r_email==nil)
     {
-        return [NSString stringWithFormat:@"%@%@%@",[LzgBabaBiServerManager theServerName],[LzgBabaBiServerManager shareInstance].fixedPlaceholderString,@"email"];
+        return [NSString stringWithFormat:@"%@%@%@",[LzgWraithServerManager theServerName],[LzgWraithServerManager shareInstance].fixedPlaceholderString,@"email"];
     }
     return _r_email;
 }
@@ -146,7 +146,7 @@ static const char* LzgBabaBiServerManagerClassKey="LzgServerManagerClassKey";
   
     if (_r_userName==nil)
     {
-        return [NSString stringWithFormat:@"%@%@%@",[LzgBabaBiServerManager theServerName],[LzgBabaBiServerManager shareInstance].fixedPlaceholderString,@"username"];
+        return [NSString stringWithFormat:@"%@%@%@",[LzgWraithServerManager theServerName],[LzgWraithServerManager shareInstance].fixedPlaceholderString,@"username"];
     }
     return _r_nickName;
 }
@@ -156,7 +156,7 @@ static const char* LzgBabaBiServerManagerClassKey="LzgServerManagerClassKey";
     if (_r_nickName==nil)
     {
         
-        return [NSString stringWithFormat:@"%@%@%@",[LzgBabaBiServerManager theServerName],[LzgBabaBiServerManager shareInstance].fixedPlaceholderString,@"nickname"];
+        return [NSString stringWithFormat:@"%@%@%@",[LzgWraithServerManager theServerName],[LzgWraithServerManager shareInstance].fixedPlaceholderString,@"nickname"];
     }
     return _r_nickName;
 }
@@ -164,7 +164,7 @@ static const char* LzgBabaBiServerManagerClassKey="LzgServerManagerClassKey";
 {
     if (_r_head==nil)
     {
-        return [NSString stringWithFormat:@"%@%@%@",[LzgBabaBiServerManager theServerName],[LzgBabaBiServerManager shareInstance].fixedPlaceholderString,@"head"];
+        return [NSString stringWithFormat:@"%@%@%@",[LzgWraithServerManager theServerName],[LzgWraithServerManager shareInstance].fixedPlaceholderString,@"head"];
     }
     return _r_head;
 }

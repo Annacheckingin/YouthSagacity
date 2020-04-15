@@ -81,7 +81,18 @@ static LzgLogViewController *me;
 }
 -(void)kRulesAction:(UIButton *)sender
 {
-    
+    UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"Attention" message:@"please be nice in our platform ,you are not supposed to release any Pornographic violent information or your information would be creened." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *action_sure=[UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }];
+    UIAlertAction *action_cancle=[UIAlertAction actionWithTitle:@"cancle" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alert dismissViewControllerAnimated:YES completion:nil];
+    }];
+    [alert addAction:action_sure];
+    [alert addAction:action_cancle];
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
 }
 -(void)klogAction:(UIButton *)sender
 {
