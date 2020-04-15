@@ -19,6 +19,7 @@
 #import "UIButton+LzgBelongtoCell.h"
 #define kLzgTopCollectionViewHeight 150
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
+FOUNDATION_EXTERN  const NSString *LzgLikesNotificationName;
 @interface NewsViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,NewsTableViewCellButtonDelegate,UIScrollViewDelegate,NewsDetailViewControllerDelegate>
 @property(nonatomic,strong)NSMutableArray *headImages;
 @property(nonatomic,strong)NSMutableArray *tableViewData;
@@ -44,7 +45,16 @@
 }
 -(void)NewsDetailViewControllerDelegateBlockingAction:(UIButton *)sender
 {
-     
+    NewsDetailViewController *vc=sender.belongToVc;
+    NSIndexPath *indexPath=vc.comeFromCellIndex;
+    NewsTableViewCell *cell=[_mainDisplay cellForRowAtIndexPath:indexPath];
+    UIButton *btnOfThisCell=cell.blockingNews;
+    [self.navigationController popViewControllerAnimated:YES];
+    [self NewsTableViewCellBlockingTargetActionMethod:btnOfThisCell];
+}
+-(void)p_PostAddLikesNotification:(NSNotification *)notification
+{
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -57,29 +67,18 @@
 }
 -(void)kRefreshData
 {
-//    NSLog(@"%s",sel_getName(_cmd));
+
     NSString *pathOfDocumentDirectory=[[LzgSandBoxStore shareInstance] stringForSandBoxOfDocument];
     NSString *nameOfPlistFile=[pathOfDocumentDirectory stringByAppendingString:@"/FixedData.plist"];
-//    NSMutableDictionary *dicOfNewsData=[[NSMutableDictionary alloc] initWithDictionary:[NSDictionary dictionaryWithContentsOfFile:nameOfPlistFile]];
+
     NSMutableDictionary *dicOfNewsData=[[NSMutableDictionary alloc]initWithContentsOfFile:nameOfPlistFile];
     NSArray *immutableArry=dicOfNewsData[@"NewsViewController"][@"NewsTableViewCell"];
    
     NSMutableArray *mutableArray=[[NSMutableArray alloc]initWithArray:immutableArry];
-//     NSLog(@"%@",mutableArray);
-//    if ([mutableArray isKindOfClass:[NSMutableArray class]])
-//    {
-//        NSLog(@"1可变");
-//    }
-//    else
-//    {
-//        NSLog(@"1不可变");
-//    }
+    
     _tableViewData=mutableArray;
     [_mainDisplay reloadData];
-//    if ([_tableViewData isKindOfClass:[NSMutableArray class]])
-//    {
-//        NSLog(@"2可变");
-//    }
+
     _kfreshed=NO;
 }
 -(void)p_addNews:(NSNotification *)dic
@@ -224,7 +223,7 @@
     }
     NSDictionary *curentData=[_tableViewData objectAtIndex:indexPath.section];
     cell.delegate=self;
-    cell.blockingNews.belongto=cell;
+ 
     NSNumber *numer=curentData[@"like"];
     if (numer.intValue==1)
     {
@@ -234,8 +233,6 @@
     {
         cell.likesBtn.selected=NO;
     }
-    cell.likesBtn.belongto=cell;
-    cell.biewDetailsBtn.belongto=cell;
     cell.cellTitle.text=curentData[@"articleTitle"];
     cell.cellBriefContent.text=curentData[@"content"];
     //
@@ -265,6 +262,10 @@
     {
          cell.img_3.image=curentData[@"image_3"];
     }
+    cell.blockingNews.belongto=cell;
+    cell.likesBtn.belongto=cell;
+    cell.biewDetailsBtn.belongto=cell;
+   
     return cell;
 }
 
@@ -273,16 +274,18 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     NSDictionary *curentData=[_tableViewData objectAtIndex:indexPath.section];
+    NSMutableDictionary *curentData=[_tableViewData objectAtIndex:indexPath.section];
+   
     NewsDetailViewController *vc=[[NewsDetailViewController alloc]init];
     vc.delegate=self;
     NewsTableViewCell  *cell=[_mainDisplay cellForRowAtIndexPath:indexPath];
     vc.comeFromCellIndex=[NSIndexPath indexPathForRow:0 inSection:[_mainDisplay indexPathForCell:cell].section];
-//    NSLog(@"likeBtnSelected:%d",cell.likesBtn.selected);
-//    NSLog(@"%@",[_tableViewData objectAtIndex:indexPath.section][@"like"]);
-    vc.likesBtn.selected=[[_tableViewData objectAtIndex:indexPath.section][@"like"] intValue];
+
+    NSNumber *likeBtnStatus=curentData[@"like"];
     
-    vc.comeFromCellIndex=[NSIndexPath indexPathForRow:indexPath.row inSection:indexPath.section];
+    vc.likesBtn.selected=likeBtnStatus.integerValue;
+  
+
     vc.handleUi = ^(UILabel * _Nonnull title, LzgLabel * _Nonnull content, UIImageView * _Nonnull img_1, UIImageView * _Nonnull img_2, UIImageView * _Nonnull img_3,UIView *basementView,UIButton *blocking)
     {
         title.text=curentData[@"articleTitle"];
@@ -326,12 +329,15 @@
     return _tableViewData.count;
 }
 
-- (void)NewsTableViewCellBlockingTargetActionMethod:(nonnull UIButton *)sender {
+- (void)NewsTableViewCellBlockingTargetActionMethod:(nonnull UIButton *)sender
+{
     UITableViewCell *cell=sender.belongto;
     NSIndexPath *cellpath=[_mainDisplay indexPathForCell:cell];
     NSIndexSet *cellSet=[NSIndexSet indexSetWithIndex:[_mainDisplay indexPathForCell:cell].section];
     [_tableViewData removeObjectAtIndex:cellpath.section];
     [_mainDisplay deleteSections:cellSet withRowAnimation:UITableViewRowAnimationFade];
+    //
+    
     
     
 }
@@ -341,7 +347,7 @@
     sender.selected=!sender.selected;
     NewsTableViewCell *cell=sender.belongto;
     NSMutableDictionary *dic=_tableViewData[[_mainDisplay indexPathForCell:cell].section];
-//    NSLog(@"%s:%@",sel_getName(_cmd),dic);
+
     if (sender.selected==YES)
     {
         dic[@"like"]=[NSNumber numberWithInt:1];
@@ -350,13 +356,16 @@
     {
         dic[@"like"]=[NSNumber numberWithInt:0];
     }
-//     NSLog(@"%s:%@",sel_getName(_cmd),dic);
-    
+ 
+    NSNotification *noti=[NSNotification notificationWithName:LzgLikesNotificationName object:nil userInfo:dic];
+    [self p_PostAddLikesNotification:noti];
 }
 
 - (void)NewsTableViewCellViewDetailsTargetActionMethod:(nonnull UIButton *)sender {
     NewsTableViewCell *cell=sender.belongto;
+  
     NSIndexPath *indexpath= [_mainDisplay indexPathForCell:cell];
+   
     [self tableView:_mainDisplay didSelectRowAtIndexPath:indexpath];
    
 }

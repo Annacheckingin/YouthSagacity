@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)saveAlike:(LikesModel * _Nonnull )alike;
 -(void)deleteALike:(LikesModel *)alike;
 -(void)deleteAlikeAtIndex:(NSInteger)index;
+-(NSMutableArray *)likes;
 -(NSInteger)numOfLikes;
 @end
 

@@ -65,7 +65,9 @@
     __weak UIImageView *img3=_img_3;
     __weak UIScrollView *base=self.baseScroView;
     __weak UIButton *blo=_blockingBtn;
+    if(self.handleUi){
     self.handleUi(titile, content, img1, img2, img3, base,blo);
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

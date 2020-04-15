@@ -17,7 +17,7 @@
 @property(nonatomic,strong)UIImageView *img_3;
 @property(nonatomic,strong)UIButton *blockingNews;
 @property(nonatomic,strong)UIButton *likesBtn;
-@property(nonatomic,strong)UIButton *viewDetailsBtn;
+@property(nonatomic,strong)UIButton *bbiewDetailsBtn;
 @end
 @implementation NewsTableViewCell
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -69,13 +69,13 @@
         ////
         ////
         ///
-        _viewDetailsBtn=[[UIButton alloc]init];
-        _viewDetailsBtn.imageView.contentMode=_blockingNews.imageView.contentMode;
-        [_viewDetailsBtn setImage:[UIImage imageNamed:@"5_157"] forState:UIControlStateNormal];
+        _biewDetailsBtn=[[UIButton alloc]init];
+        _biewDetailsBtn.imageView.contentMode=_blockingNews.imageView.contentMode;
+        [_biewDetailsBtn setImage:[UIImage imageNamed:@"5_157"] forState:UIControlStateNormal];
         [self.contentView addSubview:_baseMentview];
         ///
         ////
-        [_baseMentview sd_addSubviews:@[_cellTitle,_cellBriefContent,_img_1,_img_2,_img_3,_blockingNews,_likesBtn,_viewDetailsBtn]];
+        [_baseMentview sd_addSubviews:@[_cellTitle,_cellBriefContent,_img_1,_img_2,_img_3,_blockingNews,_likesBtn,_biewDetailsBtn]];
         [self p_setUPUI];
         self.selectionStyle=UITableViewCellSelectionStyleNone;
     }
@@ -136,7 +136,7 @@
     .heightRatioToView(_blockingNews, 1)
     .widthIs(80*LZGWIDTH);
     //
-    _viewDetailsBtn.sd_layout
+    _biewDetailsBtn.sd_layout
     .leftSpaceToView(_likesBtn, 0)
     .centerYEqualToView(_likesBtn)
     .rightSpaceToView(_baseMentview, 1*LZGWIDTH)
@@ -164,7 +164,7 @@
         }
         if ([_delegate respondsToSelector:@selector(NewsTableViewCellViewDetailsTargetActionMethod:)])
         {
-             [self.viewDetailsBtn addTarget:_delegate action:@selector(NewsTableViewCellViewDetailsTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
+             [self.biewDetailsBtn addTarget:_delegate action:@selector(NewsTableViewCellViewDetailsTargetActionMethod:) forControlEvents:UIControlEventTouchUpInside];
         }
        
        

@@ -14,7 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIButton (LzgBelongtoCell)
-@property(nonatomic) id belongto;
+@property(nonatomic,weak,readwrite) id belongto;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -16,17 +16,19 @@
 #import "LzgTableView.h"
 #import "LzgReleaseViewController.h"
 #import "LzgReportViewController.h"
+#import "inputView.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
-@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate,HomeViewControllerTableViewCellDelegate,UIScrollViewDelegate>
+@interface HomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout,HomeViewControllerCollectionVIewCellDelegate,HomeViewControllerTableViewCellDelegate,UIScrollViewDelegate,inputViewDelegate>
 @property(nonatomic,strong)NSMutableArray *collectionViewCellInfor;
 @property(nonatomic,strong)NSMutableArray *tableViewCellInfor;
 @property(nonatomic,assign) BOOL freshedData;
+@property(nonatomic,strong)inputView *inputView;
 @end
 
 @implementation HomeViewController
 -(void)viewWillAppear:(BOOL)animated
 {
-//    NSLog(@"%s",sel_getName(_cmd));
+
     self.navigationController.navigationBar.hidden=YES;
     if (_freshedData)
     {
@@ -48,13 +50,7 @@
     NSMutableArray *tableViewData=[NSMutableArray arrayWithArray:HomeVc[@"homeTableView"]];
     
     _tableViewCellInfor=tableViewData;
-//    NSLog(@"%@",NSStringFromClass([NSArray class]));
-//    NSLog(@"%@",NSStringFromClass([NSMutableArray class]));
-//    if ([_collectionViewCellInfor isKindOfClass:[NSMutableArray class]])
-//    {
-//          NSLog(@"-----%s:%@",sel_getName(_cmd),NSStringFromClass([_collectionViewCellInfor class]));
-//    }
-  
+
     [self.tips reloadData];
     [self.projects reloadData];
     _freshedData=NO;
@@ -191,7 +187,7 @@
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-//    NSLog(@"%s",sel_getName(_cmd));
+
     if (_projects.contentOffset.y==0||_projects.contentOffset.y==_projects.bounds.size.height)
     {
         _projects.LzgAllowToSlide=NO;
@@ -215,9 +211,7 @@
         CGPoint currentPointOfTableview=_projects.contentOffset;
         _projects.contentOffset=currentPointOfTableview;
     }
-//    static int i;
-//    NSLog(@"%d--%s",i,sel_getName(_cmd));
-//    i++;
+
 }
 #pragma mark UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -279,6 +273,9 @@
     [cell setTheCellDisplayImage:dictionary[@"img"]];
     cell.chatBtn.belongto=cell;
     cell.detailBtn.belongto=cell;
+    
+    
+    
 //   
  
     return cell;
@@ -300,7 +297,7 @@
 #pragma mark UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    NSLog(@"collectionViewCell selected");
+
      NSDictionary *inforDic=[self.collectionViewCellInfor objectAtIndex:indexPath.row];
     LzgDetailsViewController *detailsVc=[[LzgDetailsViewController alloc]init];
     detailsVc.hanleUI = ^(UIImageView * _Nonnull portarit, UILabel * _Nonnull name, UILabel * _Nonnull date, UILabel * _Nonnull articleTitle, UILabel * _Nonnull content, UIImageView * _Nonnull contentImgae, UILabel * _Nonnull thumbNum,UIView *baseView)
@@ -373,14 +370,10 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-//    NSLog(@"---%s%@",sel_getName(_cmd),NSStringFromClass([_collectionViewCellInfor class]));
+
     return _collectionViewCellInfor.count;
 }
 #pragma mark UICollectionViewFowLayoutDelegate
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    return CGSizeMake(100*LZGWIDTH, 100*LZGHEIGHT);
-//}
 
 
 - (void)HomeViewControllerCollectionVIewCellForBideTargetActionMethod:(nonnull UIButton *)sender
@@ -415,7 +408,12 @@
 //
 - (void)HomeViewControllerTableViewCellTheTargetActionMethodOfChatBtn:(nonnull UIButton *)sender
 {
-   
+    NSLog(@"okl");
+ _inputView=[[inputView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen] .bounds.size.width, [UIScreen mainScreen].bounds.size.height-64)];
+    [self.view addSubview:_inputView];
+      _inputView.delegate=self;
+    [_inputView inputViewShow];
+
 }
 
 - (void)HomeViewControllerTableViewCellTheTargetActionMethodOfDetailBtn:(nonnull UIButton *)sender
@@ -424,8 +422,19 @@
     NSIndexPath *indexpath=[_projects indexPathForCell:cell];
     [self tableView:_projects didSelectRowAtIndexPath:indexpath];
 }
-
+#pragma mark 弹窗的代理
+- (void)sendText:(NSString *)text
+{
+    UIAlertController *alertv=[UIAlertController alertControllerWithTitle:@"Done" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertv animated:YES completion:^{
+        sleep(1);
+        [alertv dismissViewControllerAnimated:YES completion:^{
+             [self->_inputView inputViewHiden];
+        }];
+    }];
+   
  
+}
 
 
 @end

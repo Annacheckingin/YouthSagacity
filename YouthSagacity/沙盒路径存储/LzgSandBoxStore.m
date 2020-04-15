@@ -23,7 +23,7 @@
    NSFileManager *fileManager=[NSFileManager defaultManager];
    NSURL *urlToDocument=[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].lastObject;
 #pragma mark 输出了沙盒路径
-//    NSLog(@".....%@",urlToDocument.path);
+    NSLog(@".....%@",urlToDocument.path);
     return urlToDocument.path;
 }
 -(BOOL)fileExistInDocumentDirectoryWithName:(NSString *)fileName

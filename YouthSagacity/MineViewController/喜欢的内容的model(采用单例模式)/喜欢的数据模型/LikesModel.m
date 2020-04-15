@@ -25,7 +25,7 @@
     return self;
     
 }
--(instancetype)initWithTitile:(NSString *)tile content:(NSString *)content image1:(NSString *)urlimge1 image2:(NSString *)urlimage2 image3:(NSString *)urlimage3
+-(instancetype)initWithTitile:(NSString *)tile content:(NSString *)content image1:(NSString *)urlimge1 image2:(NSString *)urlimage2 image3:(NSString *)urlimage3 andDate:(nonnull NSString *)theDate
 {
     if (self=[super init])
     {
@@ -34,6 +34,7 @@
         self.urlToImage1=urlimge1;
         self.urlToImage2=urlimage2;
         self.urlToimage3=urlimage3;
+        self.theDate=theDate;
     }
     return self;
 }

@@ -19,8 +19,13 @@
 #import "LzgMessageCenter.h"
 #import "UIButton+LzgBelongtoCell.h"
 #import "LzgScrollView.h"
+#import "LzgLikeCollectionVIewCell.h"
+#import "NewsDetailViewController.h"
+#import "LzgLabel.h"
+#import "UIButton+LzgBelongtoCell.h"
 #define kBackGroundColor  [UIColor colorWithRed:247/255.0 green:246/255.0 blue:251/255.0 alpha:1]
-@interface MineViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,LzgMessageCellDelegate>
+FOUNDATION_EXPORT const NSString *LzgLikesNotificationName=@"LzgLikesNotificationName";
+@interface MineViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITableViewDelegate,UITableViewDataSource,LzgMessageCellDelegate,NewsDetailViewControllerDelegate>
 @property(nonatomic,strong)UIImage *yellowStar;
 @property(nonatomic,strong)UIImageView *topimg;
 @property(nonatomic,strong)UIImageView *portrait;
@@ -80,6 +85,9 @@
          @property(nonatomic,strong)UITableView *messagetableView;
          @property(nonatomic,strong)UITableView *menu;
          **/
+        
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(p_handleAddLikeNotification:) name:LzgLikesNotificationName object:nil];
         LzgScrollView *sc=(LzgScrollView *)self.baseScroView;
         [sc setThekAllowDifferentGR:NO];
         _likesCenter=[LzgLikesModel shareInstance];
@@ -114,11 +122,14 @@
         UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc]init];
         
         _likesContent=[[UICollectionView alloc]initWithFrame:CGRectZero collectionViewLayout:flowLayout];
+        _likesContent.bounces=YES;
+        [_likesContent registerClass:[LzgLikeCollectionVIewCell class] forCellWithReuseIdentifier:NSStringFromClass([LzgLikeCollectionVIewCell class])];
 #pragma mark collectionViewLayout的布局
         flowLayout.minimumLineSpacing=10;
         flowLayout.scrollDirection=UICollectionViewScrollDirectionHorizontal;
-        flowLayout.itemSize=CGSizeMake(160*LZGWIDTH, 70*LZGHEIGHT);
+        flowLayout.itemSize=CGSizeMake(320*LZGWIDTH, 80*LZGHEIGHT);
         flowLayout.sectionInset=UIEdgeInsetsMake(5, 10, 5, 10);
+        flowLayout.scrollDirection=UICollectionViewScrollDirectionHorizontal;
         _likesContent.delegate=self;
         _likesContent.dataSource=self;
         _likesContent.backgroundColor=UIColor.clearColor;
@@ -141,16 +152,19 @@
         _menu.backgroundColor=UIColor.clearColor;
         self.baseScroView.delegate=self;
 #pragma mark 测试
-        
-        
-
+    
 #pragma mark UISroView
    
-        
     }
     return self;
 }
-
+-(void)p_handleAddLikeNotification:(NSNotification *)noti
+{
+    NSDictionary *dic=noti.userInfo;
+    LikesModel *model=[[LikesModel alloc]initWithTitile:dic[@"articleTitle"] content:dic[@"content"] image1:dic[@"image_1"] image2:dic[@"image_2"] image3:dic[@"image_3"] andDate:dic[@"Date"]];
+    LzgLikesModel *likeCenter=[LzgLikesModel shareInstance];
+    [likeCenter saveAlike:model];
+}
 -(void)p_setupUI
 {
     
@@ -237,25 +251,6 @@
     .heightIs(theHeigjtOfMenuTableView*LZGHEIGHT);
     accumulateHeight+=theHeigjtOfMenuTableView;
 
-   
-//#pragma mark 考虑到TabBar的高度
-//    accumulateHeight+=44;
-//#pragma mark 异形屏还需要34px
-//    if (LZGHEIGHT!=1)
-//    {
-//          accumulateHeight+=34;
-//    }
-//
-//    //
-//#pragma mark 做滑动界面的长度调整
-//    //
-//if (accumulateHeight<SCREENHEIGHT)
-//    {
-//        accumulateHeight=SCREENHEIGHT;
-//    }
-//#pragma mark 作为屏幕的调试
-//    //
-//    accumulateHeight+=100;
 #pragma mark 根据不同设备，滑动长度的调整
     
     LzgDevicePixlesHandle *pxHandle=[LzgDevicePixlesHandle shareInstance];
@@ -291,7 +286,7 @@
     [super viewDidLoad];
     self.view.backgroundColor=kBackGroundColor;
     self.userName.text=[[LzgLogStatus shareInstance] currentLogName];
-//    NSLog(@"%@",[[LzgLogStatus shareInstance] currentLogName]);
+
      [self p_setupUI];
     [self p_initializeData];
     // Do any additional setup after loading the view.
@@ -311,15 +306,74 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark  UIcollectionView的代理和数据
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    NewsDetailViewController *vc=[[NewsDetailViewController alloc]init];
+    vc.likesBtn.belongto=[_likesContent cellForItemAtIndexPath:indexPath];
+    vc.blockingBtn.belongto=[_likesContent cellForItemAtIndexPath:indexPath];
+    vc.likesBtn.selected=YES;
+    vc.delegate=self;
+    vc.handleUi = ^(UILabel * _Nonnull title, LzgLabel * _Nonnull content, UIImageView * _Nonnull img_1, UIImageView * _Nonnull img_2, UIImageView * _Nonnull img_3, UIView * _Nonnull basementView, UIButton * _Nonnull blocking) {
+        LzgLikesModel *likeCenter=[LzgLikesModel shareInstance];
+        LikesModel *mode=[[likeCenter likes] objectAtIndex:indexPath.row];
+        title.text=mode.theLikes_title;
+        content.text=mode.theLikes_content;
+       [ img_1 yy_setImageWithURL:mode.urlToImage1 placeholder:[UIImage imageNamed:@"bitmap"]];
+        [img_2 yy_setImageWithURL:mode.urlToImage2 placeholder:[UIImage imageNamed:@"bitmap"]];
+        [img_3 yy_setImageWithURL:mode.urlToimage3 placeholder:[UIImage imageNamed:@"bitmap"]];
+        UIScrollView *base=(UIScrollView *)basementView;
+                            CGSize theScroViewContentSize=base.contentSize;
+        NSString *theContent=mode.theLikes_content;
+                            CGSize refenreceSize=CGSizeMake(SCREENWIDTH-40*LZGWIDTH, MAXFLOAT);
+                            LzgLabel *templabel=[[LzgLabel alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH-40*LZGWIDTH,0)];
+                            templabel.numberOfLines=0;
+                            templabel.font=content.font;
+                            templabel.textAlignment=NSTextAlignmentNatural;
+                            templabel.text=theContent;
+                            CGSize theStringSize=[templabel sizeThatFits:refenreceSize];
+                    #pragma mark 由于使用了自定义的Label，故计算的高度需要调整
+        
+                            theScroViewContentSize.height+=theStringSize.height;
+                            theScroViewContentSize.height+=200;
+                            //
+                            //
+                             content.sd_resetLayout
+                            .heightIs(theStringSize.height*LZGHEIGHT)
+                            .leftEqualToView(title)
+                            .rightSpaceToView(basementView, 20*LZGWIDTH)
+                            .topSpaceToView(blocking, 5*LZGHEIGHT);
+                             content.text=mode.theLikes_content;
+                             //
+                            base.contentSize=theScroViewContentSize;
+        
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+}
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    return nil;
+    LzgLikeCollectionVIewCell *cell=[collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([LzgLikeCollectionVIewCell class]) forIndexPath:indexPath];
+    LzgLikesModel *likeCenter=[LzgLikesModel shareInstance];
+    LikesModel *aLike=[[likeCenter likes] objectAtIndex:indexPath.row];
+//    NSLog(@"%s:%@",sel_getName(_cmd),aLike.theLikes_title);
+    cell.titile.text=aLike.theLikes_title;
+    cell.briefContent.text=aLike.theLikes_content;
+    UITapGestureRecognizer *cellTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(p_cellTap:)];
+    [cell addGestureRecognizer:cellTap];
+    
+    return cell;
 }
-
+-(void)p_cellTap:(UITapGestureRecognizer *)cellTap
+{
+    UICollectionViewCell *cell=(UICollectionViewCell *)cellTap.view;
+    NSIndexPath *cellPath=[_likesContent indexPathForCell:cell];
+    [self collectionView:_likesContent didSelectItemAtIndexPath:cellPath];
+}
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [_likesCenter numOfLikes];
@@ -373,6 +427,24 @@
     
 }
 
-
-
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+#pragma mark 收藏的代理方法
+-(void)NewsDetailViewControllerDelegateLikeAction:(UIButton *)sender
+{
+    [self NewsDetailViewControllerDelegateBlockingAction:sender];
+}
+-(void)NewsDetailViewControllerDelegateBlockingAction:(UIButton *)sender
+{
+    
+    LzgLikesModel *likeCenter=[LzgLikesModel shareInstance];
+    UICollectionViewCell *theCell=sender.belongto;
+    NSIndexPath *thePath=[_likesContent indexPathForCell:theCell];
+    [likeCenter deleteAlikeAtIndex:thePath.row];
+    [_likesContent reloadData];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

@@ -103,6 +103,9 @@
 		2732B76C24443630000B5119 /* LzgTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B76B24443630000B5119 /* LzgTableView.m */; };
 		27700891244581F400592954 /* LzgReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27700890244581F400592954 /* LzgReportViewController.m */; };
 		2770089924458DCF00592954 /* UIButton+LzgButtonBelongToVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 2770089824458DCF00592954 /* UIButton+LzgButtonBelongToVc.m */; };
+		2770089D2445B0B800592954 /* LzgLikeCollectionVIewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2770089C2445B0B800592954 /* LzgLikeCollectionVIewCell.m */; };
+		2773E11124469F7F008EEB3F /* LzgHelpVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 2773E11024469F7F008EEB3F /* LzgHelpVc.m */; };
+		2773E1152446A213008EEB3F /* inputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2773E1132446A213008EEB3F /* inputView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -292,6 +295,12 @@
 		27700890244581F400592954 /* LzgReportViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgReportViewController.m; sourceTree = "<group>"; };
 		2770089724458DCF00592954 /* UIButton+LzgButtonBelongToVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+LzgButtonBelongToVc.h"; sourceTree = "<group>"; };
 		2770089824458DCF00592954 /* UIButton+LzgButtonBelongToVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LzgButtonBelongToVc.m"; sourceTree = "<group>"; };
+		2770089B2445B0B800592954 /* LzgLikeCollectionVIewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgLikeCollectionVIewCell.h; sourceTree = "<group>"; };
+		2770089C2445B0B800592954 /* LzgLikeCollectionVIewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgLikeCollectionVIewCell.m; sourceTree = "<group>"; };
+		2773E10F24469F7F008EEB3F /* LzgHelpVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LzgHelpVc.h; sourceTree = "<group>"; };
+		2773E11024469F7F008EEB3F /* LzgHelpVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LzgHelpVc.m; sourceTree = "<group>"; };
+		2773E1132446A213008EEB3F /* inputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = inputView.m; sourceTree = "<group>"; };
+		2773E1142446A213008EEB3F /* inputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = inputView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -511,6 +520,7 @@
 		2732B5FA243CA370000B5119 /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2773E1122446A1FC008EEB3F /* 弹窗输入 */,
 				2732B6C9243D7613000B5119 /* 自定义的tableViewCell */,
 				2732B6C5243D75D0000B5119 /* 自定义的collectionViewCell */,
 				2732B5FC243CA370000B5119 /* HomeViewController.h */,
@@ -681,6 +691,8 @@
 		2732B634243CA370000B5119 /* MineViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2773E10B24469F15008EEB3F /* 帮助的界面 */,
+				2770089A2445B08D00592954 /* 自定义的喜欢的CollectionCell */,
 				2732B76124417087000B5119 /* 自定义消息 Cell */,
 				2732B74724405295000B5119 /* 消息的model（采用的是单例模式） */,
 				2732B74624405277000B5119 /* 喜欢的内容的model(采用单例模式) */,
@@ -1017,6 +1029,33 @@
 			path = "UIButton的类别，用于标记属于的页面";
 			sourceTree = "<group>";
 		};
+		2770089A2445B08D00592954 /* 自定义的喜欢的CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				2770089B2445B0B800592954 /* LzgLikeCollectionVIewCell.h */,
+				2770089C2445B0B800592954 /* LzgLikeCollectionVIewCell.m */,
+			);
+			path = "自定义的喜欢的CollectionCell";
+			sourceTree = "<group>";
+		};
+		2773E10B24469F15008EEB3F /* 帮助的界面 */ = {
+			isa = PBXGroup;
+			children = (
+				2773E10F24469F7F008EEB3F /* LzgHelpVc.h */,
+				2773E11024469F7F008EEB3F /* LzgHelpVc.m */,
+			);
+			path = "帮助的界面";
+			sourceTree = "<group>";
+		};
+		2773E1122446A1FC008EEB3F /* 弹窗输入 */ = {
+			isa = PBXGroup;
+			children = (
+				2773E1142446A213008EEB3F /* inputView.h */,
+				2773E1132446A213008EEB3F /* inputView.m */,
+			);
+			path = "弹窗输入";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1154,6 +1193,7 @@
 				2732B6A0243CA371000B5119 /* MineViewController.m in Sources */,
 				2732B6A8243CA371000B5119 /* YYWebImageManager.m in Sources */,
 				2732B68D243CA371000B5119 /* LzgRegistModel.m in Sources */,
+				2770089D2445B0B800592954 /* LzgLikeCollectionVIewCell.m in Sources */,
 				2732B6E3243EBF7F000B5119 /* LzgLabel.m in Sources */,
 				2732B687243CA371000B5119 /* LzgCommentCell.m in Sources */,
 				2732B68B243CA371000B5119 /* LzgLogViewController.m in Sources */,
@@ -1162,6 +1202,7 @@
 				2732B6C4243D710E000B5119 /* LzgPlistRead.m in Sources */,
 				2732B6AE243CA371000B5119 /* YYImageCoder.m in Sources */,
 				2732B6A3243CA371000B5119 /* UIView+SDAutoLayout.m in Sources */,
+				2773E11124469F7F008EEB3F /* LzgHelpVc.m in Sources */,
 				2732B76824442695000B5119 /* LzgScrollView.m in Sources */,
 				2732B75124405FBC000B5119 /* LzgMessageModel.m in Sources */,
 				2732B6B0243CA371000B5119 /* UIButton+YYWebImage.m in Sources */,
@@ -1170,6 +1211,7 @@
 				2732B6D4243DAF8D000B5119 /* LzgSandBoxStore.m in Sources */,
 				2732B72E243EE83F000B5119 /* LzgCollectionViewLayout.m in Sources */,
 				2732B69B243CA371000B5119 /* UserInfor+CoreDataClass.m in Sources */,
+				2773E1152446A213008EEB3F /* inputView.m in Sources */,
 				2732B72A243ED96E000B5119 /* LzgImageCollectionCell.m in Sources */,
 				2732B69F243CA371000B5119 /* LzgBundleInforPath.m in Sources */,
 				2732B68E243CA371000B5119 /* LzgLogModel+hard.m in Sources */,

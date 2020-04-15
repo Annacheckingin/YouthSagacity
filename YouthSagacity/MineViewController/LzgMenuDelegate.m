@@ -9,6 +9,7 @@
 #import "LzgMenuDelegate.h"
 #import "LzgLogViewController.h"
 #import "LzgLogStatus.h"
+#import "LzgHelpVc.h"
 @interface LzgMenuDelegate()<UITableViewDelegate>
 
 @end
@@ -23,11 +24,15 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    NSLog(@"ok");
     if (indexPath.section==0)
     {
-        
+        LzgHelpVc *helpVc=[[LzgHelpVc alloc]init];
+        UITabBarController *tabVc=[UIApplication sharedApplication].keyWindow.rootViewController;
+        UINavigationController *naviVc=tabVc.viewControllers.lastObject;
+        [naviVc pushViewController:helpVc animated:YES];
     }
+    
     else if(indexPath.section==1)
     {
         LzgLogViewController *logvc=[LzgLogViewController shareInstance];

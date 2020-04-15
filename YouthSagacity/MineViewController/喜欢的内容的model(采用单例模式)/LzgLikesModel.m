@@ -33,12 +33,13 @@ const NSString *LzgLikesModelFileName=@"likes.plist";
             NSArray *temparray=[NSMutableArray arrayWithContentsOfFile:[pathToDocumentDirectory stringByAppendingFormat:@"/%@",likePlistName]];
                        for (NSDictionary *obj in temparray)
                        {
-                           NSString *tt=obj[@"title"];
+                           NSString *tt=obj[@"articleTitle"];
                            NSString  *ct=obj[@"content"];
-                           NSString *img1;
-                           NSString *img2;
-                           NSString *img3;
-                LikesModel *model=[[LikesModel alloc]initWithTitile:tt content:ct image1:img1 image2:img2 image3:img3];
+                           NSString *img1=obj[@"image_1"];
+                           NSString *img2=obj[@"image_2"];
+                           NSString *img3=obj[@"image_3"];
+                           NSString *date=obj[@"Date"];
+                LikesModel *model=[[LikesModel alloc]initWithTitile:tt content:ct image1:img1 image2:img2 image3:img3 andDate:date];
                            [_kcontainner  addObject:model];
                        }
         }
@@ -46,7 +47,35 @@ const NSString *LzgLikesModelFileName=@"likes.plist";
     }
     return self;
 }
-
+-(void)p_save
+{
+    LzgSandBoxStore *store=[LzgSandBoxStore shareInstance];
+    NSString *pathToDocumentDirectory=[store stringForSandBoxOfDocument];
+    
+    
+  __block  NSMutableArray *tempArray=[NSMutableArray array];
+    for (LikesModel *model in _kcontainner)
+    {
+        NSString *titleKey=@"articleTitle";
+        NSString *contentKey=@"content";
+        NSString *dateKey=@"Date";
+        NSString *image_1Key=@"image_1";
+        NSString *image_2Key=@"image_2";
+        NSString *image_3Key=@"image_3";
+        NSString *likeKey=@"like";
+        NSMutableDictionary *tempDic=[[NSMutableDictionary alloc]initWithDictionary:@{
+            titleKey:model.theLikes_title,
+            contentKey:model.theLikes_content,
+            dateKey:model.theDate,
+            image_1Key:model.urlToImage1,
+            image_2Key:model.urlToImage2,
+            image_3Key:model.urlToimage3,
+            likeKey:[NSNumber numberWithInt:1]
+        }];
+        [tempArray addObject:tempDic];
+    }
+    [tempArray writeToFile:[pathToDocumentDirectory stringByAppendingFormat:@"/%@",LzgLikesModelFileName] atomically:YES];
+}
 +(instancetype)shareInstance
 {
     static LzgLikesModel *me;
@@ -59,9 +88,9 @@ const NSString *LzgLikesModelFileName=@"likes.plist";
 -(void)saveAlike:(LikesModel *)alike
 {
     [_kcontainner addObject:alike];
-    LzgSandBoxStore *store=[LzgSandBoxStore shareInstance];
-     NSString *pathToDocumentDirectory=[store stringForSandBoxOfDocument];
-    [_kcontainner writeToFile:[pathToDocumentDirectory stringByAppendingFormat:@"/%@",LzgLikesModelFileName] atomically:YES];
+    
+    [self p_save];
+
     
 }
 -(void)deleteALike:(LikesModel *)alike
@@ -73,19 +102,19 @@ const NSString *LzgLikesModelFileName=@"likes.plist";
             [_kcontainner removeObject:obj];
         }
     }
-    LzgSandBoxStore *store=[LzgSandBoxStore shareInstance];
-        NSString *pathToDocumentDirectory=[store stringForSandBoxOfDocument];
-    [_kcontainner writeToFile:[pathToDocumentDirectory stringByAppendingFormat:@"/%@",LzgLikesModelFileName] atomically:YES];
+    [self p_save];
 }
 -(void)deleteAlikeAtIndex:(NSInteger)index
 {
     [_kcontainner removeObjectAtIndex:index];
-    LzgSandBoxStore *store=[LzgSandBoxStore shareInstance];
-          NSString *pathToDocumentDirectory=[store stringForSandBoxOfDocument];
-      [_kcontainner writeToFile:[pathToDocumentDirectory stringByAppendingFormat:@"/%@",LzgLikesModelFileName] atomically:YES];
+    [self p_save];
 }
 -(NSInteger)numOfLikes
 {
     return _kcontainner.count;
+}
+-(NSMutableArray *)likes
+{
+    return _kcontainner;
 }
 @end
